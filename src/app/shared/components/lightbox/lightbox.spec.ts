@@ -19,7 +19,7 @@ describe('Lightbox', () => {
   it('shows the selected image with its position', () => {
     const el: HTMLElement = render(1).nativeElement;
     expect(el.querySelector('img')?.getAttribute('alt')).toBe('B');
-    expect(el.querySelector('[aria-live]')?.textContent?.trim()).toBe('ছবি 2 / 3');
+    expect(el.querySelector('[aria-live]')?.textContent?.trim()).toBe('ছবি ২ / ৩');
   });
 
   it('wraps around with next/previous', () => {

@@ -1,14 +1,21 @@
 import { TestBed } from '@angular/core/testing';
-import { provideRouter, Router } from '@angular/router';
+import { Title } from '@angular/platform-browser';
+import { provideRouter, Router, TitleStrategy, withComponentInputBinding } from '@angular/router';
 import { RouterTestingHarness } from '@angular/router/testing';
 import { App } from './app';
 import { routes } from './app.routes';
+import { PAGES } from './core/config/pages';
+import { SUPPORTED_LANGS } from './core/i18n/lang';
+import { TranslatedTitleStrategy } from './core/i18n/translated-title.strategy';
 
 describe('App routing', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
       imports: [App],
-      providers: [provideRouter(routes)],
+      providers: [
+        provideRouter(routes, withComponentInputBinding()),
+        { provide: TitleStrategy, useClass: TranslatedTitleStrategy },
+      ],
     });
   });
 
@@ -24,16 +31,38 @@ describe('App routing', () => {
     expect(document.documentElement.lang).toBe('bn');
   });
 
-  it('renders the English tree and sets the document language', async () => {
+  for (const lang of SUPPORTED_LANGS) {
+    it(`resolves every registered page in ${lang} without falling through to 404`, async () => {
+      const harness = await RouterTestingHarness.create();
+      for (const page of PAGES) {
+        const url = page.path ? `/${lang}/${page.path}` : `/${lang}`;
+        await harness.navigateByUrl(url);
+        const text = harness.routeNativeElement?.textContent ?? '';
+        expect(text, url).not.toContain(
+          lang === 'bn' ? 'পৃষ্ঠাটি পাওয়া যায়নি' : 'Page not found',
+        );
+        expect(document.documentElement.lang, url).toBe(lang);
+      }
+    });
+  }
+
+  it('sets translated document titles', async () => {
     const harness = await RouterTestingHarness.create();
+    const title = TestBed.inject(Title);
+    await harness.navigateByUrl('/en/about/history');
+    expect(title.getTitle()).toBe('History | Banasree Quality Education School');
+    await harness.navigateByUrl('/bn/about/history');
+    expect(title.getTitle()).toBe('ইতিহাস | বনশ্রী কোয়ালিটি এডুকেশন স্কুল');
     await harness.navigateByUrl('/en');
-    expect(harness.routeNativeElement?.textContent).toContain('Banasree Quality Education School');
-    expect(document.documentElement.lang).toBe('en');
+    expect(title.getTitle()).toBe('Banasree Quality Education School');
   });
 
-  it('renders the not-found page for unknown URLs', async () => {
+  it('renders a translated not-found page for unknown URLs', async () => {
     const harness = await RouterTestingHarness.create();
-    await harness.navigateByUrl('/bn/does-not-exist');
-    expect(harness.routeNativeElement?.textContent).toContain('404');
+    await harness.navigateByUrl('/en/does-not-exist');
+    expect(harness.routeNativeElement?.textContent).toContain('Page not found');
+    expect(TestBed.inject(Title).getTitle()).toBe(
+      'Page not found | Banasree Quality Education School',
+    );
   });
 });

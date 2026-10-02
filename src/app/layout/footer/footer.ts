@@ -5,13 +5,14 @@ import { FOOTER_QUICK_LINKS, navCommands } from '../../core/config/navigation';
 import { LanguageService } from '../../core/i18n/language.service';
 import { SchoolInfoService } from '../../core/services/school-info.service';
 import { Icon } from '../../shared/components/icon/icon';
+import { LocaleNumberPipe } from '../../shared/pipes/locale-format.pipes';
 import { LocalizePipe } from '../../shared/pipes/localize.pipe';
 import { TranslatePipe } from '../../shared/pipes/translate.pipe';
 
 @Component({
   selector: 'app-footer',
   changeDetection: ChangeDetectionStrategy.OnPush,
-  imports: [RouterLink, NgOptimizedImage, Icon, TranslatePipe, LocalizePipe],
+  imports: [RouterLink, NgOptimizedImage, Icon, TranslatePipe, LocalizePipe, LocaleNumberPipe],
   template: `
     <footer class="bg-secondary-950 text-secondary-100">
       <div
@@ -152,7 +153,8 @@ import { TranslatePipe } from '../../shared/pipes/translate.pipe';
       </div>
       <div class="border-t border-white/10">
         <p class="container-page py-5 text-center text-xs text-secondary-300 sm:text-sm">
-          © {{ year }} {{ info().name | localize }} · {{ 'footer.rights' | t }}
+          © {{ year | localeNumber: false }} {{ info().name | localize }} ·
+          {{ 'footer.rights' | t }}
         </p>
       </div>
     </footer>

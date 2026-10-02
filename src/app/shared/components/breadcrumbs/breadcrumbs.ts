@@ -1,13 +1,10 @@
 import { ChangeDetectionStrategy, Component, input } from '@angular/core';
 import { RouterLink } from '@angular/router';
+import { BreadcrumbItem } from '../../../core/models/breadcrumb.model';
 import { TranslatePipe } from '../../pipes/translate.pipe';
 import { Icon } from '../icon/icon';
 
-export interface BreadcrumbItem {
-  label: string;
-  /** Router commands; omit for the current page. */
-  link?: readonly string[];
-}
+export type { BreadcrumbItem };
 
 @Component({
   selector: 'app-breadcrumbs',

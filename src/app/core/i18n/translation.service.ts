@@ -1,4 +1,5 @@
 import { computed, inject, Injectable, InjectionToken } from '@angular/core';
+import { formatNumber } from './format';
 import { DEFAULT_LANG, Lang } from './lang';
 import { LanguageService } from './language.service';
 import { bn } from './translations/bn';
@@ -25,11 +26,14 @@ function lookup(dict: PartialDict<typeof bn> | undefined, key: string): string |
   return typeof node === 'string' ? node : undefined;
 }
 
-function interpolate(text: string, params?: TranslationParams): string {
+/** Replaces `{name}` placeholders; numbers are written in the language's digits. */
+function interpolate(text: string, lang: Lang, params?: TranslationParams): string {
   if (!params) return text;
-  return text.replace(/\{(\w+)\}/g, (match, name: string) =>
-    name in params ? String(params[name]) : match,
-  );
+  return text.replace(/\{(\w+)\}/g, (match, name: string) => {
+    if (!(name in params)) return match;
+    const value = params[name];
+    return typeof value === 'number' ? formatNumber(value, lang) : value;
+  });
 }
 
 /**
@@ -51,6 +55,6 @@ export class TranslationService {
   translate(lang: Lang, key: TranslationKey, params?: TranslationParams): string {
     const dict = lang === this.lang() ? this.dict() : this.dictionaries[lang];
     const text = lookup(dict, key) ?? lookup(this.dictionaries[DEFAULT_LANG], key) ?? key;
-    return interpolate(text, params);
+    return interpolate(text, lang, params);
   }
 }

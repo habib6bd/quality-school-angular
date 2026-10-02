@@ -70,6 +70,17 @@ export const en: PartialDict<TranslationShape> = {
     contact: 'Contact',
     search: 'Search',
   },
+  page: {
+    preparingTitle: 'Content in preparation',
+    preparingMessage:
+      'Information for this page is being collected from the school and will be published soon.',
+    related: 'Related pages',
+  },
+  notFound: {
+    title: 'Page not found',
+    message: 'The page you are looking for has moved or the address is incorrect.',
+    backHome: 'Back to the home page',
+  },
   footer: {
     about:
       'Established in Banasree in 2010. Our aim is to develop capable citizens through quality education and moral values.',

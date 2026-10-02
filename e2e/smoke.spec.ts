@@ -27,7 +27,7 @@ test.describe('foundation smoke', () => {
   test('unknown URL returns 404 with the not-found page', async ({ page }) => {
     const response = await page.goto('/bn/does-not-exist');
     expect(response?.status()).toBe(404);
-    await expect(page.getByText('404')).toBeVisible();
+    await expect(page.getByRole('heading', { level: 1 })).toHaveText('পৃষ্ঠাটি পাওয়া যায়নি');
   });
 
   for (const width of [320, 768, 1440]) {
