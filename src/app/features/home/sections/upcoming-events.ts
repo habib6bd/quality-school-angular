@@ -2,6 +2,7 @@ import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
 import { rxResource } from '@angular/core/rxjs-interop';
 import { SchoolEvent } from '../../../core/models/event.model';
 import { EventService } from '../../../core/services/event.service';
+import { todayIso } from '../../../core/util/today';
 import { AsyncState } from '../../../shared/components/async-state/async-state';
 import { ContentSection } from '../../../shared/components/content-section/content-section';
 import { Icon } from '../../../shared/components/icon/icon';
@@ -52,7 +53,7 @@ export class HomeEvents {
   private readonly service = inject(EventService);
 
   protected readonly events = rxResource({
-    stream: () => this.service.upcoming(new Date().toISOString().slice(0, 10), 3),
+    stream: () => this.service.upcoming(todayIso(), 3),
     defaultValue: [] as readonly SchoolEvent[],
   });
 }

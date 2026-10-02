@@ -4,6 +4,7 @@ import { Router, RouterLink } from '@angular/router';
 import { SchoolEvent } from '../../core/models/event.model';
 import { EventService } from '../../core/services/event.service';
 import { paginate } from '../../core/util/paginate';
+import { todayIso } from '../../core/util/today';
 import { AsyncState } from '../../shared/components/async-state/async-state';
 import { EventCard } from '../../shared/components/event-card/event-card';
 import { PageScaffold } from '../../shared/components/page-scaffold/page-scaffold';
@@ -101,7 +102,7 @@ export class EventsPage {
   protected readonly events = rxResource({
     params: () => this.activeView(),
     stream: ({ params }) => {
-      const today = new Date().toISOString().slice(0, 10);
+      const today = todayIso();
       return params === 'past' ? this.service.past(today) : this.service.upcoming(today);
     },
     defaultValue: [] as readonly SchoolEvent[],

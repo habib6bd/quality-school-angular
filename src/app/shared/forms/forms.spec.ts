@@ -137,6 +137,17 @@ describe('FormField + FieldControl', () => {
     expect(input.getAttribute('aria-describedby')).toBe('name-field-hint');
   });
 
+  it('updates the message when the error changes while the field stays invalid', () => {
+    const { fixture, el, control } = setup();
+    control.markAsTouched();
+    fixture.detectChanges();
+    expect(el.querySelector('#name-field-error')?.textContent).toContain('আবশ্যক');
+    control.setValue('ab'); // required → too short, still invalid
+    fixture.detectChanges();
+    expect(el.querySelector('#name-field-error')?.textContent).not.toContain('আবশ্যক');
+    expect(el.querySelector('#name-field-error')?.textContent).toContain('৩');
+  });
+
   it('reports the length rule with the required number', () => {
     const { fixture, el, control } = setup();
     control.setValue('ab');
@@ -168,5 +179,15 @@ describe('ErrorSummary', () => {
     fixture.componentInstance.focus();
     expect(document.activeElement).toBe(el.querySelector('[role="alert"]'));
     document.getElementById('field-x')?.remove();
+  });
+});
+
+describe('rollNumberValidator', () => {
+  it('accepts 1–8 digits in either script and rejects the rest', async () => {
+    const { rollNumberValidator } = await import('./validators');
+    const check = (value: string) => rollNumberValidator(new FormControl(value));
+    for (const ok of ['7', '042', '12345678', '১২৩', '']) expect(check(ok)).toBeNull();
+    for (const bad of ['123456789', '12a', '1 2', '-5'])
+      expect(check(bad)).toEqual({ rollNumber: true });
   });
 });

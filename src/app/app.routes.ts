@@ -25,6 +25,9 @@ const PAGE_COMPONENTS: Partial<Record<string, ComponentLoader>> = {
   videos: () => import('./features/videos/videos').then((m) => m.VideosPage),
   achievements: () =>
     import('./features/achievements/achievements').then((m) => m.AchievementsPage),
+  results: () => import('./features/results/results').then((m) => m.ResultsPage),
+  resources: () => import('./features/resources/resources').then((m) => m.ResourcesPage),
+  'academics/calendar': () => import('./features/academics/calendar').then((m) => m.CalendarPage),
   academics: () => import('./features/academics/overview').then((m) => m.AcademicsPage),
   'academics/programs': () => import('./features/academics/programs').then((m) => m.ProgramsPage),
 };

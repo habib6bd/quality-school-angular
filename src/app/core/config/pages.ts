@@ -67,6 +67,7 @@ export const PAGES: readonly PageDef[] = [
     titleKey: 'nav.calendar',
     descriptionKey: 'seo.calendar',
     parent: 'academics',
+    queryDriven: true,
   },
   { path: 'results', titleKey: 'nav.results', descriptionKey: 'seo.results', parent: 'academics' },
   {
@@ -74,6 +75,7 @@ export const PAGES: readonly PageDef[] = [
     titleKey: 'nav.resources',
     descriptionKey: 'seo.resources',
     parent: 'academics',
+    queryDriven: true,
   },
 
   { path: 'admission', titleKey: 'nav.admissionInfo', descriptionKey: 'seo.admission' },

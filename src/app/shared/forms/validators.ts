@@ -38,3 +38,11 @@ export const notBlankValidator: ValidatorFn = (
   typeof control.value === 'string' && control.value.length > 0 && !control.value.trim()
     ? { required: true }
     : null;
+
+/** Roll number: 1–8 digits (ASCII or Bangla). */
+export const rollNumberValidator: ValidatorFn = (
+  control: AbstractControl,
+): ValidationErrors | null => {
+  const raw = String(control.value ?? '').trim();
+  return !raw || /^\d{1,8}$/.test(normalizeDigits(raw)) ? null : { rollNumber: true };
+};

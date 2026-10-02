@@ -32,6 +32,7 @@ export function fieldError(errors: ValidationErrors | null): FieldError | null {
     };
   if (errors['email']) return { key: 'forms.error.email' };
   if (errors['phone']) return { key: 'forms.error.phone' };
+  if (errors['rollNumber']) return { key: 'forms.error.rollNumber' };
   if (errors['futureDate']) return { key: 'forms.error.futureDate' };
   if (errors['invalidDate']) return { key: 'forms.error.invalidDate' };
   return { key: 'forms.error.invalid' };
@@ -97,6 +98,8 @@ export class FormField {
     return control.invalid && control.touched;
   });
   protected readonly message = computed(() => {
+    // Read the tick directly: `showError` stays `true` while the error changes (required → format).
+    this.tick();
     if (!this.showError()) return null;
     const error = fieldError(this.control().errors);
     return error ? this.i18n.t(error.key, error.params) : null;

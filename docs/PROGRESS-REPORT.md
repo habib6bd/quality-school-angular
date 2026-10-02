@@ -198,3 +198,35 @@ Phase reports are appended below in order. (A final summary is added at the top 
 **Issues (honest):** YouTube thumbnails, the YouTube player and the channel page are unreachable from this sandbox, so only the links, the dialog and the thumbnail fallback were verified (against stubs); the real player was not exercised. The gallery has 7 photos and no pagination (not needed at this size). No achievements are published.
 
 **Acceptance criteria:** PASS — lightbox and modals are keyboard accessible (Enter/Space open, arrows, Escape, focus return, inert background); images have fixed dimensions (CLS < 0.1 measured); video links are valid and validated; unit, browser and build checks pass.
+
+---
+
+### Phase 10: Results, resources & academic calendar
+
+**Implemented**
+
+- Results lookup (`/results`): form (class, exam, year, roll number) with accessible validation and error summary, built against `ResultService`; today it answers "not available online yet" with a contact link. Handles loading, not-found, found (service-provided rows only) and error-with-retry states; exam/year required only when choices exist. No data is stored, sent elsewhere or logged.
+- Resources (`/resources`): six resource types as marked placeholders, URL-driven filters for type, class, subject, year and exam (choices derived from items), safe download/open links, empty-match state.
+- Academic calendar (`/academics/calendar`): reusable `MonthCalendar` (responsive table grid + month list, Bangla/English month names and digits, previous/next links in the URL, today highlighted), empty with an honest placeholder; `todayIso()` (Dhaka date).
+- New models/services: `ResultService`, `ResourceService`, `CalendarService` (all honestly empty).
+
+**Files** — new: `src/app/features/{results,resources}/*`, `src/app/features/academics/calendar.ts`, `src/app/shared/components/month-calendar/*`, `src/app/core/{models,services}/{result,resource,calendar}*`, `src/app/core/util/today.ts`, specs, `e2e/academics-extras.spec.ts`. Modified: `form-field.ts` (bug fix), `validators.ts` (roll number), `pages.ts`, `app.routes.ts`, events/home use `todayIso`, translations.
+
+**Dependencies:** none added.
+
+**Commands:** `npm run typecheck`; `npm run lint`; `npx ng test --watch=false`; `npx ng build`; `PORT=4310 ./scripts/ssr-smoke.sh /bn/results /en/resources?type=form /bn/academics/calendar?month=2026-10 /en/academics/calendar`; `PW_EXECUTABLE=/opt/pw-browsers/chromium npx playwright test`.
+
+**Verification**
+
+| Check            | Result                                                                                                                    |
+| ---------------- | ------------------------------------------------------------------------------------------------------------------------- |
+| Type checking    | PASS                                                                                                                      |
+| Lint             | PASS                                                                                                                      |
+| Unit tests       | PASS — 40 files, 282 tests                                                                                                |
+| Production build | PASS — 118 static routes prerendered                                                                                      |
+| SSR smoke        | PASS — /bn/results 200; /en/resources?type=form 200; /bn/academics/calendar?month=2026-10 200; /en/academics/calendar 200 |
+| Browser tests    | PASS — 174 Playwright tests (Chromium 141 via `PW_EXECUTABLE`)                                                            |
+
+**Issues (honest):** Everything content-dependent is a placeholder because the school has supplied no results system, routines, syllabus, study material, forms, policies or calendar; filters/lookup states with real data were verified with stub services in unit tests only. A stale-error bug in `FormField` (also affecting the Phase 7 form) was found and fixed in this phase.
+
+**Acceptance criteria:** PASS — filters work (URL-driven, derived options, safe downloads); the calendar is responsive (no overflow 320–1440 px) and accessible; no private data exposed or stored; unit, browser and build checks pass.
