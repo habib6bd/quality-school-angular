@@ -16,6 +16,8 @@ const PAGE_COMPONENTS: Partial<Record<string, ComponentLoader>> = {
   'about/messages': () => import('./features/about/messages').then((m) => m.MessagesPage),
   'about/facilities': () => import('./features/about/facilities').then((m) => m.FacilitiesPage),
   teachers: () => import('./features/teachers/teachers').then((m) => m.TeachersPage),
+  admission: () => import('./features/admission/admission').then((m) => m.AdmissionPage),
+  'admission/apply': () => import('./features/admission/apply').then((m) => m.ApplyPage),
   academics: () => import('./features/academics/overview').then((m) => m.AcademicsPage),
   'academics/programs': () => import('./features/academics/programs').then((m) => m.ProgramsPage),
 };

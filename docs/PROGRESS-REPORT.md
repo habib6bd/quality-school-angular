@@ -99,3 +99,37 @@ Phase reports are appended below in order. (A final summary is added at the top 
 **Issues (honest):** Staff photos, subjects and qualifications are not published (the old site's photos need a vendor login), so profiles are intentionally minimal. The published teacher count (27) differs from the 24 principal+teacher entries in the list; both are shown as published. Hydration race: text typed into a server-rendered input before hydration is lost (mitigated in tests only; a production fix would need a pre-hydration input replay).
 
 **Acceptance criteria:** PASS — cards display; filters work (chips, search, combined); empty results handled; detail routes work (28 profile pages + 404 for unknown); mobile layout verified at 320–1440 px; tests pass.
+
+---
+
+### Phase 7: Admission (info + form prototype)
+
+**Implemented**
+
+- Admission overview (`/admission`): the real 2026 admission notice with its image (lightbox), classes open for admission (links to class pages), eligibility / application steps / required documents as marked placeholders, admission calendar table with placeholder dates, admission FAQs, direct contact block (banner phone numbers and address) and CTAs.
+- Application wizard prototype (`/admission/apply`): Reactive Forms, 5 steps + confirmation (student → guardian → class & medium → documents → review → done), clearly labelled as a prototype, step progress, focus management, per-field errors and an error summary, review with edit buttons, back/next, start over.
+- Validation: required fields, name length, real non-future birth date, Bangladeshi mobile numbers (ASCII or Bangla digits), optional e-mail, study group required only for Nine/Ten, acknowledgement checkbox.
+- Accessibility: `aria-describedby`, `aria-invalid`, `aria-required`, `aria-live` regions, alert summary that receives focus and links to fields, focus moved to the step heading on navigation.
+- Privacy: no network, storage, cookies or logging of what is typed; no payment; verified by tests.
+- Shared `shared/forms`: validators, `FormField`, `FieldControl`, `ErrorSummary`.
+
+**Files** — new: `src/app/features/admission/*` (+ specs), `src/app/shared/forms/*` (+ spec), `e2e/admission.spec.ts`. Modified: `app.routes.ts`, `faq.service.ts` (category filter), translations (`admission`, `forms`, `apply`).
+
+**Dependencies:** none added.
+
+**Commands:** `npm run typecheck`; `npm run lint`; `npx ng test --watch=false`; `npx ng build`; `PORT=4310 ./scripts/ssr-smoke.sh /bn/admission /en/admission/apply /bn/admission/apply`; `PW_EXECUTABLE=/opt/pw-browsers/chromium npx playwright test`.
+
+**Verification**
+
+| Check            | Result                                                                     |
+| ---------------- | -------------------------------------------------------------------------- |
+| Type checking    | PASS                                                                       |
+| Lint             | PASS                                                                       |
+| Unit tests       | PASS — 35 files, 207 tests                                                 |
+| Production build | PASS — 128 static routes prerendered                                       |
+| SSR smoke        | PASS — /bn/admission 200; /en/admission/apply 200; /bn/admission/apply 200 |
+| Browser tests    | PASS — 117 Playwright tests (Chromium 141 via `PW_EXECUTABLE`)             |
+
+**Issues (honest):** Eligibility, steps, documents, dates and fees are not published, so those sections are placeholders by design. The form cannot submit anything (prototype). A text-input value typed before hydration completes can be lost on slow devices (same race as Phase 6; tests wait for the hydration marker).
+
+**Acceptance criteria:** PASS — validation works (required, format, date, conditional group); required fields enforced; errors accessible (aria + summary + live region); submission states correct (blocked step, review, prototype confirmation, start over); no data sent, stored or logged; tests pass.

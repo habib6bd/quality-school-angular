@@ -32,3 +32,12 @@ One line per ambiguous choice, made to stay consistent with the plan, the conten
 - Staff are shown exactly as published: English names on both language pages (with `lang="en"`), no transliteration, avatar initials only. Profile pages show name and designation, a pending note for photo/profile, and point to the school's general contact page; no private contact fields exist in the model.
 - Two entries share the name "Habibur Rahman" with different spellings/serials in the source (`habibur-rahman`, `habibur-rahman-2`); both are kept as published.
 - The app now sets `data-app-ready="true"` on `<html>` once hydrated and stable. E2E `goto` waits for it, because typing into a server-rendered control before hydration is lost (a real race that surfaced in the name-search test).
+
+## Phase 7
+
+- Eligibility, application steps, required documents and admission dates are not published anywhere, so each is a marked placeholder (`PendingNote`; calendar rows read "To be confirmed by the school"). No age limits, fees or document names were written. The page does show what the school did publish: the 2026 admission notice with its image (opens in the lightbox), the classes that admit, and the banner contact details.
+- The application is a Reactive Forms wizard (student → guardian → class & medium → documents → review → confirmation) kept in memory only: no HTTP client is used, nothing is stored (no local/session storage, no cookies) and nothing is logged. Unit and e2e tests assert all of this, including spying on `fetch`, XHR, `sendBeacon` and `console.*`.
+- The documents step uploads nothing (the list of documents is unpublished); it asks the visitor to acknowledge that this is a prototype. The final screen is labelled "Prototype finished".
+- Mobile numbers accept `01XXXXXXXXX`, with or without `+88`/`88`, and Bangla digits; date of birth only has to be a real, non-future date (no invented age rules). A study group is required only for the classes that have groups (Nine, Ten).
+- Reusable form building blocks were added to `shared/forms`: `FormField` + `FieldControl` (label, hint, error, `aria-describedby`, `aria-invalid`, `aria-required`, polite live region) and `ErrorSummary` (alert that takes focus and links to each invalid field). Contact (Phase 11) reuses them.
+- The nav label "অনলাইন আবেদন / Apply Online" is kept as registered; the page itself carries the prototype label.
