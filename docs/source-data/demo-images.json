@@ -1,0 +1,125 @@
+{
+  "_about": "Temporary DEMO photos (not BQES). Public-domain / CC0 images found via Openverse; replace with real school photos when available. Content using them must set isDemo: true.",
+  "images": [
+    {
+      "file": "images/demo/classroom-presentation.webp",
+      "width": 1024,
+      "height": 683,
+      "alt": {
+        "en": "Young students presenting work in a classroom"
+      },
+      "license": "Public Domain Mark 1.0",
+      "title": "202108009-FNS-UNC-0006",
+      "creator": "USDAgov",
+      "source": "https://www.flickr.com/photos/41284017@N08/51366783642"
+    },
+    {
+      "file": "images/demo/teacher-with-students.webp",
+      "width": 1024,
+      "height": 683,
+      "alt": {
+        "en": "Teacher working with a group of young students at a table"
+      },
+      "license": "Public Domain Mark 1.0",
+      "title": "20210810-FNS-UNC-0023",
+      "creator": "USDAgov",
+      "source": "https://www.flickr.com/photos/41284017@N08/51370167703"
+    },
+    {
+      "file": "images/demo/students-classroom.webp",
+      "width": 1023,
+      "height": 661,
+      "alt": {
+        "en": "Students working together in a classroom"
+      },
+      "license": "Public Domain Mark 1.0",
+      "title": "Big Data Science School",
+      "creator": "Jefferson Lab",
+      "source": "https://www.flickr.com/photos/53950384@N02/55473262480"
+    },
+    {
+      "file": "images/demo/students-discussion.webp",
+      "width": 1024,
+      "height": 676,
+      "alt": {
+        "en": "Students in a classroom discussion"
+      },
+      "license": "Public Domain Mark 1.0",
+      "title": "Big Data Science School",
+      "creator": "Jefferson Lab",
+      "source": "https://www.flickr.com/photos/53950384@N02/55473047014"
+    },
+    {
+      "file": "images/demo/teacher-lecture.webp",
+      "width": 1024,
+      "height": 659,
+      "alt": {
+        "en": "Teacher with a laptop teaching a class"
+      },
+      "license": "Public Domain Mark 1.0",
+      "title": "Big Data Science School",
+      "creator": "Jefferson Lab",
+      "source": "https://www.flickr.com/photos/53950384@N02/55472981168"
+    },
+    {
+      "file": "images/demo/child-reading.webp",
+      "width": 1024,
+      "height": 683,
+      "alt": {
+        "en": "Young child reading a book in a classroom library"
+      },
+      "license": "Public Domain Mark 1.0",
+      "title": "202108009-FNS-UNC-0015",
+      "creator": "USDAgov",
+      "source": "https://www.flickr.com/photos/41284017@N08/51366782462"
+    },
+    {
+      "file": "images/demo/field-trip.webp",
+      "width": 1024,
+      "height": 768,
+      "alt": {
+        "en": "Students on an outdoor field trip"
+      },
+      "license": "Public Domain Mark 1.0",
+      "title": "Students explore the Trinity River",
+      "creator": "blmcalifornia",
+      "source": "https://www.flickr.com/photos/50976304@N07/52553328266"
+    },
+    {
+      "file": "images/demo/girls-studying.webp",
+      "width": 1024,
+      "height": 683,
+      "alt": {
+        "en": "Girls in school uniform writing in their notebooks"
+      },
+      "license": "CC0 1.0",
+      "title": "Somalian girls, students studying school",
+      "creator": "The African Union Mission in Somalia",
+      "source": "https://www.rawpixel.com/image/8708889/photo-image-public-domain-people-kid"
+    },
+    {
+      "file": "images/demo/library-study.webp",
+      "width": 1024,
+      "height": 683,
+      "alt": {
+        "en": "Student studying in a library"
+      },
+      "license": "CC0 1.0",
+      "title": "SWC Library - Students Studying for Finals-12",
+      "creator": "waketechcc",
+      "source": "https://www.flickr.com/photos/42853072@N07/53379872781"
+    },
+    {
+      "file": "images/demo/group-study.webp",
+      "width": 1024,
+      "height": 683,
+      "alt": {
+        "en": "Students studying together at a table"
+      },
+      "license": "CC0 1.0",
+      "title": "SWC Library - Students Studying for Finals-21",
+      "creator": "waketechcc",
+      "source": "https://www.flickr.com/photos/42853072@N07/53380185474"
+    }
+  ]
+}

@@ -1,59 +1,36 @@
-# QualitySchoolAngular
+# Banasree Quality Education School — Website
 
-This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 22.1.8.
+Bilingual (বাংলা / English) public website for Banasree Quality Education School (BQES), built with Angular 22, server-side rendering, and Tailwind CSS v4.
 
-## Development server
+- **Plan and progress:** [docs/DEVELOPMENT-PLAN.md](docs/DEVELOPMENT-PLAN.md)
+- **Architecture and conventions:** [CLAUDE.md](CLAUDE.md)
+- **Verified school data and image sources:** [docs/source-data/](docs/source-data/)
 
-To start a local development server, run:
-
-```bash
-ng serve
-```
-
-Once the server is running, open your browser and navigate to `http://localhost:4200/`. The application will automatically reload whenever you modify any of the source files.
-
-## Code scaffolding
-
-Angular CLI includes powerful code scaffolding tools. To generate a new component, run:
+## Getting started
 
 ```bash
-ng generate component component-name
+npm ci
+npm start                 # dev server with SSR at http://localhost:4200 (redirects to /bn)
 ```
 
-For a complete list of available schematics (such as `components`, `directives`, or `pipes`), run:
+## Checks
 
 ```bash
-ng generate --help
+npm run check             # typecheck + lint + unit tests + production build
+npx playwright test       # end-to-end tests against the built SSR server
 ```
 
-## Building
+Playwright uses Google Chrome when it's installed. Otherwise install Chromium once with `npx playwright install --with-deps chromium`.
 
-To build the project run:
+## Production server
 
 ```bash
-ng build
+npm run build
+PORT=4000 npm run serve:ssr:quality-school-angular
 ```
 
-This will compile your project and store the build artifacts in the `dist/` directory. By default, the production build optimizes your application for performance and speed.
+Allowed host names for SSR are set in `angular.json` → `security.allowedHosts`.
 
-## Running unit tests
+## Content status
 
-To execute unit tests with the [Vitest](https://vitest.dev/) test runner, use the following command:
-
-```bash
-ng test
-```
-
-## Running end-to-end tests
-
-For end-to-end (e2e) testing, run:
-
-```bash
-ng e2e
-```
-
-Angular CLI does not come with an end-to-end testing framework by default. You can choose one that suits your needs.
-
-## Additional Resources
-
-For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+Much of the school's information (mission, routines, results, fees, testimonials, etc.) has not been published yet. Pages show clearly marked placeholders until the school supplies it. Photos in `public/images/demo/` are public-domain demo images, not photos of BQES.
