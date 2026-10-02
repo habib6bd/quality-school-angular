@@ -1,4 +1,4 @@
-import { expect, test } from '@playwright/test';
+import { expect, test } from './fixtures';
 
 test.describe('foundation smoke', () => {
   test('root redirects to Bangla and renders with Tailwind styles', async ({ page }) => {
@@ -12,8 +12,9 @@ test.describe('foundation smoke', () => {
 
     const heading = page.getByRole('heading', { level: 1 });
     await expect(heading).toContainText('বনশ্রী কোয়ালিটি এডুকেশন স্কুল');
-    // primary-700 token => rgb(0, 107, 60)
-    await expect(heading).toHaveCSS('color', 'rgb(0, 107, 60)');
+    // Theme tokens are applied: white hero heading on the page's surface-muted background.
+    await expect(heading).toHaveCSS('color', 'rgb(255, 255, 255)');
+    await expect(page.locator('body')).toHaveCSS('background-color', 'rgb(248, 247, 244)');
     expect(errors).toEqual([]);
   });
 

@@ -1,4 +1,4 @@
-import { expect, Page, test } from '@playwright/test';
+import { expect, Page, test } from './fixtures';
 
 async function collectErrors(page: Page): Promise<string[]> {
   const errors: string[] = [];

@@ -90,7 +90,96 @@ export const en: PartialDict<TranslationShape> = {
     address: 'Address',
     phone: 'Phone',
     email: 'Email',
+    eiin: 'EIIN',
+    schoolCode: 'School code',
     followUs: 'Follow us',
     rights: 'All rights reserved.',
+  },
+  home: {
+    heroTagline: 'Quality education is our commitment',
+    heroLead:
+      'In Banasree, Dhaka since 2010. Bangla medium and English version, from Play to Class Ten.',
+    heroCta: 'View admission information',
+    heroPoint1: 'Established 2010',
+    heroPoint2: 'Bangla medium and English version',
+    heroPoint3: 'Play to Class Ten',
+    heroImageAlt: 'A teacher and five students behind model projects displayed on a table',
+    quickLinks: 'Quick links',
+    aboutP1:
+      'Feeling the need for a quality educational institution, Banasree Quality Education School began its journey in Banasree, Dhaka in 2010.',
+    aboutP2:
+      'As the Chairman’s message says, in a competitive world it is essential to prepare students as capable and skilled citizens through knowledge and training.',
+    aboutP3:
+      'The school offers Bangla medium and an English version from Play to Class Ten, with Science and Business Studies groups in Classes Nine and Ten.',
+    aboutMore: 'Learn more about the school',
+    statsNote: 'Figures as published on the school’s existing website.',
+    statStudents: 'Students',
+    statTeachers: 'Teachers',
+    statCampus: 'Campus',
+    whyTitle: 'Why choose Banasree Quality Education School?',
+    whyDescription: 'Our features, as published by the school itself.',
+    whyMediumTitle: 'Bangla medium and English version',
+    whyMediumText: 'The school offers both Bangla medium and an English version.',
+    whyGroupsTitle: 'Science and Business Studies groups',
+    whyGroupsText: 'Classes Nine and Ten have Science and Business Studies groups.',
+    messagesTitle: 'Messages from the Chairman and Headmaster',
+    messagesMore: 'Read the full messages',
+    programsDescription: 'The school’s classes, from Play to Class Ten.',
+    programsNote:
+      'Bangla medium and English version. Science and Business Studies groups in Classes Nine and Ten.',
+    teachersDescription: 'A selection from the school’s published staff list.',
+    facilitiesTitle: 'Campus and facilities',
+    facilitiesDescription: 'As published by the school.',
+    facilitiesImageAlt: 'Students and teachers standing in rows on a green playing field',
+    noticesTitle: 'Latest notices',
+    eventsTitle: 'Upcoming events',
+    achievementsDescription:
+      'Verified achievements will be published here once the school confirms them.',
+    ctaTitle: 'Find out about admission for your child',
+    ctaText: 'See the general admission information or contact the school directly.',
+    contactTitle: 'Contact and location',
+    contactMore: 'Contact page',
+    mapTitle: 'Location of Banasree Quality Education School on Google Maps',
+  },
+  teachers: {
+    designation: { principal: 'Principal', teacher: 'Teacher', staff: 'Staff' },
+  },
+  programs: {
+    group: { science: 'Science', business: 'Business Studies' },
+  },
+  notices: {
+    category: {
+      admission: 'Admission',
+      academic: 'Academic',
+      exam: 'Exam',
+      holiday: 'Holiday',
+      general: 'General',
+    },
+    emptyTitle: 'No notices',
+    emptyMessage: 'No notices have been published yet.',
+  },
+  events: {
+    emptyTitle: 'No upcoming events',
+    emptyMessage: 'Events will appear here once the school announces them.',
+  },
+  achievements: {
+    academic: 'Academic achievements',
+    sports: 'Sports achievements',
+    cultural: 'Cultural achievements',
+    placeholderText: 'To be published here once the school provides verified details.',
+  },
+  gallery: {
+    open: 'View larger image',
+  },
+  videos: {
+    watch: 'Watch video',
+  },
+  testimonials: {
+    title: 'Guardian reviews',
+    emptyTitle: 'No reviews published yet',
+    emptyMessage: 'Only verified and approved guardian reviews will be published here.',
+  },
+  contact: {
+    officeHours: 'Office hours',
   },
 };

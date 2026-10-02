@@ -14,6 +14,12 @@ const channel =
     : undefined);
 
 /**
+ * Offline or pinned-browser environments: set PW_EXECUTABLE to a Chromium/Chrome binary
+ * (e.g. /opt/pw-browsers/chromium) instead of downloading Playwright's own build.
+ */
+const executablePath = process.env['PW_EXECUTABLE'];
+
+/**
  * End-to-end checks run against the production SSR build (`npm run build` first).
  */
 export default defineConfig({
@@ -23,9 +29,20 @@ export default defineConfig({
   use: {
     baseURL: `http://localhost:${PORT}`,
     channel,
+    // The only external hosts are the Google Fonts CDN (and, in sandboxes, a TLS-inspecting proxy).
+    ignoreHTTPSErrors: true,
     trace: 'retain-on-failure',
   },
-  projects: [{ name: 'chrome', use: { ...devices['Desktop Chrome'], channel } }],
+  projects: [
+    {
+      name: 'chrome',
+      use: {
+        ...devices['Desktop Chrome'],
+        channel: executablePath ? undefined : channel,
+        launchOptions: executablePath ? { executablePath, args: ['--no-sandbox'] } : {},
+      },
+    },
+  ],
   webServer: {
     command: 'node dist/quality-school-angular/server/server.mjs',
     env: { PORT: String(PORT) },

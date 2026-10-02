@@ -5,14 +5,22 @@ import { FOOTER_QUICK_LINKS, navCommands } from '../../core/config/navigation';
 import { LanguageService } from '../../core/i18n/language.service';
 import { SchoolInfoService } from '../../core/services/school-info.service';
 import { Icon } from '../../shared/components/icon/icon';
-import { LocaleNumberPipe } from '../../shared/pipes/locale-format.pipes';
+import { LocaleDigitsPipe, LocaleNumberPipe } from '../../shared/pipes/locale-format.pipes';
 import { LocalizePipe } from '../../shared/pipes/localize.pipe';
 import { TranslatePipe } from '../../shared/pipes/translate.pipe';
 
 @Component({
   selector: 'app-footer',
   changeDetection: ChangeDetectionStrategy.OnPush,
-  imports: [RouterLink, NgOptimizedImage, Icon, TranslatePipe, LocalizePipe, LocaleNumberPipe],
+  imports: [
+    RouterLink,
+    NgOptimizedImage,
+    Icon,
+    TranslatePipe,
+    LocalizePipe,
+    LocaleNumberPipe,
+    LocaleDigitsPipe,
+  ],
   template: `
     <footer class="bg-secondary-950 text-secondary-100">
       <div
@@ -121,7 +129,9 @@ import { TranslatePipe } from '../../shared/pipes/translate.pipe';
               </dt>
               <dd class="text-secondary-200">
                 @for (phone of info().phones; track phone) {
-                  <a [href]="'tel:' + phone" class="block hover:text-white">{{ phone }}</a>
+                  <a [href]="'tel:' + phone" class="block hover:text-white">{{
+                    phone | localeDigits
+                  }}</a>
                 } @empty {
                   <span class="text-secondary-300"
                     >{{ 'footer.phone' | t }}: {{ 'common.toBeConfirmed' | t }}</span
@@ -149,6 +159,19 @@ import { TranslatePipe } from '../../shared/pipes/translate.pipe';
               </dd>
             </div>
           </dl>
+          @if (info().schoolCode || info().eiin) {
+            <p class="mt-4 text-xs text-secondary-300">
+              @if (info().schoolCode; as code) {
+                {{ 'footer.schoolCode' | t }}: {{ code | localeDigits }}
+              }
+              @if (info().schoolCode && info().eiin) {
+                ·
+              }
+              @if (info().eiin; as eiin) {
+                {{ 'footer.eiin' | t }}: {{ eiin | localeDigits }}
+              }
+            </p>
+          }
         </section>
       </div>
       <div class="border-t border-white/10">

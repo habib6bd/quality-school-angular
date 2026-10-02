@@ -1,0 +1,140 @@
+import { Teacher } from '../models/teacher.model';
+
+/**
+ * Staff names and designations as published on bqesbd.com (API `GetTeachers`, fetched 2026-10-02).
+ * Only name, designation and display serial are kept: the old site's photos need a vendor login
+ * and contact details are private, so neither is copied. Names are English-only in the source and
+ * are shown exactly as published (spelling and capitalisation included).
+ */
+export const TEACHERS: readonly Teacher[] = [
+  {
+    slug: 'jalal-hossain',
+    name: 'MD. JALAL HOSSAIN',
+    designation: 'teacher',
+    serial: 0,
+    photo: null,
+  },
+  {
+    slug: 'salma-alam-sonia',
+    name: 'Salma Alam Sonia',
+    designation: 'teacher',
+    serial: 0,
+    photo: null,
+  },
+  {
+    slug: 'farzana-yesmin-papon',
+    name: 'Farzana Yesmin Papon',
+    designation: 'teacher',
+    serial: 0,
+    photo: null,
+  },
+  {
+    slug: 'masuma-afroz-luna',
+    name: 'Masuma Afroz Luna',
+    designation: 'teacher',
+    serial: 0,
+    photo: null,
+  },
+  { slug: 'sumaiya-islam', name: 'Sumaiya Islam', designation: 'teacher', serial: 0, photo: null },
+  {
+    slug: 'sanjida-islam-shetu',
+    name: 'Sanjida Islam Shetu',
+    designation: 'teacher',
+    serial: 0,
+    photo: null,
+  },
+  { slug: 'debaur-rahman', name: 'Debaur Rahman', designation: 'teacher', serial: 0, photo: null },
+  {
+    slug: 'sumaiya-akter',
+    name: 'MST. Sumaiya Akter',
+    designation: 'teacher',
+    serial: 0,
+    photo: null,
+  },
+  { slug: 'marjana-jihan', name: 'Marjana Jihan', designation: 'teacher', serial: 0, photo: null },
+  {
+    slug: 'md-abdullah-al-mizan',
+    name: 'Sk. Md. Abdullah Al Mizan',
+    designation: 'principal',
+    serial: 1,
+    photo: null,
+  },
+  {
+    slug: 'omor-faroq-jehadi',
+    name: 'Md. Omor Faroq jehadi',
+    designation: 'teacher',
+    serial: 2,
+    photo: null,
+  },
+  { slug: 'golam-azam', name: 'Md. Golam Azam', designation: 'teacher', serial: 3, photo: null },
+  {
+    slug: 'latifa-akter-rina',
+    name: 'Latifa Akter Rina',
+    designation: 'teacher',
+    serial: 4,
+    photo: null,
+  },
+  {
+    slug: 'mahmuda-khanam',
+    name: 'Mahmuda Khanam',
+    designation: 'teacher',
+    serial: 6,
+    photo: null,
+  },
+  { slug: 'farhana-akter', name: 'Farhana Akter', designation: 'teacher', serial: 8, photo: null },
+  { slug: 'suriya-akter', name: 'Suriya Akter', designation: 'teacher', serial: 9, photo: null },
+  {
+    slug: 'jannatul-ferdous',
+    name: 'Jannatul Ferdous',
+    designation: 'teacher',
+    serial: 10,
+    photo: null,
+  },
+  { slug: 'nasrin-akter', name: 'Nasrin Akter', designation: 'teacher', serial: 11, photo: null },
+  { slug: 'shilpi-akter', name: 'Shilpi Akter', designation: 'teacher', serial: 19, photo: null },
+  { slug: 'saima-sultana', name: 'Saima Sultana', designation: 'teacher', serial: 21, photo: null },
+  {
+    slug: 'habibur-rahman',
+    name: 'Mao. Habibur Rahman',
+    designation: 'teacher',
+    serial: 26,
+    photo: null,
+  },
+  {
+    slug: 'habibur-rahman-2',
+    name: 'MD. Habibur Rahman',
+    designation: 'teacher',
+    serial: 26,
+    photo: null,
+  },
+  {
+    slug: 'jenia-akther-rini',
+    name: 'JENIA AKTHER RINI',
+    designation: 'teacher',
+    serial: 26,
+    photo: null,
+  },
+  {
+    slug: 'rehana-chowdhury',
+    name: 'Rehana Chowdhury',
+    designation: 'teacher',
+    serial: 27,
+    photo: null,
+  },
+  {
+    slug: 'abu-sufian-bappy',
+    name: 'Abu Sufian Bappy',
+    designation: 'staff',
+    serial: 0,
+    photo: null,
+  },
+  {
+    slug: 'shaikh-zahidul-kabir',
+    name: 'Shaikh zahidul kabir',
+    designation: 'staff',
+    serial: 24,
+    photo: null,
+  },
+  { slug: 'ibrahim', name: 'MD. Ibrahim', designation: 'staff', serial: 24, photo: null },
+  { slug: 'khursida-begum', name: 'Khursida Begum', designation: 'staff', serial: 28, photo: null },
+];

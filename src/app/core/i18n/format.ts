@@ -37,3 +37,10 @@ export function formatDate(iso: string, lang: Lang, style: DateStyle = 'long'): 
     ...(dateOnly ? { timeZone: 'UTC' } : { timeZone: 'Asia/Dhaka' }),
   }).format(date);
 }
+
+const BANGLA_DIGITS = '০১২৩৪৫৬৭৮৯';
+
+/** Rewrites ASCII digits in free text (phone numbers, codes) as Bangla digits on Bangla pages. */
+export function formatDigits(text: string, lang: Lang): string {
+  return lang === 'bn' ? text.replace(/\d/g, (digit) => BANGLA_DIGITS[Number(digit)]) : text;
+}

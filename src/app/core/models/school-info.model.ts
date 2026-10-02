@@ -24,6 +24,7 @@ export interface SchoolInfo {
   emails: readonly string[];
   officeHours: Localized | null;
   eiin: string | null;
+  schoolCode: string | null;
   /** Google Maps embed URL. */
   mapEmbedUrl: string;
   social: readonly SocialLink[];

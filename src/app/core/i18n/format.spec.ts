@@ -15,3 +15,12 @@ describe('locale formatting', () => {
     expect(formatDate('not-a-date', 'en')).toBe('not-a-date');
   });
 });
+
+describe('formatDigits', () => {
+  it('converts digits to Bangla on Bangla pages only', async () => {
+    const { formatDigits } = await import('./format');
+    expect(formatDigits('01678 708862', 'bn')).toBe('০১৬৭৮ ৭০৮৮৬২');
+    expect(formatDigits('01678 708862', 'en')).toBe('01678 708862');
+    expect(formatDigits('EIIN 134172', 'bn')).toBe('EIIN ১৩৪১৭২');
+  });
+});

@@ -11,8 +11,8 @@ Work proceeds **one phase at a time**. A phase is finished only when its accepta
 | 1   | Project foundation                     | ✅ Done    |
 | 2   | Design system & shared components      | ✅ Done    |
 | 3   | Bilingual architecture                 | ✅ Done    |
-| 4   | Main layout & homepage                 | ⏭ **Next** |
-| 5   | About & academic pages                 | ☐          |
+| 4   | Main layout & homepage                 | ✅ Done    |
+| 5   | About & academic pages                 | ⏭ **Next** |
 | 6   | Teachers & faculty directory           | ☐          |
 | 7   | Admission (info + form prototype)      | ☐          |
 | 8   | Notices, news & events                 | ☐          |
