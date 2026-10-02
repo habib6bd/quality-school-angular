@@ -1,3 +1,133 @@
-/* You can add global styles to this file, and also import other style files */
-
 @import 'tailwindcss';
+
+/*
+ * BQES design tokens.
+ * Provisional palette derived from the existing site's red theme; adjust once the
+ * school confirms official brand colours.
+ */
+@theme {
+  --font-sans: 'Inter', 'Hind Siliguri', ui-sans-serif, system-ui, sans-serif;
+  --font-bangla: 'Hind Siliguri', 'Inter', ui-sans-serif, system-ui, sans-serif;
+  --font-display: 'Hind Siliguri', 'Inter', ui-sans-serif, system-ui, sans-serif;
+
+  /* Primary — deep crimson */
+  --color-primary-50: #fdf3f4;
+  --color-primary-100: #fbe4e7;
+  --color-primary-200: #f6cdd3;
+  --color-primary-300: #eea4ae;
+  --color-primary-400: #e27183;
+  --color-primary-500: #d1465d;
+  --color-primary-600: #b52b45;
+  --color-primary-700: #981f38;
+  --color-primary-800: #7f1d34;
+  --color-primary-900: #6c1b31;
+  --color-primary-950: #3c0a17;
+
+  /* Secondary — trustworthy navy */
+  --color-secondary-50: #f2f6fc;
+  --color-secondary-100: #e1eaf8;
+  --color-secondary-200: #cadbf3;
+  --color-secondary-300: #a5c3eb;
+  --color-secondary-400: #7aa3e0;
+  --color-secondary-500: #5a84d6;
+  --color-secondary-600: #4669c9;
+  --color-secondary-700: #3c57b8;
+  --color-secondary-800: #364896;
+  --color-secondary-900: #1f2d5c;
+  --color-secondary-950: #141c3b;
+
+  /* Accent — warm gold */
+  --color-accent-50: #fffaeb;
+  --color-accent-100: #fef0c7;
+  --color-accent-200: #fde08a;
+  --color-accent-300: #fcca4d;
+  --color-accent-400: #fbb424;
+  --color-accent-500: #f5930b;
+  --color-accent-600: #d96d06;
+  --color-accent-700: #b44a09;
+
+  /* Neutral surfaces */
+  --color-surface: #ffffff;
+  --color-surface-muted: #f8f7f4;
+  --color-ink: #1c1917;
+  --color-ink-muted: #57534e;
+
+  --radius-card: 1rem;
+  --shadow-card: 0 1px 2px rgb(28 25 23 / 0.04), 0 4px 16px rgb(28 25 23 / 0.06);
+  --shadow-card-hover: 0 2px 4px rgb(28 25 23 / 0.06), 0 12px 32px rgb(28 25 23 / 0.1);
+
+  --animate-fade-up: fade-up 0.5s ease-out both;
+
+  @keyframes fade-up {
+    from {
+      opacity: 0;
+      transform: translateY(12px);
+    }
+    to {
+      opacity: 1;
+      transform: none;
+    }
+  }
+}
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+    -webkit-text-size-adjust: 100%;
+  }
+
+  body {
+    @apply bg-surface-muted font-sans text-ink antialiased;
+    line-height: 1.6;
+  }
+
+  /* Bangla script needs a taller line box for matras and conjuncts. */
+  :lang(bn) body,
+  body:lang(bn) {
+    font-family: var(--font-bangla);
+    line-height: 1.8;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4 {
+    @apply font-display font-semibold text-secondary-950;
+    line-height: 1.3;
+    text-wrap: balance;
+  }
+
+  :focus-visible {
+    @apply outline-2 outline-offset-2 outline-accent-500;
+  }
+
+  img,
+  video {
+    max-width: 100%;
+    height: auto;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    html {
+      scroll-behavior: auto;
+    }
+
+    *,
+    *::before,
+    *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+    }
+  }
+}
+
+@layer components {
+  .container-page {
+    @apply mx-auto w-full max-w-7xl px-4 sm:px-6 lg:px-8;
+  }
+
+  .skip-link {
+    @apply sr-only rounded-md bg-secondary-900 px-4 py-2 text-white focus:not-sr-only focus:fixed focus:top-3 focus:left-3 focus:z-[100];
+  }
+}
