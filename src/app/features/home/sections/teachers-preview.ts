@@ -26,7 +26,9 @@ import { TranslatePipe } from '../../../shared/pipes/translate.pipe';
       >
         <ul class="grid grid-cols-2 gap-4 lg:grid-cols-4">
           @for (teacher of teachers.value(); track teacher.slug) {
-            <li><app-teacher-card [teacher]="teacher" /></li>
+            <li>
+              <app-teacher-card [teacher]="teacher" [link]="'teachers' | pagePath: teacher.slug" />
+            </li>
           }
         </ul>
       </app-async-state>

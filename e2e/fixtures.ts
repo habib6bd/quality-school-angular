@@ -17,6 +17,13 @@ export const test = base.extend({
         body: '',
       }),
     );
+    // Server-rendered controls only react once the app has hydrated, so every `goto` waits for it.
+    const goto = page.goto.bind(page);
+    page.goto = async (url, options) => {
+      const response = await goto(url, options);
+      await page.waitForSelector('html[data-app-ready="true"]', { state: 'attached' });
+      return response;
+    };
     await use(page);
   },
 });

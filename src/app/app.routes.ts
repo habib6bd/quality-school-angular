@@ -15,6 +15,7 @@ const PAGE_COMPONENTS: Partial<Record<string, ComponentLoader>> = {
   'about/philosophy': () => import('./features/about/philosophy').then((m) => m.PhilosophyPage),
   'about/messages': () => import('./features/about/messages').then((m) => m.MessagesPage),
   'about/facilities': () => import('./features/about/facilities').then((m) => m.FacilitiesPage),
+  teachers: () => import('./features/teachers/teachers').then((m) => m.TeachersPage),
   academics: () => import('./features/academics/overview').then((m) => m.AcademicsPage),
   'academics/programs': () => import('./features/academics/programs').then((m) => m.ProgramsPage),
 };
@@ -37,6 +38,12 @@ const pageRoutes: Routes = [
     path: 'academics/programs/:slug',
     data: { titleKey: 'nav.programs', descriptionKey: 'seo.programs' },
     loadComponent: () => import('./features/academics/class-detail').then((m) => m.ClassDetailPage),
+  },
+  {
+    path: 'teachers/:slug',
+    data: { titleKey: 'nav.teachers', descriptionKey: 'seo.teachers' },
+    loadComponent: () =>
+      import('./features/teachers/teacher-detail').then((m) => m.TeacherDetailPage),
   },
   { path: '**', data: { titleKey: 'notFound.title' }, loadComponent: notFound },
 ];

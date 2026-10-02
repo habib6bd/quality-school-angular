@@ -1,3 +1,4 @@
+import { ApplicationRef } from '@angular/core';
 import { TestBed } from '@angular/core/testing';
 import { Title } from '@angular/platform-browser';
 import { provideRouter, Router, TitleStrategy, withComponentInputBinding } from '@angular/router';
@@ -22,6 +23,15 @@ describe('App routing', () => {
   it('should create the app', () => {
     const fixture = TestBed.createComponent(App);
     expect(fixture.componentInstance).toBeTruthy();
+  });
+
+  it('marks the document as ready once the app is rendered and stable', async () => {
+    document.documentElement.removeAttribute('data-app-ready');
+    const fixture = TestBed.createComponent(App);
+    fixture.detectChanges();
+    await fixture.whenStable();
+    await TestBed.inject(ApplicationRef).whenStable();
+    expect(document.documentElement.getAttribute('data-app-ready')).toBe('true');
   });
 
   it('redirects the root URL to the default Bangla tree', async () => {

@@ -25,3 +25,10 @@ One line per ambiguous choice, made to stay consistent with the plan, the conten
 - Class pages show only name, order, medium and groups. Subjects, routine, syllabus and fees are a placeholder, never invented.
 - Unknown class slugs are rendered by the router (so the layout stays), show the shared not-found page and set the HTTP status to 404 through `RESPONSE_INIT` (`ResponseStatusService`); known slugs are prerendered with a server fallback. The same pattern will be used by teacher/notice/news/event detail routes.
 - `SeoService` was introduced here (title, description, Open Graph, Twitter) and is called by the title strategy for every route; canonical URLs, hreflang and JSON-LD are left to Phase 13 as the plan says. Every `PAGES` entry now has a `descriptionKey`.
+
+## Phase 6
+
+- Staff directory filters live in the URL (`?designation=…&q=…`), so a filtered list is shareable, survives the language switch and is rendered on the server. Because the content depends on the query string, pages flagged `queryDriven` in the page registry are rendered per request instead of prerendered (otherwise the static HTML would not match what the browser hydrates). Only `teachers` is flagged so far; later list pages with filters/pagination will be flagged too.
+- Staff are shown exactly as published: English names on both language pages (with `lang="en"`), no transliteration, avatar initials only. Profile pages show name and designation, a pending note for photo/profile, and point to the school's general contact page; no private contact fields exist in the model.
+- Two entries share the name "Habibur Rahman" with different spellings/serials in the source (`habibur-rahman`, `habibur-rahman-2`); both are kept as published.
+- The app now sets `data-app-ready="true"` on `<html>` once hydrated and stable. E2E `goto` waits for it, because typing into a server-rendered control before hydration is lost (a real race that surfaced in the name-search test).

@@ -12,6 +12,12 @@ export interface PageDef {
   descriptionKey: TranslationKey;
   /** Path of the parent page for breadcrumbs; omitted means "child of home". */
   parent?: string;
+  /**
+   * The page's content depends on URL query parameters (filters, page number, search text).
+   * It is rendered per request on the server instead of prerendered, so the HTML always matches
+   * what the browser hydrates.
+   */
+  queryDriven?: boolean;
 }
 
 export const PAGES: readonly PageDef[] = [
@@ -79,7 +85,7 @@ export const PAGES: readonly PageDef[] = [
   },
   { path: 'faq', titleKey: 'nav.faq', descriptionKey: 'seo.faq' },
 
-  { path: 'teachers', titleKey: 'nav.teachers', descriptionKey: 'seo.teachers' },
+  { path: 'teachers', titleKey: 'nav.teachers', descriptionKey: 'seo.teachers', queryDriven: true },
   { path: 'notices', titleKey: 'nav.notices', descriptionKey: 'seo.notices' },
   { path: 'news', titleKey: 'nav.news', descriptionKey: 'seo.news' },
   { path: 'events', titleKey: 'nav.events', descriptionKey: 'seo.events' },

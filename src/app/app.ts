@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import { DOCUMENT } from '@angular/common';
+import { afterNextRender, ApplicationRef, Component, inject } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 
 @Component({
@@ -6,4 +7,14 @@ import { RouterOutlet } from '@angular/router';
   imports: [RouterOutlet],
   template: '<router-outlet />',
 })
-export class App {}
+export class App {
+  constructor() {
+    const appRef = inject(ApplicationRef);
+    const root = inject(DOCUMENT).documentElement;
+    // Browser only: marks the page as hydrated and idle, so end-to-end tests (and anyone
+    // debugging) can tell when server-rendered controls have become interactive.
+    afterNextRender(() => {
+      void appRef.whenStable().then(() => root.setAttribute('data-app-ready', 'true'));
+    });
+  }
+}

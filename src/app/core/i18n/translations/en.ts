@@ -143,6 +143,23 @@ export const en: PartialDict<TranslationShape> = {
     mapTitle: 'Location of Banasree Quality Education School on Google Maps',
   },
   teachers: {
+    intro: 'The school’s published list of teachers and staff.',
+    namesNote: 'Names are shown as published by the school, written in English.',
+    filterLabel: 'Filter by designation',
+    all: 'Everyone',
+    searchLabel: 'Search by name',
+    searchPlaceholder: 'Type a name…',
+    showing: 'Showing {shown} of {total}',
+    emptyTitle: 'No one found',
+    emptyMessage: 'No results for this filter or name. Try another designation or name.',
+    clearFilters: 'Clear filters',
+    detailIntro: '{name} — {designation}, Banasree Quality Education School.',
+    profilePending:
+      'A photo and a fuller profile (such as subjects and qualifications) will be added once the school supplies and approves them.',
+    contactNote:
+      'No personal contact details are published on this website. See the school’s general contact page.',
+    backToList: 'All teachers and staff',
+    designationLabel: 'Designation',
     designation: { principal: 'Principal', teacher: 'Teacher', staff: 'Staff' },
   },
   programs: {

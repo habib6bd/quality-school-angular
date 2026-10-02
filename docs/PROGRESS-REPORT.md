@@ -66,3 +66,36 @@ Phase reports are appended below in order. (A final summary is added at the top 
 **Issues (honest):** Mission, vision and a formal educational philosophy are not published, so those pages are intentionally placeholders. The English translations of the leaders' messages were written for this site and need the school's review. Canonical/hreflang/JSON-LD are not set yet (Phase 13). The nine pages × 2 languages were checked in Chromium 141 only; real fonts were stubbed in tests.
 
 **Acceptance criteria:** PASS — all routes work in both languages (`/bn|en` × 9 pages incl. class pages); consistent `PageScaffold` layout; title and description set per page; unit and e2e tests pass; unknown class returns a real 404.
+
+---
+
+### Phase 6: Teachers & faculty directory
+
+**Implemented**
+
+- Typed `Teacher` model and `TeacherService` (list, preview, bySlug) fed from the published staff data: name, designation and display serial only (no photos, no private fields). Principal first, then teachers, then staff.
+- Directory page (`/teachers`): cards with initial-letter avatars, designation filter chips with live counts, name search, `Showing N of M` live region, empty state with a clear-filters link, English names on Bangla pages with `lang="en"`. Filters are URL query parameters, so they are server-rendered, shareable and kept by the language switcher.
+- Person page (`/teachers/:slug`): avatar, name, designation, pending note for photo/profile, link to the general contact page; real 404 for unknown slugs; prerendered per person and language; SEO title/description per person.
+- Homepage staff preview cards now link to the person pages.
+- Infrastructure: `queryDriven` page flag (server-rendered instead of prerendered), hydration-ready marker for tests.
+
+**Files** — new: `src/app/features/teachers/*` (+ specs), `e2e/teachers.spec.ts`. Modified: `pages.ts`, `app.routes.ts`, `app.routes.server.ts`, `app.ts` (+ spec), home teachers preview, translations, `e2e/fixtures.ts`.
+
+**Dependencies:** none added.
+
+**Commands:** `npm run typecheck`; `npm run lint`; `npx ng test --watch=false`; `npx ng build`; `PORT=4310 ./scripts/ssr-smoke.sh /bn/teachers /en/teachers?designation=staff /en/teachers/md-abdullah-al-mizan /bn/teachers/nobody`; `PW_EXECUTABLE=/opt/pw-browsers/chromium npx playwright test`.
+
+**Verification**
+
+| Check            | Result                                                                                                                      |
+| ---------------- | --------------------------------------------------------------------------------------------------------------------------- |
+| Type checking    | PASS                                                                                                                        |
+| Lint             | PASS                                                                                                                        |
+| Unit tests       | PASS — 32 files, 164 tests                                                                                                  |
+| Production build | PASS — 128 static routes prerendered                                                                                        |
+| SSR smoke        | PASS — /bn/teachers 200; /en/teachers?designation=staff 200; /en/teachers/md-abdullah-al-mizan 200; /bn/teachers/nobody 404 |
+| Browser tests    | PASS — 100 Playwright tests (Chromium 141 via `PW_EXECUTABLE`)                                                              |
+
+**Issues (honest):** Staff photos, subjects and qualifications are not published (the old site's photos need a vendor login), so profiles are intentionally minimal. The published teacher count (27) differs from the 24 principal+teacher entries in the list; both are shown as published. Hydration race: text typed into a server-rendered input before hydration is lost (mitigated in tests only; a production fix would need a pre-hydration input replay).
+
+**Acceptance criteria:** PASS — cards display; filters work (chips, search, combined); empty results handled; detail routes work (28 profile pages + 404 for unknown); mobile layout verified at 320–1440 px; tests pass.
