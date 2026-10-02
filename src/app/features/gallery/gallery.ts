@@ -10,6 +10,7 @@ import { AsyncState } from '../../shared/components/async-state/async-state';
 import { GalleryGrid } from '../../shared/components/gallery-grid/gallery-grid';
 import { Lightbox, LightboxImage } from '../../shared/components/lightbox/lightbox';
 import { PageScaffold } from '../../shared/components/page-scaffold/page-scaffold';
+import { RelatedLinks } from '../../shared/components/related-links/related-links';
 import { ButtonDirective } from '../../shared/directives/button.directive';
 import { LocaleNumberPipe } from '../../shared/pipes/locale-format.pipes';
 import { PagePathPipe } from '../../shared/pipes/page-path.pipe';
@@ -38,6 +39,7 @@ export function isGalleryCategory(value: unknown): value is GalleryCategory {
     GalleryGrid,
     Lightbox,
     PageScaffold,
+    RelatedLinks,
     LocaleNumberPipe,
     PagePathPipe,
     TranslatePipe,
@@ -88,10 +90,12 @@ export function isGalleryCategory(value: unknown): value is GalleryCategory {
         }}</a>
         <app-lightbox [images]="images()" [(index)]="selected" />
       </app-async-state>
+      <app-related-links class="mt-14 block" [paths]="related" />
     </app-page-scaffold>
   `,
 })
 export class GalleryPage {
+  protected readonly related = ['videos', 'events', 'achievements'] as const;
   private readonly service = inject(GalleryService);
   private readonly language = inject(LanguageService);
 

@@ -7,6 +7,7 @@ import { paginate } from '../../core/util/paginate';
 import { AsyncState } from '../../shared/components/async-state/async-state';
 import { NewsCard } from '../../shared/components/news-card/news-card';
 import { PageScaffold } from '../../shared/components/page-scaffold/page-scaffold';
+import { RelatedLinks } from '../../shared/components/related-links/related-links';
 import { Pagination } from '../../shared/components/pagination/pagination';
 import { PagePathPipe } from '../../shared/pipes/page-path.pipe';
 import { TranslatePipe } from '../../shared/pipes/translate.pipe';
@@ -17,7 +18,15 @@ export const NEWS_PAGE_SIZE = 9;
 @Component({
   selector: 'app-news-page',
   changeDetection: ChangeDetectionStrategy.OnPush,
-  imports: [AsyncState, NewsCard, PageScaffold, Pagination, PagePathPipe, TranslatePipe],
+  imports: [
+    AsyncState,
+    NewsCard,
+    PageScaffold,
+    RelatedLinks,
+    Pagination,
+    PagePathPipe,
+    TranslatePipe,
+  ],
   template: `
     <app-page-scaffold page="news" [intro]="'news.intro' | t">
       <app-async-state
@@ -41,10 +50,12 @@ export const NEWS_PAGE_SIZE = 9;
           />
         </div>
       </app-async-state>
+      <app-related-links class="mt-14 block" [paths]="related" />
     </app-page-scaffold>
   `,
 })
 export class NewsPage {
+  protected readonly related = ['notices', 'events', 'gallery'] as const;
   private readonly service = inject(NewsService);
   private readonly router = inject(Router);
 

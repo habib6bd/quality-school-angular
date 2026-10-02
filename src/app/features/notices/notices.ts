@@ -11,6 +11,7 @@ import {
   NoticeCard,
 } from '../../shared/components/notice-card/notice-card';
 import { PageScaffold } from '../../shared/components/page-scaffold/page-scaffold';
+import { RelatedLinks } from '../../shared/components/related-links/related-links';
 import { Pagination } from '../../shared/components/pagination/pagination';
 import { ButtonDirective } from '../../shared/directives/button.directive';
 import { LocaleNumberPipe } from '../../shared/pipes/locale-format.pipes';
@@ -45,6 +46,7 @@ const CHIPS: readonly Chip[] = [
     ButtonDirective,
     NoticeCard,
     PageScaffold,
+    RelatedLinks,
     Pagination,
     LocaleNumberPipe,
     PagePathPipe,
@@ -115,10 +117,12 @@ const CHIPS: readonly Chip[] = [
           />
         </div>
       </app-async-state>
+      <app-related-links class="mt-14 block" [paths]="related" />
     </app-page-scaffold>
   `,
 })
 export class NoticesPage {
+  protected readonly related = ['admission', 'academics/calendar', 'results'] as const;
   private readonly service = inject(NoticeService);
   private readonly router = inject(Router);
 

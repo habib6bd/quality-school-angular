@@ -8,6 +8,7 @@ import { todayIso } from '../../core/util/today';
 import { AsyncState } from '../../shared/components/async-state/async-state';
 import { EventCard } from '../../shared/components/event-card/event-card';
 import { PageScaffold } from '../../shared/components/page-scaffold/page-scaffold';
+import { RelatedLinks } from '../../shared/components/related-links/related-links';
 import { Pagination } from '../../shared/components/pagination/pagination';
 import { PagePathPipe } from '../../shared/pipes/page-path.pipe';
 import { TranslatePipe } from '../../shared/pipes/translate.pipe';
@@ -24,6 +25,7 @@ export type EventView = 'upcoming' | 'past';
     AsyncState,
     EventCard,
     PageScaffold,
+    RelatedLinks,
     Pagination,
     PagePathPipe,
     TranslatePipe,
@@ -81,10 +83,12 @@ export type EventView = 'upcoming' | 'past';
           />
         </div>
       </app-async-state>
+      <app-related-links class="mt-14 block" [paths]="related" />
     </app-page-scaffold>
   `,
 })
 export class EventsPage {
+  protected readonly related = ['academics/calendar', 'news', 'gallery'] as const;
   private readonly service = inject(EventService);
   private readonly router = inject(Router);
 

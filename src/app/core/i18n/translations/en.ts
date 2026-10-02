@@ -572,4 +572,23 @@ export const en: PartialDict<TranslationShape> = {
     moreTitle: 'Did not find your answer?',
     moreText: 'For specific information, please contact the school directly.',
   },
+  search: {
+    intro: 'Search pages, teachers, notices, news, events and resources.',
+    label: 'Search the website',
+    hint: 'Type one or more words — for example “admission”, “Class Nine” or a teacher’s name.',
+    suggestionsTitle: 'Start here',
+    kindLabel: 'Type of result',
+    all: 'All',
+    kind: {
+      page: 'Pages',
+      teacher: 'Teachers & staff',
+      notice: 'Notices',
+      news: 'News',
+      event: 'Events',
+      resource: 'Resources',
+    },
+    resultCount: '{count} results for “{query}”',
+    noResultsTitle: 'Nothing found for “{query}”',
+    noResultsText: 'Try different words, check the spelling, or contact the school directly.',
+  },
 };

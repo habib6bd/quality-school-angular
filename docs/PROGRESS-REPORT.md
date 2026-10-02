@@ -262,3 +262,34 @@ Phase reports are appended below in order. (A final summary is added at the top 
 **Issues (honest):** The map embed is built from the school name and could not be loaded or verified from this sandbox (Google Maps is unreachable), so "valid map location" is unverified. The school published no email address or office hours. The contact form cannot deliver messages (prototype). No testimonials exist, so only the empty state could be shown.
 
 **Acceptance criteria:** PASS (with the map caveat above) — forms validate; FAQ works (filters, search, accordion); contact details are consistent across footer, homepage and contact page; no endpoint, nothing stored or logged; unit, browser and build checks pass.
+
+---
+
+### Phase 12: Site search & navigation polish
+
+**Implemented**
+
+- Client-side search index over pages, class pages, teachers, notices, news, events and resources (built from the existing services, cached), with a pure `searchEntries` ranking function, Bangla/ASCII digit equivalence, both-language matching, safe highlighting and snippets.
+- `/search?q=&kind=&page=`: search field (focused on arrival), live results as you type with the query in the URL, kind chips with counts, kind labels on results, pagination (10/page, bad pages clamped), suggestions when empty, "nothing found" state with a contact link, live result count; arrow-key navigation between field and results. Both languages.
+- Navigation polish: focus moves to the main landmark after navigating to another page (not for filters, pagination or language switches); related-page cards on teachers, notices, news, events, gallery, FAQ and contact pages; mobile menu and header both reach search.
+
+**Files** — new: `src/app/core/search/*`, `src/app/core/services/search-index.service.ts`, `src/app/features/search/*`, `e2e/search.spec.ts`. Modified: `shell.ts` (focus on page change), `search-box.ts` (`focus()`), list pages (related links), `pages.ts`, `app.routes.ts`, `app.spec.ts`, translations.
+
+**Dependencies:** none added.
+
+**Commands:** `npm run typecheck`; `npm run lint`; `npx ng test --watch=false`; `npx ng build`; `PORT=4310 ./scripts/ssr-smoke.sh /bn/search /en/search?q=admission "/bn/search?q=<percent-encoded ভর্তি>"`; `PW_EXECUTABLE=/opt/pw-browsers/chromium npx playwright test`.
+
+**Verification**
+
+| Check            | Result                                                                                                            |
+| ---------------- | ----------------------------------------------------------------------------------------------------------------- |
+| Type checking    | PASS                                                                                                              |
+| Lint             | PASS                                                                                                              |
+| Unit tests       | PASS — 43 files, 326 tests                                                                                        |
+| Production build | PASS — 114 static routes prerendered                                                                              |
+| SSR smoke        | PASS — /bn/search 200; /en/search?q=admission 200; /bn/search?q=%E0%A6%AD%E0%A6%B0%E0%A7%8D%E0%A6%A4%E0%A6%BF 200 |
+| Browser tests    | PASS — 209 Playwright tests (Chromium 141 via `PW_EXECUTABLE`)                                                    |
+
+**Issues (honest):** News, events and resources are indexed but contribute no entries because none are published. The search index is built in memory per visit (fine for ~60 entries; a server-side index would be needed if content grows into the thousands). A partial-word highlight bug ("Soni a") was found by a unit test and fixed.
+
+**Acceptance criteria:** PASS — search works over all content kinds in both languages with results, category labels, empty states, pagination and keyboard support; breadcrumbs/related content/focus handling polished; unit, browser and build checks pass.

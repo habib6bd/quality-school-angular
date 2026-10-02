@@ -17,6 +17,7 @@ import { FaqService } from '../../core/services/faq.service';
 import { Accordion, AccordionItem } from '../../shared/components/accordion/accordion';
 import { AsyncState } from '../../shared/components/async-state/async-state';
 import { PageScaffold } from '../../shared/components/page-scaffold/page-scaffold';
+import { RelatedLinks } from '../../shared/components/related-links/related-links';
 import { SearchBox } from '../../shared/components/search-box/search-box';
 import { ButtonDirective } from '../../shared/directives/button.directive';
 import { LocaleNumberPipe } from '../../shared/pipes/locale-format.pipes';
@@ -66,6 +67,7 @@ export function filterFaqs(
     AsyncState,
     ButtonDirective,
     PageScaffold,
+    RelatedLinks,
     SearchBox,
     LocaleNumberPipe,
     PagePathPipe,
@@ -138,10 +140,12 @@ export function filterFaqs(
         <p class="mt-1 text-ink-muted">{{ 'faq.moreText' | t }}</p>
         <a appButton class="mt-4" [routerLink]="'contact' | pagePath">{{ 'nav.contact' | t }}</a>
       </section>
+      <app-related-links class="mt-14 block" [paths]="related" />
     </app-page-scaffold>
   `,
 })
 export class FaqPage {
+  protected readonly related = ['admission', 'contact', 'about'] as const;
   private readonly service = inject(FaqService);
   private readonly language = inject(LanguageService);
   private readonly router = inject(Router);

@@ -34,6 +34,31 @@ describe('App routing', () => {
     expect(document.documentElement.getAttribute('data-app-ready')).toBe('true');
   });
 
+  it('moves focus to the main landmark after navigating to another page, but not for filters or language changes', async () => {
+    const harness = await RouterTestingHarness.create();
+    await harness.navigateByUrl('/bn/about');
+    const main = () => document.getElementById('main-content');
+    await TestBed.inject(ApplicationRef).whenStable();
+    expect(document.activeElement).not.toBe(main()); // first page: focus left alone
+
+    await harness.navigateByUrl('/bn/teachers');
+    await TestBed.inject(ApplicationRef).whenStable();
+    expect(document.activeElement).toBe(main());
+
+    (document.activeElement as HTMLElement).blur();
+    await harness.navigateByUrl('/bn/teachers?designation=staff');
+    await TestBed.inject(ApplicationRef).whenStable();
+    expect(document.activeElement).not.toBe(main()); // same page, different filter
+
+    await harness.navigateByUrl('/en/teachers?designation=staff');
+    await TestBed.inject(ApplicationRef).whenStable();
+    expect(document.activeElement).not.toBe(main()); // same page, other language
+
+    await harness.navigateByUrl('/en/contact');
+    await TestBed.inject(ApplicationRef).whenStable();
+    expect(document.activeElement).toBe(main());
+  });
+
   it('redirects the root URL to the default Bangla tree', async () => {
     const harness = await RouterTestingHarness.create();
     await harness.navigateByUrl('/');

@@ -24,6 +24,7 @@ import { Badge } from '../../shared/components/badge/badge';
 import { Icon } from '../../shared/components/icon/icon';
 import { MapEmbed } from '../../shared/components/map-embed/map-embed';
 import { PageScaffold } from '../../shared/components/page-scaffold/page-scaffold';
+import { RelatedLinks } from '../../shared/components/related-links/related-links';
 import { ButtonDirective } from '../../shared/directives/button.directive';
 import { ErrorSummary, SummaryError } from '../../shared/forms/error-summary';
 import { FieldControl, fieldError, FormField } from '../../shared/forms/form-field';
@@ -76,6 +77,7 @@ const text = (...validators: ((c: AbstractControl) => ValidationErrors | null)[]
     Icon,
     MapEmbed,
     PageScaffold,
+    RelatedLinks,
     LocaleDigitsPipe,
     LocalizePipe,
     TranslatePipe,
@@ -301,10 +303,12 @@ const text = (...validators: ((c: AbstractControl) => ValidationErrors | null)[]
           [title]="'home.mapTitle' | t"
         />
       </section>
+      <app-related-links class="mt-14 block" [paths]="related" />
     </app-page-scaffold>
   `,
 })
 export class ContactPage {
+  protected readonly related = ['faq', 'admission', 'about'] as const;
   private readonly contact = inject(ContactService);
   private readonly i18n = inject(TranslationService);
   private readonly injector = inject(Injector);

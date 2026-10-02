@@ -1,4 +1,12 @@
-import { ChangeDetectionStrategy, Component, input, model, output } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  ElementRef,
+  input,
+  model,
+  output,
+  viewChild,
+} from '@angular/core';
 import { TranslatePipe } from '../../pipes/translate.pipe';
 import { Icon } from '../icon/icon';
 
@@ -20,6 +28,7 @@ let nextId = 0;
         class="pointer-events-none absolute top-1/2 left-3.5 -translate-y-1/2 text-ink-muted"
       />
       <input
+        #field
         [id]="inputId"
         type="search"
         enterkeyhint="search"
@@ -49,6 +58,12 @@ export class SearchBox {
   readonly submitted = output<string>();
 
   protected readonly inputId = `search-${nextId++}`;
+  private readonly field = viewChild<ElementRef<HTMLInputElement>>('field');
+
+  /** Moves keyboard focus into the text field. */
+  focus(): void {
+    this.field()?.nativeElement.focus();
+  }
 
   protected onInput(event: Event): void {
     this.value.set((event.target as HTMLInputElement).value);

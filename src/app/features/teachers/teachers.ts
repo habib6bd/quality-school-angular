@@ -13,6 +13,7 @@ import { Designation, Teacher } from '../../core/models/teacher.model';
 import { DESIGNATION_ORDER, TeacherService } from '../../core/services/teacher.service';
 import { AsyncState } from '../../shared/components/async-state/async-state';
 import { PageScaffold } from '../../shared/components/page-scaffold/page-scaffold';
+import { RelatedLinks } from '../../shared/components/related-links/related-links';
 import { SearchBox } from '../../shared/components/search-box/search-box';
 import { DESIGNATION_LABELS, TeacherCard } from '../../shared/components/teacher-card/teacher-card';
 import { ButtonDirective } from '../../shared/directives/button.directive';
@@ -62,6 +63,7 @@ const CHIPS: readonly FilterChip[] = [
     AsyncState,
     ButtonDirective,
     PageScaffold,
+    RelatedLinks,
     SearchBox,
     TeacherCard,
     LocaleNumberPipe,
@@ -136,10 +138,12 @@ const CHIPS: readonly FilterChip[] = [
       </app-async-state>
 
       <p class="mt-8 text-sm text-ink-muted">{{ 'teachers.namesNote' | t }}</p>
+      <app-related-links class="mt-14 block" [paths]="related" />
     </app-page-scaffold>
   `,
 })
 export class TeachersPage {
+  protected readonly related = ['about', 'academics', 'contact'] as const;
   private readonly service = inject(TeacherService);
   private readonly router = inject(Router);
 

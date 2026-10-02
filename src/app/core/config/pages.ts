@@ -96,7 +96,7 @@ export const PAGES: readonly PageDef[] = [
   { path: 'achievements', titleKey: 'nav.achievements', descriptionKey: 'seo.achievements' },
 
   { path: 'contact', titleKey: 'nav.contact', descriptionKey: 'seo.contact' },
-  { path: 'search', titleKey: 'nav.search', descriptionKey: 'seo.search' },
+  { path: 'search', titleKey: 'nav.search', descriptionKey: 'seo.search', queryDriven: true },
 ];
 
 const BY_PATH = new Map(PAGES.map((page) => [page.path, page]));

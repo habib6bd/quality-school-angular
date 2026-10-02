@@ -1,6 +1,13 @@
-import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
+import {
+  afterNextRender,
+  ChangeDetectionStrategy,
+  Component,
+  inject,
+  Injector,
+} from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
-import { ActivatedRoute, RouterOutlet } from '@angular/router';
+import { ActivatedRoute, NavigationEnd, Router, RouterOutlet } from '@angular/router';
+import { filter } from 'rxjs';
 import { navCommands } from '../../core/config/navigation';
 import { DEFAULT_LANG, isLang } from '../../core/i18n/lang';
 import { LanguageService } from '../../core/i18n/language.service';
@@ -39,6 +46,10 @@ import { Header } from '../header/header';
 })
 export class Shell {
   private readonly language = inject(LanguageService);
+  private readonly router = inject(Router);
+  private readonly injector = inject(Injector);
+  /** Path (without language or query) of the page last shown; `null` before the first one. */
+  private shownPath: string | null = null;
   protected readonly announcement = inject(AnnouncementService).current;
 
   constructor() {
@@ -48,6 +59,31 @@ export class Shell {
       .subscribe((data) => {
         const lang = data['lang'];
         this.language.setLang(isLang(lang) ? lang : DEFAULT_LANG);
+      });
+    this.focusMainOnPageChange();
+  }
+
+  /**
+   * After navigating to a different page, moves focus to the main landmark so keyboard and
+   * screen-reader users start at the new content. Filters, pagination, language changes and the
+   * first load leave focus alone.
+   */
+  private focusMainOnPageChange(): void {
+    this.router.events
+      .pipe(
+        filter((event): event is NavigationEnd => event instanceof NavigationEnd),
+        takeUntilDestroyed(),
+      )
+      .subscribe((event) => {
+        const path = event.urlAfterRedirects.split(/[?#]/)[0].replace(/^\/(bn|en)(?=\/|$)/, '');
+        const changed = this.shownPath !== null && path !== this.shownPath;
+        this.shownPath = path;
+        if (changed) {
+          afterNextRender(
+            () => document.getElementById('main-content')?.focus({ preventScroll: true }),
+            { injector: this.injector },
+          );
+        }
       });
   }
 

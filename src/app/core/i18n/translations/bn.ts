@@ -572,6 +572,26 @@ export const bn = {
     moreTitle: 'উত্তর খুঁজে পাননি?',
     moreText: 'নির্দিষ্ট তথ্যের জন্য সরাসরি বিদ্যালয়ের সঙ্গে যোগাযোগ করুন।',
   },
+  search: {
+    intro: 'পৃষ্ঠা, শিক্ষক, নোটিশ, সংবাদ, ইভেন্ট ও রিসোর্সে অনুসন্ধান করুন।',
+    label: 'ওয়েবসাইটে অনুসন্ধান',
+    hint: 'একটি বা একাধিক শব্দ লিখুন — যেমন “ভর্তি”, “নবম শ্রেণি” বা কোনো শিক্ষকের নাম।',
+    suggestionsTitle: 'এখান থেকে শুরু করুন',
+    kindLabel: 'ফলাফলের ধরন',
+    all: 'সব',
+    kind: {
+      page: 'পৃষ্ঠা',
+      teacher: 'শিক্ষক ও কর্মচারী',
+      notice: 'নোটিশ',
+      news: 'সংবাদ',
+      event: 'ইভেন্ট',
+      resource: 'রিসোর্স',
+    },
+    resultCount: '“{query}” এর জন্য {count}টি ফলাফল',
+    noResultsTitle: '“{query}” এর জন্য কিছু পাওয়া যায়নি',
+    noResultsText:
+      'অন্য শব্দ চেষ্টা করুন, বানান দেখে নিন, অথবা সরাসরি বিদ্যালয়ের সঙ্গে যোগাযোগ করুন।',
+  },
 } satisfies TranslationDict;
 
 export type TranslationShape = typeof bn;
