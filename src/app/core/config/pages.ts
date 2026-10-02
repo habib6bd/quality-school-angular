@@ -8,39 +8,87 @@ import { TranslationKey } from '../i18n/translation.service';
 export interface PageDef {
   path: string;
   titleKey: TranslationKey;
+  /** Meta description shown in search results and link previews. */
+  descriptionKey: TranslationKey;
   /** Path of the parent page for breadcrumbs; omitted means "child of home". */
   parent?: string;
 }
 
 export const PAGES: readonly PageDef[] = [
-  { path: '', titleKey: 'nav.home' },
+  { path: '', titleKey: 'nav.home', descriptionKey: 'seo.home' },
 
-  { path: 'about', titleKey: 'nav.aboutSchool' },
-  { path: 'about/history', titleKey: 'nav.history', parent: 'about' },
-  { path: 'about/mission-vision', titleKey: 'nav.missionVision', parent: 'about' },
-  { path: 'about/messages', titleKey: 'nav.messages', parent: 'about' },
-  { path: 'about/facilities', titleKey: 'nav.facilities', parent: 'about' },
+  { path: 'about', titleKey: 'nav.aboutSchool', descriptionKey: 'seo.about' },
+  {
+    path: 'about/history',
+    titleKey: 'nav.history',
+    descriptionKey: 'seo.history',
+    parent: 'about',
+  },
+  {
+    path: 'about/mission-vision',
+    titleKey: 'nav.missionVision',
+    descriptionKey: 'seo.missionVision',
+    parent: 'about',
+  },
+  {
+    path: 'about/philosophy',
+    titleKey: 'nav.philosophy',
+    descriptionKey: 'seo.philosophy',
+    parent: 'about',
+  },
+  {
+    path: 'about/messages',
+    titleKey: 'nav.messages',
+    descriptionKey: 'seo.messages',
+    parent: 'about',
+  },
+  {
+    path: 'about/facilities',
+    titleKey: 'nav.facilities',
+    descriptionKey: 'seo.facilities',
+    parent: 'about',
+  },
 
-  { path: 'academics', titleKey: 'nav.academicOverview' },
-  { path: 'academics/programs', titleKey: 'nav.programs', parent: 'academics' },
-  { path: 'academics/calendar', titleKey: 'nav.calendar', parent: 'academics' },
-  { path: 'results', titleKey: 'nav.results', parent: 'academics' },
-  { path: 'resources', titleKey: 'nav.resources', parent: 'academics' },
+  { path: 'academics', titleKey: 'nav.academicOverview', descriptionKey: 'seo.academics' },
+  {
+    path: 'academics/programs',
+    titleKey: 'nav.programs',
+    descriptionKey: 'seo.programs',
+    parent: 'academics',
+  },
+  {
+    path: 'academics/calendar',
+    titleKey: 'nav.calendar',
+    descriptionKey: 'seo.calendar',
+    parent: 'academics',
+  },
+  { path: 'results', titleKey: 'nav.results', descriptionKey: 'seo.results', parent: 'academics' },
+  {
+    path: 'resources',
+    titleKey: 'nav.resources',
+    descriptionKey: 'seo.resources',
+    parent: 'academics',
+  },
 
-  { path: 'admission', titleKey: 'nav.admissionInfo' },
-  { path: 'admission/apply', titleKey: 'nav.applyOnline', parent: 'admission' },
-  { path: 'faq', titleKey: 'nav.faq' },
+  { path: 'admission', titleKey: 'nav.admissionInfo', descriptionKey: 'seo.admission' },
+  {
+    path: 'admission/apply',
+    titleKey: 'nav.applyOnline',
+    descriptionKey: 'seo.apply',
+    parent: 'admission',
+  },
+  { path: 'faq', titleKey: 'nav.faq', descriptionKey: 'seo.faq' },
 
-  { path: 'teachers', titleKey: 'nav.teachers' },
-  { path: 'notices', titleKey: 'nav.notices' },
-  { path: 'news', titleKey: 'nav.news' },
-  { path: 'events', titleKey: 'nav.events' },
-  { path: 'gallery', titleKey: 'nav.gallery' },
-  { path: 'videos', titleKey: 'nav.videos' },
-  { path: 'achievements', titleKey: 'nav.achievements' },
+  { path: 'teachers', titleKey: 'nav.teachers', descriptionKey: 'seo.teachers' },
+  { path: 'notices', titleKey: 'nav.notices', descriptionKey: 'seo.notices' },
+  { path: 'news', titleKey: 'nav.news', descriptionKey: 'seo.news' },
+  { path: 'events', titleKey: 'nav.events', descriptionKey: 'seo.events' },
+  { path: 'gallery', titleKey: 'nav.gallery', descriptionKey: 'seo.gallery' },
+  { path: 'videos', titleKey: 'nav.videos', descriptionKey: 'seo.videos' },
+  { path: 'achievements', titleKey: 'nav.achievements', descriptionKey: 'seo.achievements' },
 
-  { path: 'contact', titleKey: 'nav.contact' },
-  { path: 'search', titleKey: 'nav.search' },
+  { path: 'contact', titleKey: 'nav.contact', descriptionKey: 'seo.contact' },
+  { path: 'search', titleKey: 'nav.search', descriptionKey: 'seo.search' },
 ];
 
 const BY_PATH = new Map(PAGES.map((page) => [page.path, page]));

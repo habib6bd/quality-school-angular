@@ -8,6 +8,15 @@ type ComponentLoader = NonNullable<Routes[number]['loadComponent']>;
 /** Pages with their own feature component; the rest show the placeholder page until built. */
 const PAGE_COMPONENTS: Partial<Record<string, ComponentLoader>> = {
   '': () => import('./features/home/home').then((m) => m.Home),
+  about: () => import('./features/about/about').then((m) => m.AboutPage),
+  'about/history': () => import('./features/about/history').then((m) => m.HistoryPage),
+  'about/mission-vision': () =>
+    import('./features/about/mission-vision').then((m) => m.MissionVisionPage),
+  'about/philosophy': () => import('./features/about/philosophy').then((m) => m.PhilosophyPage),
+  'about/messages': () => import('./features/about/messages').then((m) => m.MessagesPage),
+  'about/facilities': () => import('./features/about/facilities').then((m) => m.FacilitiesPage),
+  academics: () => import('./features/academics/overview').then((m) => m.AcademicsPage),
+  'academics/programs': () => import('./features/academics/programs').then((m) => m.ProgramsPage),
 };
 
 const placeholder: ComponentLoader = () =>
@@ -21,9 +30,14 @@ const pageRoutes: Routes = [
   ...PAGES.map((page) => ({
     path: page.path,
     pathMatch: 'full' as const,
-    data: { page: page.path, titleKey: page.titleKey },
+    data: { page: page.path, titleKey: page.titleKey, descriptionKey: page.descriptionKey },
     loadComponent: PAGE_COMPONENTS[page.path] ?? placeholder,
   })),
+  {
+    path: 'academics/programs/:slug',
+    data: { titleKey: 'nav.programs', descriptionKey: 'seo.programs' },
+    loadComponent: () => import('./features/academics/class-detail').then((m) => m.ClassDetailPage),
+  },
   { path: '**', data: { titleKey: 'notFound.title' }, loadComponent: notFound },
 ];
 

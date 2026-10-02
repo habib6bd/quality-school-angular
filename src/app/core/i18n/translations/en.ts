@@ -47,6 +47,7 @@ export const en: PartialDict<TranslationShape> = {
     aboutSchool: 'About the School',
     history: 'History',
     missionVision: 'Mission & Vision',
+    philosophy: 'Educational philosophy',
     messages: 'Messages',
     facilities: 'Facilities',
     academics: 'Academics',
@@ -181,5 +182,145 @@ export const en: PartialDict<TranslationShape> = {
   },
   contact: {
     officeHours: 'Office hours',
+  },
+  seo: {
+    defaultDescription:
+      'Banasree Quality Education School — established in 2010 in Banasree, Dhaka. Bangla medium and English version, from Play to Class Ten.',
+    home: 'Banasree Quality Education School — established in 2010 in Banasree, Dhaka. Bangla medium and English version, from Play to Class Ten.',
+    about:
+      'About Banasree Quality Education School: year of establishment, classes, medium and basic facts.',
+    history: 'The story of Banasree Quality Education School — founded in Banasree in 2010.',
+    missionVision: 'The school’s mission and vision — awaiting the school’s confirmed statement.',
+    philosophy:
+      'What the Chairman and Headmaster have published about the school’s educational approach.',
+    messages: 'Messages from the Chairman and Headmaster of Banasree Quality Education School.',
+    facilities:
+      'Smart classrooms, air-conditioned classrooms, a play zone, clubs and more — the facilities published by the school.',
+    academics:
+      'Bangla medium and English version from Play to Class Ten, with Science and Business Studies groups in Classes Nine and Ten.',
+    programs: 'The school’s classes and groups from Play to Class Ten.',
+    calendar: 'The school’s academic calendar — dates awaiting publication.',
+    results: 'Results lookup — not yet available.',
+    resources: 'Syllabus, forms and study materials — awaiting the school’s files.',
+    admission: 'General admission information, classes and contact details.',
+    apply: 'A prototype of the admission application form — it does not submit any information.',
+    faq: 'Frequently asked questions about this website and admission.',
+    teachers: 'The school’s published list of teachers and staff.',
+    notices: 'Notices and announcements from Banasree Quality Education School.',
+    news: 'News from Banasree Quality Education School.',
+    events: 'Events and programs at Banasree Quality Education School.',
+    gallery: 'Photos from Banasree Quality Education School.',
+    videos: 'Videos from Banasree Quality Education School.',
+    achievements: 'The school’s achievements — awaiting verified details.',
+    contact: 'Address, phone numbers and location of Banasree Quality Education School.',
+    search: 'Search the Banasree Quality Education School website.',
+  },
+  about: {
+    intro: 'The basics about Banasree Quality Education School, as published by the school itself.',
+    glanceTitle: 'At a glance',
+    schoolName: 'School name',
+    established: 'Established',
+    location: 'Location',
+    mediums: 'Medium',
+    mediumsValue: 'Bangla medium and English version',
+    classes: 'Classes',
+    classesValue: 'Play to Class Ten',
+    groups: 'Groups (Classes Nine and Ten)',
+    groupsValue: 'Science and Business Studies',
+    recognition: 'Recognition',
+    recognitionValue: 'Recognised by the Dhaka Education Board',
+    recognitionSource: 'As stated on the school’s admission banner',
+    storyTitle: 'Our journey',
+    storyImageAlt: 'A teacher and students behind model projects displayed on a table',
+    exploreTitle: 'Explore more',
+    pending:
+      'A fuller profile (such as approval details and a description of the campus) will be added once the school supplies it.',
+  },
+  history: {
+    intro: 'The story of Banasree Quality Education School, as published by the school.',
+    year2010: '2010 — Founded',
+    text2010:
+      'Feeling the need for a quality educational institution, the school began its journey in Banasree in 2010.',
+    today: 'Today',
+    textToday: 'Teaching continues from Play to Class Ten in Bangla medium and an English version.',
+    source: 'Sources: the Chairman’s and Headmaster’s messages and the school’s admission banner.',
+    pending:
+      'A fuller history and other milestones will be published once collected from the school.',
+  },
+  missionVision: {
+    intro: 'The school has not yet published its own mission and vision statements.',
+    mission: 'Mission',
+    vision: 'Vision',
+    pending: 'To be published here once the school supplies its approved statement.',
+    leadersTitle: 'From the Chairman’s message',
+    chairmanQuote:
+      'In a competitive world, it is essential to prepare students as capable and skilled citizens through knowledge and training.',
+    moreLink: 'Read the full messages',
+  },
+  philosophy: {
+    intro:
+      'The school has not yet published a formal statement of its educational philosophy. Below are the themes mentioned in the Chairman’s and Headmaster’s messages.',
+    pending: 'The formal philosophy will be published here once the school supplies it.',
+    themesTitle: 'Themes in the messages',
+    citizensTitle: 'Capable and skilled citizens',
+    citizensText:
+      'Preparing students as capable and skilled citizens through knowledge and training.',
+    valuesTitle: 'Moral values',
+    valuesText: 'A resolve to build thoughtful, morally grounded and capable citizens.',
+    teachingTitle: 'Modern teaching',
+    teachingText:
+      'A smart board, IR board and multimedia projector in every classroom for clear and engaging teaching.',
+    clubsTitle: 'Co-curricular activities',
+    clubsText: 'Cultural, debate, science and math clubs, and participation in competitions.',
+    sourceChairman: 'Source: the Chairman’s message',
+    sourceHeadmaster: 'Source: the Headmaster’s message',
+  },
+  messagesPage: {
+    intro: 'Messages from the Chairman and Headmaster, as published by the school.',
+    translationNote:
+      'The school published these messages in Bangla. The English text is a translation prepared for this website.',
+  },
+  facilitiesPage: {
+    intro: 'The facilities the school has published.',
+    imageAlt: 'Students and teachers standing in rows on a green playing field',
+    note: 'This list follows the Headmaster’s message and the school’s admission banner. More facilities will be added once the school confirms them.',
+  },
+  academics: {
+    intro: 'Bangla medium and English version, from Play to Class Ten.',
+    classesTitle: 'Classes',
+    classesText: '{count} classes, from Play to Class Ten.',
+    mediumTitle: 'Medium',
+    mediumText: 'Bangla medium and English version.',
+    groupsTitle: 'Groups',
+    groupsText: 'Science and Business Studies groups in Classes Nine and Ten.',
+    recognitionNote:
+      'Recognised by the Dhaka Education Board (as stated on the school’s admission banner).',
+    moreTitle: 'See also',
+    pending:
+      'Curriculum details, class routines and exam schedules will be published once the school supplies them.',
+  },
+  programsPage: {
+    intro: 'The school’s classes and groups, from Play to Class Ten.',
+    mediumTitle: 'Medium',
+    mediumText: 'Bangla medium and English version.',
+    groupsTitle: 'Groups in Classes Nine and Ten',
+    groupsText: 'Science and Business Studies.',
+    allClasses: 'All classes',
+    viewClass: 'View class information',
+  },
+  classPage: {
+    intro: 'Basic information about {name}, as published by the school.',
+    order: 'Class order',
+    orderValue: 'Number {order} counting from Play',
+    medium: 'Medium',
+    groups: 'Groups in this class',
+    noGroups: 'According to the school’s list, this class has no separate groups.',
+    pendingTitle: 'Subjects, routine and syllabus',
+    pending:
+      'Subject lists, class routines and syllabus will be published once the school supplies them.',
+    previous: 'Previous class',
+    next: 'Next class',
+    allClasses: 'All classes',
+    admission: 'View admission information',
   },
 };

@@ -16,6 +16,7 @@ export const MAIN_NAV: readonly NavItem[] = [
       { labelKey: 'nav.aboutSchool', path: 'about' },
       { labelKey: 'nav.history', path: 'about/history' },
       { labelKey: 'nav.missionVision', path: 'about/mission-vision' },
+      { labelKey: 'nav.philosophy', path: 'about/philosophy' },
       { labelKey: 'nav.messages', path: 'about/messages' },
       { labelKey: 'nav.facilities', path: 'about/facilities' },
     ],

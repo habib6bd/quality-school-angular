@@ -29,3 +29,23 @@ describe('page registry', () => {
     expect(pageTrail('missing')).toEqual([]);
   });
 });
+
+describe('page descriptions', () => {
+  it('gives every page a non-empty description in both languages', async () => {
+    const { bn } = await import('../i18n/translations/bn');
+    const { en } = await import('../i18n/translations/en');
+    const lookup = (dict: object, key: string): unknown =>
+      key
+        .split('.')
+        .reduce<unknown>((node, part) => (node as Record<string, unknown>)?.[part], dict);
+    for (const page of PAGES) {
+      expect(String(lookup(bn, page.descriptionKey) ?? '').length, page.path).toBeGreaterThan(20);
+      expect(String(lookup(en, page.descriptionKey) ?? '').length, page.path).toBeGreaterThan(20);
+    }
+  });
+
+  it('registers the philosophy page under About', () => {
+    expect(findPage('about/philosophy')?.parent).toBe('about');
+    expect(flatten(MAIN_NAV).some((item) => item.path === 'about/philosophy')).toBe(true);
+  });
+});
