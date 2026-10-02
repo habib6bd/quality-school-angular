@@ -166,6 +166,19 @@ export const bn = {
     group: { science: 'বিজ্ঞান', business: 'ব্যবসায় শিক্ষা' },
   },
   notices: {
+    intro: 'বিদ্যালয়ের নোটিশ ও বিজ্ঞপ্তি। নতুন নোটিশ প্রকাশিত হলে এখানে যুক্ত হবে।',
+    filterLabel: 'বিভাগ অনুযায়ী দেখুন',
+    all: 'সব',
+    showing: 'মোট {total}টি নোটিশের মধ্যে {shown}টি দেখানো হচ্ছে',
+    emptyFilterTitle: 'এই বিভাগে কোনো নোটিশ নেই',
+    emptyFilterMessage: 'অন্য বিভাগ বেছে নিন অথবা সব নোটিশ দেখুন।',
+    clearFilters: 'সব নোটিশ দেখুন',
+    published: 'প্রকাশের তারিখ',
+    attachments: 'সংযুক্তি',
+    openAttachment: 'নতুন ট্যাবে খুলুন',
+    download: 'ডাউনলোড করুন',
+    attachmentSkipped: 'নিরাপত্তার কারণে একটি সংযুক্তি দেখানো হয়নি।',
+    backToList: 'সব নোটিশ',
     category: {
       admission: 'ভর্তি',
       academic: 'একাডেমিক',
@@ -177,6 +190,15 @@ export const bn = {
     emptyMessage: 'এখনো কোনো নোটিশ প্রকাশিত হয়নি।',
   },
   events: {
+    intro: 'বিদ্যালয়ের ইভেন্ট ও অনুষ্ঠান। বিদ্যালয় ঘোষণা করলে এখানে যুক্ত হবে।',
+    viewLabel: 'ইভেন্টের ধরন',
+    upcoming: 'আসন্ন',
+    past: 'অতীত',
+    emptyPastTitle: 'কোনো অতীত ইভেন্ট নেই',
+    emptyPastMessage: 'বিদ্যালয় ইভেন্ট প্রকাশ করলে এখানে দেখানো হবে।',
+    when: 'সময়',
+    where: 'স্থান',
+    backToList: 'সব ইভেন্ট',
     emptyTitle: 'কোনো আসন্ন ইভেন্ট নেই',
     emptyMessage: 'বিদ্যালয় কোনো ইভেন্ট ঘোষণা করলে এখানে দেখানো হবে।',
   },
@@ -430,6 +452,13 @@ export const bn = {
     doneText:
       'কোনো তথ্য পাঠানো বা সংরক্ষণ করা হয়নি। ভর্তির জন্য অনুগ্রহ করে বিদ্যালয়ের সঙ্গে সরাসরি যোগাযোগ করুন।',
     startOver: 'নতুন করে শুরু করুন',
+  },
+  news: {
+    intro: 'বিদ্যালয়ের সংবাদ ও আপডেট।',
+    emptyTitle: 'এখনো কোনো সংবাদ প্রকাশিত হয়নি',
+    emptyMessage: 'বিদ্যালয় সংবাদ প্রকাশ করলে এখানে দেখানো হবে।',
+    published: 'প্রকাশের তারিখ',
+    backToList: 'সব সংবাদ',
   },
 } satisfies TranslationDict;
 

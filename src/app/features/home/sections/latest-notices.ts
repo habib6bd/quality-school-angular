@@ -24,7 +24,9 @@ import { TranslatePipe } from '../../../shared/pipes/translate.pipe';
       >
         <ul class="grid gap-5 md:grid-cols-2 lg:grid-cols-3">
           @for (notice of notices.value(); track notice.slug) {
-            <li><app-notice-card [notice]="notice" [link]="'notices' | pagePath" /></li>
+            <li>
+              <app-notice-card [notice]="notice" [link]="'notices' | pagePath: notice.slug" />
+            </li>
           }
         </ul>
       </app-async-state>

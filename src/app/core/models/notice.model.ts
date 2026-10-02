@@ -2,14 +2,23 @@ import { Localized } from '../i18n/localized';
 
 export type NoticeCategory = 'admission' | 'academic' | 'exam' | 'holiday' | 'general';
 
-export interface NoticeAttachment {
-  kind: 'image';
+interface AttachmentBase {
   /** Local path (relative to the site root) of a file shipped with the site. */
   src: string;
-  width: number;
-  height: number;
   label: Localized;
 }
+
+export interface ImageAttachment extends AttachmentBase {
+  kind: 'image';
+  width: number;
+  height: number;
+}
+
+export interface PdfAttachment extends AttachmentBase {
+  kind: 'pdf';
+}
+
+export type NoticeAttachment = ImageAttachment | PdfAttachment;
 
 export interface Notice {
   slug: string;

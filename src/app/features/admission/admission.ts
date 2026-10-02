@@ -5,7 +5,7 @@ import { RouterLink } from '@angular/router';
 import { LanguageService } from '../../core/i18n/language.service';
 import { pickLocalized } from '../../core/i18n/localized';
 import { FaqItem } from '../../core/models/faq.model';
-import { Notice } from '../../core/models/notice.model';
+import { ImageAttachment } from '../../core/models/notice.model';
 import { SchoolClass } from '../../core/models/school-class.model';
 import { FaqService } from '../../core/services/faq.service';
 import { NoticeService } from '../../core/services/notice.service';
@@ -73,7 +73,7 @@ const CALENDAR_ROWS = [
           >
             @if (notice.value(); as item) {
               <div class="card grid gap-6 p-5 sm:grid-cols-[12rem_1fr] sm:p-6">
-                @if (item.attachments[0]; as attachment) {
+                @if (firstImage(); as attachment) {
                   <button
                     type="button"
                     class="mx-auto block w-40 overflow-hidden rounded-xl border border-stone-200 sm:w-full"
@@ -274,12 +274,13 @@ export class AdmissionPage {
     defaultValue: [] as readonly FaqItem[],
   });
 
+  /** The notice image shown next to the text (its first image attachment). */
+  protected readonly firstImage = computed<ImageAttachment | undefined>(() =>
+    this.notice.value()?.attachments.find((a): a is ImageAttachment => a.kind === 'image'),
+  );
   protected readonly lightboxImages = computed(() => {
-    const notice: Notice | undefined = this.notice.value();
-    return (notice?.attachments ?? []).map((a) => ({
-      src: a.src,
-      alt: pickLocalized(a.label, this.language.lang()),
-    }));
+    const image = this.firstImage();
+    return image ? [{ src: image.src, alt: pickLocalized(image.label, this.language.lang()) }] : [];
   });
   protected readonly faqItems = computed<AccordionItem[]>(() =>
     this.faqs.value().map((faq) => ({

@@ -41,3 +41,11 @@ One line per ambiguous choice, made to stay consistent with the plan, the conten
 - Mobile numbers accept `01XXXXXXXXX`, with or without `+88`/`88`, and Bangla digits; date of birth only has to be a real, non-future date (no invented age rules). A study group is required only for the classes that have groups (Nine, Ten).
 - Reusable form building blocks were added to `shared/forms`: `FormField` + `FieldControl` (label, hint, error, `aria-describedby`, `aria-invalid`, `aria-required`, polite live region) and `ErrorSummary` (alert that takes focus and links to each invalid field). Contact (Phase 11) reuses them.
 - The nav label "অনলাইন আবেদন / Apply Online" is kept as registered; the page itself carries the prototype label.
+
+## Phase 8
+
+- Notices, news and events each get a list page (URL-driven: `?category=`, `?view=`, `?page=`; rendered per request, flagged `queryDriven`) and a detail route (`notices|news|events/:slug`, prerendered per slug via the services, real 404 for unknown slugs). Only the one real notice exists; news and events are empty and show honest empty states. Detail pages for news/events are exercised in unit tests with stub services, never with invented content in the app data.
+- The notice filter always shows all five categories (with counts, so 0 for those without notices) instead of hiding empty ones; an empty category shows "No notices in this category" with a way back.
+- Out-of-range or invalid `page` values are clamped to the valid range (no error page). Page size: notices 6, news/events 9.
+- Attachments are linked only through `safeAttachmentPath`: site-relative paths, no scheme/`//`/`..`/query/fragment, allowed types `webp png jpg jpeg pdf`. Links open in a new tab with `rel="noopener noreferrer"` plus a `download` link; unsafe attachments are not rendered and the page says one was skipped. The `NoticeAttachment` model is now a union of image and pdf attachments.
+- The homepage notice card and the admission page now link to the notice detail page.

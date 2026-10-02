@@ -166,6 +166,19 @@ export const en: PartialDict<TranslationShape> = {
     group: { science: 'Science', business: 'Business Studies' },
   },
   notices: {
+    intro: 'Notices and announcements from the school. New notices appear here once published.',
+    filterLabel: 'Filter by category',
+    all: 'All',
+    showing: 'Showing {shown} of {total} notices',
+    emptyFilterTitle: 'No notices in this category',
+    emptyFilterMessage: 'Choose another category or view all notices.',
+    clearFilters: 'View all notices',
+    published: 'Published',
+    attachments: 'Attachments',
+    openAttachment: 'Open in a new tab',
+    download: 'Download',
+    attachmentSkipped: 'One attachment was not shown for safety reasons.',
+    backToList: 'All notices',
     category: {
       admission: 'Admission',
       academic: 'Academic',
@@ -177,6 +190,15 @@ export const en: PartialDict<TranslationShape> = {
     emptyMessage: 'No notices have been published yet.',
   },
   events: {
+    intro: 'Events and programs at the school. They appear here once the school announces them.',
+    viewLabel: 'Type of events',
+    upcoming: 'Upcoming',
+    past: 'Past',
+    emptyPastTitle: 'No past events',
+    emptyPastMessage: 'Events will appear here once the school publishes them.',
+    when: 'When',
+    where: 'Where',
+    backToList: 'All events',
     emptyTitle: 'No upcoming events',
     emptyMessage: 'Events will appear here once the school announces them.',
   },
@@ -431,5 +453,12 @@ export const en: PartialDict<TranslationShape> = {
     doneText:
       'No information was sent or saved. For admission, please contact the school directly.',
     startOver: 'Start over',
+  },
+  news: {
+    intro: 'News and updates from the school.',
+    emptyTitle: 'No news published yet',
+    emptyMessage: 'News will appear here once the school publishes it.',
+    published: 'Published',
+    backToList: 'All news',
   },
 };

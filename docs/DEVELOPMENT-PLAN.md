@@ -15,8 +15,8 @@ Work proceeds **one phase at a time**. A phase is finished only when its accepta
 | 5   | About & academic pages                 | ✅ Done    |
 | 6   | Teachers & faculty directory           | ✅ Done    |
 | 7   | Admission (info + form prototype)      | ✅ Done    |
-| 8   | Notices, news & events                 | ⏭ **Next** |
-| 9   | Gallery, videos & achievements         | ☐          |
+| 8   | Notices, news & events                 | ✅ Done    |
+| 9   | Gallery, videos & achievements         | ⏭ **Next** |
 | 10  | Results, resources & academic calendar | ☐          |
 | 11  | Guardian reviews, FAQ & contact        | ☐          |
 | 12  | Site search & navigation polish        | ☐          |

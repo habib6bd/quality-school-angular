@@ -18,6 +18,9 @@ const PAGE_COMPONENTS: Partial<Record<string, ComponentLoader>> = {
   teachers: () => import('./features/teachers/teachers').then((m) => m.TeachersPage),
   admission: () => import('./features/admission/admission').then((m) => m.AdmissionPage),
   'admission/apply': () => import('./features/admission/apply').then((m) => m.ApplyPage),
+  notices: () => import('./features/notices/notices').then((m) => m.NoticesPage),
+  news: () => import('./features/news/news').then((m) => m.NewsPage),
+  events: () => import('./features/events/events').then((m) => m.EventsPage),
   academics: () => import('./features/academics/overview').then((m) => m.AcademicsPage),
   'academics/programs': () => import('./features/academics/programs').then((m) => m.ProgramsPage),
 };
@@ -46,6 +49,21 @@ const pageRoutes: Routes = [
     data: { titleKey: 'nav.teachers', descriptionKey: 'seo.teachers' },
     loadComponent: () =>
       import('./features/teachers/teacher-detail').then((m) => m.TeacherDetailPage),
+  },
+  {
+    path: 'notices/:slug',
+    data: { titleKey: 'nav.notices', descriptionKey: 'seo.notices' },
+    loadComponent: () => import('./features/notices/notice-detail').then((m) => m.NoticeDetailPage),
+  },
+  {
+    path: 'news/:slug',
+    data: { titleKey: 'nav.news', descriptionKey: 'seo.news' },
+    loadComponent: () => import('./features/news/news-detail').then((m) => m.NewsDetailPage),
+  },
+  {
+    path: 'events/:slug',
+    data: { titleKey: 'nav.events', descriptionKey: 'seo.events' },
+    loadComponent: () => import('./features/events/event-detail').then((m) => m.EventDetailPage),
   },
   { path: '**', data: { titleKey: 'notFound.title' }, loadComponent: notFound },
 ];

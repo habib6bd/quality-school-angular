@@ -133,3 +133,36 @@ Phase reports are appended below in order. (A final summary is added at the top 
 **Issues (honest):** Eligibility, steps, documents, dates and fees are not published, so those sections are placeholders by design. The form cannot submit anything (prototype). A text-input value typed before hydration completes can be lost on slow devices (same race as Phase 6; tests wait for the hydration marker).
 
 **Acceptance criteria:** PASS — validation works (required, format, date, conditional group); required fields enforced; errors accessible (aria + summary + live region); submission states correct (blocked step, review, prototype confirmation, start over); no data sent, stored or logged; tests pass.
+
+---
+
+### Phase 8: Notices, news & events
+
+**Implemented**
+
+- Models and services for notices, news and events (list, bySlug, upcoming/past for events); notice attachments are a typed union (image / pdf).
+- Notice board (`/notices`): the real admission notice, category chips with counts (all five categories), URL-driven filter and pagination (`?category`, `?page`, clamped), empty-category state, live result count.
+- Notice page (`/notices/:slug`): category badge, date, summary, attachment with image preview + lightbox, open-in-new-tab and download links through a safe-URL allow-list, graceful skip of unsafe attachments, back link, SEO title/description.
+- News and events lists with pagination and honest empty states (no items are published); events have an upcoming/past switch; detail routes for both (tested with stub data), real 404 for unknown slugs.
+- New shared cards `NewsCard` and `EventCard`; `paginate()` utility; `safeAttachmentPath()`; homepage and admission notice links now go to the notice page.
+
+**Files** — new: `src/app/features/{notices,news,events}/*`, `src/app/shared/components/{news-card,event-card}/*`, `src/app/core/util/paginate.ts`, `src/app/shared/util/safe-url.ts`, specs, `e2e/notices-news-events.spec.ts`. Modified: `notice.model.ts`, `event.service.ts`, `app.routes.ts`, `app.routes.server.ts`, `pages.ts` (`queryDriven`), homepage notices section, admission page, translations.
+
+**Dependencies:** none added.
+
+**Commands:** `npm run typecheck`; `npm run lint`; `npx ng test --watch=false`; `npx ng build`; `PORT=4310 ./scripts/ssr-smoke.sh /bn/notices /en/notices?category=exam /en/notices/admission-2026 /en/notices/nope /en/news /bn/events?view=past /bn/news/nope`; `PW_EXECUTABLE=/opt/pw-browsers/chromium npx playwright test`.
+
+**Verification**
+
+| Check            | Result                                                                                                                                                                 |
+| ---------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Type checking    | PASS                                                                                                                                                                   |
+| Lint             | PASS                                                                                                                                                                   |
+| Unit tests       | PASS — 37 files, 245 tests                                                                                                                                             |
+| Production build | PASS — 124 static routes prerendered                                                                                                                                   |
+| SSR smoke        | PASS — /bn/notices 200; /en/notices?category=exam 200; /en/notices/admission-2026 200; /en/notices/nope 404; /en/news 200; /bn/events?view=past 200; /bn/news/nope 404 |
+| Browser tests    | PASS — 135 Playwright tests (Chromium 141 via `PW_EXECUTABLE`)                                                                                                         |
+
+**Issues (honest):** Only one notice exists, so multi-page notice listings and the category filter on real multi-category data were verified with stub data in unit tests, not in the browser. The notice's own expiry date (2026-02-28) is stored but not used to hide it (see DECISIONS). News and events pages are empty until the school publishes items.
+
+**Acceptance criteria:** PASS — listings, filters, pagination and detail routes work in both languages; attachments are linked safely; unknown items return 404; unit, browser and build checks pass.
