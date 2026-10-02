@@ -1,9 +1,7 @@
 import { Injectable } from '@angular/core';
 import { map, Observable, of } from 'rxjs';
+import { EVENTS } from '../data/events.data';
 import { SchoolEvent } from '../models/event.model';
-
-/** No events have been published by the school yet, so the list is honestly empty. */
-const EVENTS: readonly SchoolEvent[] = [];
 
 @Injectable({ providedIn: 'root' })
 export class EventService {

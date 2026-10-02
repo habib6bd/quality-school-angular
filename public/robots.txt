@@ -1,0 +1,8 @@
+# BQES — Banasree Quality Education School
+User-agent: *
+Allow: /
+# Search results are endless query variations and add nothing to a search engine's index.
+Disallow: /bn/search
+Disallow: /en/search
+
+Sitemap: https://www.bqesbd.com/sitemap.xml

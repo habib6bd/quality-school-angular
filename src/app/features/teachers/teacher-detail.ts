@@ -110,7 +110,7 @@ export class TeacherDetailPage {
     effect(() => {
       if (this.detail.status() !== 'resolved' || this.detail.value()) return;
       this.status.notFound();
-      this.seo.setPage({ title: this.i18n.t('notFound.title') });
+      this.seo.setPage({ title: this.i18n.t('notFound.title'), noindex: true });
     });
   }
 }

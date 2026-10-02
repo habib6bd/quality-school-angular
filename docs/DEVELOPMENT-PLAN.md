@@ -20,8 +20,8 @@ Work proceeds **one phase at a time**. A phase is finished only when its accepta
 | 10  | Results, resources & academic calendar | ✅ Done    |
 | 11  | Guardian reviews, FAQ & contact        | ✅ Done    |
 | 12  | Site search & navigation polish        | ✅ Done    |
-| 13  | SEO & SSR                              | ⏭ **Next** |
-| 14  | Accessibility & performance            | ☐          |
+| 13  | SEO & SSR                              | ✅ Done    |
+| 14  | Accessibility & performance            | ⏭ **Next** |
 | 15  | CMS / API integration readiness        | ☐          |
 | 16  | Final QA                               | ☐          |
 

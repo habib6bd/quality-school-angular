@@ -6,6 +6,7 @@ import { LanguageService } from '../../core/i18n/language.service';
 import { pickLocalized } from '../../core/i18n/localized';
 import { TranslationService } from '../../core/i18n/translation.service';
 import { SeoService } from '../../core/seo/seo.service';
+import { eventJsonLd } from '../../core/seo/structured-data';
 import { EventService } from '../../core/services/event.service';
 import { ResponseStatusService } from '../../core/services/response-status.service';
 import { Icon } from '../../shared/components/icon/icon';
@@ -123,10 +124,18 @@ export class EventDetailPage {
   });
 
   constructor() {
+    // Structured data only for a real, loaded event.
+    effect(() => {
+      const event = this.detail.value();
+      if (event) {
+        const lang = this.language.lang();
+        this.seo.addStructuredData('event', eventJsonLd(event, lang, this.seo.currentUrl(lang)));
+      }
+    });
     effect(() => {
       if (this.detail.status() !== 'resolved' || this.detail.value()) return;
       this.status.notFound();
-      this.seo.setPage({ title: this.i18n.t('notFound.title') });
+      this.seo.setPage({ title: this.i18n.t('notFound.title'), noindex: true });
     });
   }
 }

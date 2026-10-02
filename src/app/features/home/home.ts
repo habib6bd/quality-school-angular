@@ -1,4 +1,8 @@
-import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component, effect, inject } from '@angular/core';
+import { LanguageService } from '../../core/i18n/language.service';
+import { SeoService } from '../../core/seo/seo.service';
+import { schoolJsonLd } from '../../core/seo/structured-data';
+import { SchoolInfoService } from '../../core/services/school-info.service';
 import { HomeAbout } from './sections/about-intro';
 import { HomeAchievements } from './sections/achievements-preview';
 import { HomeAdmissionCta } from './sections/admission-cta';
@@ -65,4 +69,12 @@ import { HomeWhyChoose } from './sections/why-choose';
     <app-home-contact />
   `,
 })
-export class Home {}
+export class Home {
+  constructor() {
+    const seo = inject(SeoService);
+    const info = inject(SchoolInfoService).info;
+    const language = inject(LanguageService);
+    // The school as structured data (name, founding year, banner address/phones, social links).
+    effect(() => seo.addStructuredData('school', schoolJsonLd(info(), language.lang())));
+  }
+}

@@ -18,6 +18,8 @@ export interface PageDef {
    * what the browser hydrates.
    */
   queryDriven?: boolean;
+  /** Keep out of search engines (search results are endless query variations). */
+  noindex?: boolean;
 }
 
 export const PAGES: readonly PageDef[] = [
@@ -96,7 +98,13 @@ export const PAGES: readonly PageDef[] = [
   { path: 'achievements', titleKey: 'nav.achievements', descriptionKey: 'seo.achievements' },
 
   { path: 'contact', titleKey: 'nav.contact', descriptionKey: 'seo.contact' },
-  { path: 'search', titleKey: 'nav.search', descriptionKey: 'seo.search', queryDriven: true },
+  {
+    path: 'search',
+    titleKey: 'nav.search',
+    descriptionKey: 'seo.search',
+    queryDriven: true,
+    noindex: true,
+  },
 ];
 
 const BY_PATH = new Map(PAGES.map((page) => [page.path, page]));

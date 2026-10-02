@@ -46,7 +46,12 @@ const pageRoutes: Routes = [
   ...PAGES.map((page) => ({
     path: page.path,
     pathMatch: 'full' as const,
-    data: { page: page.path, titleKey: page.titleKey, descriptionKey: page.descriptionKey },
+    data: {
+      page: page.path,
+      titleKey: page.titleKey,
+      descriptionKey: page.descriptionKey,
+      noindex: page.noindex,
+    },
     loadComponent: PAGE_COMPONENTS[page.path] ?? placeholder,
   })),
   {
@@ -75,7 +80,7 @@ const pageRoutes: Routes = [
     data: { titleKey: 'nav.events', descriptionKey: 'seo.events' },
     loadComponent: () => import('./features/events/event-detail').then((m) => m.EventDetailPage),
   },
-  { path: '**', data: { titleKey: 'notFound.title' }, loadComponent: notFound },
+  { path: '**', data: { titleKey: 'notFound.title', noindex: true }, loadComponent: notFound },
 ];
 
 export const routes: Routes = [
@@ -90,6 +95,8 @@ export const routes: Routes = [
     path: '**',
     component: Shell,
     data: { lang: DEFAULT_LANG },
-    children: [{ path: '**', data: { titleKey: 'notFound.title' }, loadComponent: notFound }],
+    children: [
+      { path: '**', data: { titleKey: 'notFound.title', noindex: true }, loadComponent: notFound },
+    ],
   },
 ];

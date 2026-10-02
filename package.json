@@ -11,7 +11,8 @@
     "lint": "ng lint",
     "e2e": "playwright test",
     "typecheck": "tsc -p tsconfig.app.json --noEmit && tsc -p tsconfig.spec.json --noEmit",
-    "check": "npm run typecheck && npm run lint && ng test --watch=false && ng build"
+    "check": "npm run typecheck && npm run lint && node scripts/generate-sitemap.mjs --check && ng test --watch=false && ng build",
+    "sitemap": "node scripts/generate-sitemap.mjs"
   },
   "private": true,
   "packageManager": "npm@11.19.0",
@@ -38,6 +39,7 @@
     "@types/express": "^5.0.1",
     "@types/node": "^20.17.19",
     "angular-eslint": "22.5.0",
+    "esbuild": "^0.28.2",
     "eslint": "^10.9.1",
     "jsdom": "^28.0.0",
     "postcss": "^8.5.3",

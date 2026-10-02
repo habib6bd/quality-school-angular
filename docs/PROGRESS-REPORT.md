@@ -293,3 +293,35 @@ Phase reports are appended below in order. (A final summary is added at the top 
 **Issues (honest):** News, events and resources are indexed but contribute no entries because none are published. The search index is built in memory per visit (fine for ~60 entries; a server-side index would be needed if content grows into the thousands). A partial-word highlight bug ("Soni a") was found by a unit test and fixed.
 
 **Acceptance criteria:** PASS — search works over all content kinds in both languages with results, category labels, empty states, pagination and keyboard support; breadcrumbs/related content/focus handling polished; unit, browser and build checks pass.
+
+---
+
+### Phase 13: SEO & SSR
+
+**Implemented**
+
+- `SeoService`: title, description, robots, canonical, hreflang (bn, en, x-default), Open Graph (+ og:url, locale alternate), Twitter card, and JSON-LD management (add / replace / reset per navigation); detail pages override it once their data loads. Search results and 404s are noindex with no canonical/alternates.
+- JSON-LD: `School` (home), `BreadcrumbList` (every inner page, matching the visible breadcrumbs), `NewsArticle`/`Event` builders used only for real items (none exist yet).
+- `public/robots.txt` and a generated `public/sitemap.xml` (`scripts/generate-sitemap.mjs`, 130 URLs from `PAGES` + class/staff/notice/news/event data, both languages with hreflang alternates; `npm run sitemap`, `--check` in `npm run check`).
+- SSR verification: e2e tests fetch the raw server HTML of 16 key routes and assert real content, one h1, title/description/OG/Twitter, canonical/hreflang, robots, JSON-LD; every URL in the sitemap is requested and returns 200; metadata is also checked after client-side navigation and language switching.
+
+**Files** — new: `src/app/core/seo/{urls,structured-data,seo.spec}.ts`, `src/app/features/seo-integration.spec.ts`, `scripts/generate-sitemap.mjs`, `public/{robots.txt,sitemap.xml}`, `src/app/core/data/{news,events}.data.ts`, `e2e/seo.spec.ts`. Modified: `seo.service.ts`, `translated-title.strategy.ts`, `pages.ts` (`noindex`), `app.routes.ts`, `page-scaffold.ts`, `home.ts`, news/event detail pages, services, `package.json` (+`esbuild` devDependency, `sitemap` script), `package-lock.json` (one line).
+
+**Dependencies:** `esbuild` added as an explicit devDependency (already installed transitively at 0.28.2; lock edited by one line).
+
+**Commands:** `npm run typecheck`; `npm run lint`; `npx ng test --watch=false`; `npx ng build`; `PORT=4310 ./scripts/ssr-smoke.sh /bn /en/about /en/teachers?designation=staff /en/search?q=admission /en/nope`; `PW_EXECUTABLE=/opt/pw-browsers/chromium npx playwright test`.
+
+**Verification**
+
+| Check            | Result                                                                                                      |
+| ---------------- | ----------------------------------------------------------------------------------------------------------- |
+| Type checking    | PASS                                                                                                        |
+| Lint             | PASS                                                                                                        |
+| Unit tests       | PASS — 45 files, 346 tests                                                                                  |
+| Production build | PASS — 114 static routes prerendered                                                                        |
+| SSR smoke        | PASS — /bn 200; /en/about 200; /en/teachers?designation=staff 200; /en/search?q=admission 200; /en/nope 404 |
+| Browser tests    | PASS — 235 Playwright tests (Chromium 141 via `PW_EXECUTABLE`)                                              |
+
+**Issues (honest):** Open Graph/Twitter previews and search-engine indexing could not be tested against real crawlers or the public domain from this sandbox; canonical URLs assume the production site URL `https://www.bqesbd.com` from `environment.ts` (confirm with the school). The preview image is the logo (no dedicated share image exists). No Article/Event JSON-LD is emitted because no news or events are published.
+
+**Acceptance criteria:** PASS — SeoService covers title, description, canonical, Open Graph, Twitter and hreflang (bn, en, x-default); JSON-LD for School and BreadcrumbList (Article/Event only for real data); robots.txt and a generated sitemap (verified in sync and fully resolvable); correct 404 status; SSR HTML verified to contain the real content.

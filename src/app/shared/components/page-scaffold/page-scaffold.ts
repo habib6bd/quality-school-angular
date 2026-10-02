@@ -43,6 +43,7 @@ export class PageScaffold {
   );
 
   constructor() {
+    effect(() => this.seo.setBreadcrumbs(this.breadcrumbs()));
     effect(() => {
       const title = this.detailTitle();
       if (title) this.seo.setPage({ title, description: this.detailDescription() });

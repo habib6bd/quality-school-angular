@@ -1,9 +1,7 @@
 import { Injectable } from '@angular/core';
 import { map, Observable, of } from 'rxjs';
+import { NEWS } from '../data/news.data';
 import { NewsArticle } from '../models/news.model';
-
-/** No news has been published by the school yet, so the list is honestly empty. */
-const NEWS: readonly NewsArticle[] = [];
 
 @Injectable({ providedIn: 'root' })
 export class NewsService {

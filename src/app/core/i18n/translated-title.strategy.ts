@@ -9,6 +9,7 @@ export interface TitledRouteData {
   lang?: Lang;
   titleKey?: TranslationKey;
   descriptionKey?: TranslationKey;
+  noindex?: boolean;
 }
 
 /**
@@ -24,18 +25,21 @@ export class TranslatedTitleStrategy extends TitleStrategy {
     let lang: Lang = DEFAULT_LANG;
     let titleKey: TranslationKey | undefined;
     let descriptionKey: TranslationKey | undefined;
+    let noindex = false;
     let route: ActivatedRouteSnapshot | null = snapshot.root;
     while (route) {
       const data = route.data as TitledRouteData;
       if (isLang(data.lang)) lang = data.lang;
       if (data.titleKey) titleKey = data.titleKey;
       if (data.descriptionKey) descriptionKey = data.descriptionKey;
+      if (data.noindex) noindex = true;
       route = route.firstChild;
     }
 
     const page =
       titleKey && titleKey !== 'nav.home' ? this.i18n.translate(lang, titleKey) : undefined;
     const description = descriptionKey ? this.i18n.translate(lang, descriptionKey) : undefined;
-    this.seo.setPage({ title: page, description }, lang);
+    this.seo.resetStructuredData();
+    this.seo.setPage({ title: page, description, noindex }, lang, snapshot.url);
   }
 }
