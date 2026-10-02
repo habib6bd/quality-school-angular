@@ -2,49 +2,49 @@
 
 /*
  * BQES design tokens.
- * Provisional palette derived from the existing site's red theme; adjust once the
- * school confirms official brand colours.
+ * Palette derived from the logo used on the existing bqesbd.com site
+ * (green #007030, blue #0060a0, amber #f0a020). Adjust if the school supplies brand guidelines.
  */
 @theme {
   --font-sans: 'Inter', 'Hind Siliguri', ui-sans-serif, system-ui, sans-serif;
   --font-bangla: 'Hind Siliguri', 'Inter', ui-sans-serif, system-ui, sans-serif;
   --font-display: 'Hind Siliguri', 'Inter', ui-sans-serif, system-ui, sans-serif;
 
-  /* Primary — deep crimson */
-  --color-primary-50: #fdf3f4;
-  --color-primary-100: #fbe4e7;
-  --color-primary-200: #f6cdd3;
-  --color-primary-300: #eea4ae;
-  --color-primary-400: #e27183;
-  --color-primary-500: #d1465d;
-  --color-primary-600: #b52b45;
-  --color-primary-700: #981f38;
-  --color-primary-800: #7f1d34;
-  --color-primary-900: #6c1b31;
-  --color-primary-950: #3c0a17;
+  /* Primary — logo green */
+  --color-primary-50: #effaf3;
+  --color-primary-100: #d8f3e1;
+  --color-primary-200: #b4e6c7;
+  --color-primary-300: #82d2a5;
+  --color-primary-400: #4db67f;
+  --color-primary-500: #2a9a63;
+  --color-primary-600: #137c4c;
+  --color-primary-700: #006b3c;
+  --color-primary-800: #045530;
+  --color-primary-900: #064628;
+  --color-primary-950: #022716;
 
-  /* Secondary — trustworthy navy */
-  --color-secondary-50: #f2f6fc;
-  --color-secondary-100: #e1eaf8;
-  --color-secondary-200: #cadbf3;
-  --color-secondary-300: #a5c3eb;
-  --color-secondary-400: #7aa3e0;
-  --color-secondary-500: #5a84d6;
-  --color-secondary-600: #4669c9;
-  --color-secondary-700: #3c57b8;
-  --color-secondary-800: #364896;
-  --color-secondary-900: #1f2d5c;
-  --color-secondary-950: #141c3b;
+  /* Secondary — logo blue */
+  --color-secondary-50: #eff7ff;
+  --color-secondary-100: #dbecfe;
+  --color-secondary-200: #bfdefe;
+  --color-secondary-300: #93c9fd;
+  --color-secondary-400: #5fabf9;
+  --color-secondary-500: #2f8ae6;
+  --color-secondary-600: #0a6cb5;
+  --color-secondary-700: #005b99;
+  --color-secondary-800: #064c7e;
+  --color-secondary-900: #0b3f68;
+  --color-secondary-950: #082845;
 
-  /* Accent — warm gold */
-  --color-accent-50: #fffaeb;
-  --color-accent-100: #fef0c7;
-  --color-accent-200: #fde08a;
-  --color-accent-300: #fcca4d;
-  --color-accent-400: #fbb424;
-  --color-accent-500: #f5930b;
-  --color-accent-600: #d96d06;
-  --color-accent-700: #b44a09;
+  /* Accent — logo amber (decorative; never as text colour on white) */
+  --color-accent-50: #fff8eb;
+  --color-accent-100: #feecc7;
+  --color-accent-200: #fdd88a;
+  --color-accent-300: #fcc04d;
+  --color-accent-400: #f8b03a;
+  --color-accent-500: #f0a020;
+  --color-accent-600: #d68210;
+  --color-accent-700: #b26109;
 
   /* Neutral surfaces */
   --color-surface: #ffffff;
@@ -98,7 +98,7 @@
   }
 
   :focus-visible {
-    @apply outline-2 outline-offset-2 outline-accent-500;
+    @apply outline-2 outline-offset-2 outline-secondary-600;
   }
 
   img,
@@ -125,6 +125,28 @@
 @layer components {
   .container-page {
     @apply mx-auto w-full max-w-7xl px-4 sm:px-6 lg:px-8;
+  }
+
+  /* Cards */
+  .card {
+    @apply overflow-hidden rounded-[var(--radius-card)] border border-stone-200/70 bg-surface shadow-[var(--shadow-card)];
+  }
+
+  .card-interactive {
+    @apply transition duration-200 hover:-translate-y-0.5 hover:shadow-[var(--shadow-card-hover)] focus-within:shadow-[var(--shadow-card-hover)];
+  }
+
+  .section {
+    @apply py-14 sm:py-20;
+  }
+
+  /* Long-form text from content sources */
+  .prose-content {
+    @apply max-w-prose text-ink-muted;
+  }
+
+  .prose-content > * + * {
+    @apply mt-4;
   }
 
   .skip-link {

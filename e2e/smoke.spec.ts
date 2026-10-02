@@ -12,8 +12,8 @@ test.describe('foundation smoke', () => {
 
     const heading = page.getByRole('heading', { level: 1 });
     await expect(heading).toContainText('বনশ্রী কোয়ালিটি এডুকেশন স্কুল');
-    // primary-700 token => rgb(152, 31, 56)
-    await expect(heading).toHaveCSS('color', 'rgb(152, 31, 56)');
+    // primary-700 token => rgb(0, 107, 60)
+    await expect(heading).toHaveCSS('color', 'rgb(0, 107, 60)');
     expect(errors).toEqual([]);
   });
 
