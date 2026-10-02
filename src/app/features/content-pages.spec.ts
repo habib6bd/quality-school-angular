@@ -7,7 +7,7 @@ import { LanguageService } from '../core/i18n/language.service';
 import { SchoolEvent } from '../core/models/event.model';
 import { NewsArticle } from '../core/models/news.model';
 import { Notice, NoticeCategory } from '../core/models/notice.model';
-import { EventService } from '../core/services/event.service';
+import { EVENT_LIST } from '../core/repositories/content-repositories';
 import { NewsService } from '../core/services/news.service';
 import { NoticeService } from '../core/services/notice.service';
 import { EventDetailPage } from './events/event-detail';
@@ -254,7 +254,10 @@ const FUTURE = '2999-05-01';
 const PAST = '2001-05-01';
 
 describe('Events pages', () => {
-  const real = EventService;
+  const repo = (items: readonly SchoolEvent[]) => ({
+    provide: EVENT_LIST.token,
+    useValue: { list: () => of(items) },
+  });
 
   it('shows honest empty states for upcoming and past events', async () => {
     const upcoming = await render(EventsPage, 'en');
@@ -266,11 +269,9 @@ describe('Events pages', () => {
   });
 
   it('splits events into upcoming (soonest first) and past (latest first)', async () => {
-    const service = new real();
-    vi.spyOn(service, 'list').mockReturnValue(
-      of([event('old', PAST), event('soon', '2998-01-01'), event('later', FUTURE)]),
-    );
-    const providers = [{ provide: EventService, useValue: service }];
+    const providers = [
+      repo([event('old', PAST), event('soon', '2998-01-01'), event('later', FUTURE)]),
+    ];
     const upcoming = await render(EventsPage, 'en', {}, providers);
     expect(
       Array.from(upcoming.querySelectorAll('app-event-card h3')).map((h) => h.textContent?.trim()),
@@ -282,16 +283,12 @@ describe('Events pages', () => {
   });
 
   it('keeps an event that is still running in the upcoming list', async () => {
-    const service = new real();
-    vi.spyOn(service, 'list').mockReturnValue(of([event('running', PAST, FUTURE)]));
-    const el = await render(EventsPage, 'en', {}, [{ provide: EventService, useValue: service }]);
+    const el = await render(EventsPage, 'en', {}, [repo([event('running', PAST, FUTURE)])]);
     expect(el.querySelectorAll('app-event-card')).toHaveLength(1);
   });
 
   it('shows the event page with dates and place, and 404s for unknown slugs', async () => {
-    const service = new real();
-    vi.spyOn(service, 'list').mockReturnValue(of([event('camp', '2026-12-20', '2026-12-22')]));
-    const providers = [{ provide: EventService, useValue: service }];
+    const providers = [repo([event('camp', '2026-12-20', '2026-12-22')])];
     const el = await render(EventDetailPage, 'en', { slug: 'camp' }, providers);
     expect(el.querySelector('h1')?.textContent).toContain('Event camp');
     expect(el.textContent).toContain('20 December 2026');

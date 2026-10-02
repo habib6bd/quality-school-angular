@@ -17,20 +17,14 @@
       "photo": "https://apiimage.astutebd.com/Uploads/bqes/maincampus/Messages/65202425459PMQ ch.jpg",
       "text": "কবির আহমদ - চেয়ারম্যান\nপ্রিয় অভিভাবক,\nআসসালামু আলাইকুম ওয়া রহমাতুল্লাহ। মানসম্পন্ন শিক্ষা প্রতিষ্ঠানের প্রয়োজনীয়তা অনুভব করেই ২০১০ সালে কোয়ালিটি এডুকেশন স্কুল বনশ্রী ক্যাম্পাস প্রতিষ্ঠিত হয়। প্রতিযোগিতামূলক বিশ্বে জ্ঞান ও প্রশিক্ষণের মাধ্যমে শিক্ষার্থীদের যোগ্য ও দক্ষ নাগরিক হিসাবে গড়ে তোলা অপরিহার্য। আর এসবকিছু বাস্তবায়নের জন্য সচেতন অভিভাবক ও সম্মানিত সুধীবৃন্দের সহযোগিতা একান্ত কাম্য।",
       "localPhoto": "images/bqes/leaders/chairman.webp",
-      "photoSize": [
-        223,
-        274
-      ]
+      "photoSize": [223, 274]
     },
     {
       "title": "Message from Headmaster",
       "photo": "https://apiimage.astutebd.com/Uploads/bqes/maincampus/Messages/65202425736PMQ hm.jpg",
       "text": "ড. আব্দুল্লাহ আল মিজান - প্রধান শিক্ষক\nআধুনিক বিশ্বের চ্যালেঞ্জকে সামনে রেখে জাতীয় উন্নতি ও অগ্রগতির প্রয়াসে একদল মননশীল, নৈতিক মূল্যবোধসম্পন্ন এবং যোগ্য নাগরিক তৈরীর প্রত্যয়ে ২০১০ সালে বনশ্রীতে আমাদের যাত্রা শুরু। সময়ের সাথে তাল মিলিয়ে ইতোমধ্যে সহজবোধ্য ও নান্দনিক পাঠদানের জন্য প্রতিটি শ্রেণিকক্ষে স্মাটবোড, আইআর বোড ও মাল্টিমিডিয়া প্রজেক্টরের ব্যবস্থা করা হয়েছে। শিক্ষার্থীরা অনলাইনে স্কুল ব্যাংকিং, ক্যাম্পাসে নামাজ আদায় করার পাশাপাশি স্কুল ক্যান্টিন, স্টোর ও ভেন্ডিং মেশিনের মাধ্যমে টিফিন ও শিক্ষাসামগ্রী সংগ্রহ করতে পারে। প্রসঙ্গত, বিদ্যালয়ের সাংস্কৃতিক, বিতর্ক, বিজ্ঞান ও গণিত ক্লাব বিভিন্ন TV চ্যানেলসহ স্থানীয় ও জাতীয় পর্যায়ের প্রতিযোগিতায় অংশগ্রহণ এবং অর্জনসমূহ বেশ সুখকর ‍সুখ্যাতি বয়ে আনছে।\nআমাদের স্বপ্নের গন্তব্য ও ভবিষ্যতের স্বর্ণশিখরে পৌছাতে সম্মানিত অভিজ্ঞজন, অভিভাবক, সুধী ও সুভানুধ্যায়ীদের আন্তরিক দিকনির্দেশনা ও মূল্যবান পরামর্শ সাদরে প্রশংসিত হবে, ইনশাআল্লাহ।",
       "localPhoto": "images/bqes/leaders/headmaster.webp",
-      "photoSize": [
-        157,
-        197
-      ]
+      "photoSize": [157, 197]
     }
   ],
   "scrollingNews": [
@@ -51,30 +45,21 @@
       "start": "2026-05-17",
       "end": "2031-05-31",
       "local": "images/bqes/banners/banner-1.webp",
-      "size": [
-        594,
-        335
-      ]
+      "size": [594, 335]
     },
     {
       "image": "https://apiimage.astutebd.com/Uploads/bqes/maincampus/Home Banner/1118202594740AMAD (1).jpg",
       "start": "2025-11-18",
       "end": "2026-02-28",
       "local": "images/bqes/banners/banner-2.webp",
-      "size": [
-        1500,
-        771
-      ]
+      "size": [1500, 771]
     },
     {
       "image": "https://apiimage.astutebd.com/Uploads/bqes/maincampus/Home Banner/1118202594906AMG6.jpg",
       "start": "2025-11-18",
       "end": "2026-02-28",
       "local": "images/bqes/banners/banner-3.webp",
-      "size": [
-        1080,
-        609
-      ]
+      "size": [1080, 609]
     }
   ],
   "social": [
@@ -162,10 +147,7 @@
       "end": "2026-02-28",
       "attachment": "https://apiimage.astutebd.com/Uploads/bqes/maincampus/Document/ADD-jpg_bqes1119202554331PM.jpg",
       "localAttachment": "images/bqes/notices/admission-2026.webp",
-      "attachmentSize": [
-        822,
-        1280
-      ]
+      "attachmentSize": [822, 1280]
     }
   ],
   "galleryGroups": [
@@ -180,70 +162,49 @@
       "groupId": 1,
       "image": "https://apiimage.astutebd.com/Uploads/bqes/maincampus/Gallery/519202635041PMWhatsApp Image 2026-05-17 at 4.04.35 PM.jpg",
       "local": "images/bqes/gallery/annual-sports-1.webp",
-      "size": [
-        594,
-        430
-      ]
+      "size": [594, 430]
     },
     {
       "title": "BQES",
       "groupId": 1,
       "image": "https://apiimage.astutebd.com/Uploads/bqes/maincampus/Gallery/519202625443PMWhatsApp Image 2026-05-17 at 4.04.37 PM.jpeg",
       "local": "images/bqes/gallery/annual-sports-2.webp",
-      "size": [
-        1600,
-        1200
-      ]
+      "size": [1600, 1200]
     },
     {
       "title": "BQES",
       "groupId": 0,
       "image": "https://apiimage.astutebd.com/Uploads/bqes/maincampus/Gallery/519202632936PMWhatsApp Image 2026-05-17 at 4.04.33 PM.jpeg",
       "local": "images/bqes/gallery/annual-sports-3.webp",
-      "size": [
-        1296,
-        972
-      ]
+      "size": [1296, 972]
     },
     {
       "title": "BQES",
       "groupId": 0,
       "image": "https://apiimage.astutebd.com/Uploads/bqes/maincampus/Gallery/11182025100038AMG3 (1).jpg",
       "local": "images/bqes/gallery/annual-sports-4.webp",
-      "size": [
-        1500,
-        1125
-      ]
+      "size": [1500, 1125]
     },
     {
       "title": "BQES",
       "groupId": 0,
       "image": "https://apiimage.astutebd.com/Uploads/bqes/maincampus/Gallery/11182025100152AMG2 (1).jpg",
       "local": "images/bqes/gallery/annual-sports-5.webp",
-      "size": [
-        1500,
-        1125
-      ]
+      "size": [1500, 1125]
     },
     {
       "title": "BQES",
       "groupId": 0,
       "image": "https://apiimage.astutebd.com/Uploads/bqes/maincampus/Gallery/11182025100308AMG1 (1).jpg",
       "local": "images/bqes/gallery/annual-sports-6.webp",
-      "size": [
-        1500,
-        1125
-      ]
+      "size": [1500, 1125]
     },
     {
       "title": "BQES",
       "groupId": 0,
       "image": "https://apiimage.astutebd.com/Uploads/bqes/maincampus/Gallery/11182025100429AMG7 (1).jpg",
       "local": "images/bqes/gallery/annual-sports-7.webp",
-      "size": [
-        1500,
-        1125
-      ]
+      "size": [1500, 1125]
     }
   ],
   "videos": [
@@ -483,10 +444,7 @@
     "_source": "Transcribed by eye from the school-published admission banner public/images/bqes/banners/banner-2.webp (Bangla digits converted). Ask the school to confirm before treating as final.",
     "schoolCode": "424256",
     "eiin": "134172",
-    "phones": [
-      "01678708862",
-      "01711732486"
-    ],
+    "phones": ["01678708862", "01711732486"],
     "address": {
       "bn": "বাড়ি # কে-২৭৮, রোড # ১৬ (জোড়া খাম্বার পাশে), দক্ষিণ বনশ্রী, ঢাকা",
       "en": "House K-278, Road 16 (beside Jora Khamba), South Banasree, Dhaka"

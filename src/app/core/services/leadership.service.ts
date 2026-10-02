@@ -1,11 +1,13 @@
-import { Injectable } from '@angular/core';
-import { Observable, of } from 'rxjs';
-import { LEADER_MESSAGES } from '../data/leadership.data';
+import { inject, Injectable } from '@angular/core';
+import { Observable } from 'rxjs';
+import { LEADER_MESSAGE_LIST } from '../repositories/content-repositories';
 import { LeaderMessage } from '../models/leader-message.model';
 
 @Injectable({ providedIn: 'root' })
 export class LeadershipService {
+  private readonly repository = inject(LEADER_MESSAGE_LIST.token);
+
   messages(): Observable<readonly LeaderMessage[]> {
-    return of(LEADER_MESSAGES);
+    return this.repository.list();
   }
 }

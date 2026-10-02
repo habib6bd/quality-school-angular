@@ -357,3 +357,35 @@ Phase reports are appended below in order. (A final summary is added at the top 
 **Issues (honest):** Lighthouse (v12, mobile, simulated slow 4G, headless Chromium in this sandbox, production server on localhost; scores vary run to run): bn home perf 72, en home 89, en/gallery 89, en/teachers 93, bn/admission/apply 90; accessibility, best-practices and SEO 100 on all; CLS 0. The Bangla home page is the weakest: LCP about 4.4 s (hero photo waits for JS hydration and Bangla font download) and TBT about 350 ms. Not tuned further. Real-device and real-network numbers were not measured; no screen-reader testing was done (axe covers only automatically detectable issues).
 
 **Acceptance criteria:** PASS with a caveat — axe finds no violations on any audited route/state, heading, focus and reduced-motion tests pass, CLS is 0 and lazy routes/sized images are in place; the Bangla home page performance score (72) is below 90.
+
+---
+
+### Phase 15: CMS / API integration readiness
+
+**Implemented**
+
+- `ContentRepository<T>` interface (`InjectionToken` per collection, 14 collections) with `LocalContentRepository` (bundled data, the default) and an unwired `HttpContentRepository` (`GET {apiBaseUrl}/{path}`); `provideHttpContentRepositories()` swaps all of them at once and is deliberately not added to `app.config.ts`.
+- All 14 list-based content services (notices, news, events, teachers, classes, facilities, leader messages, gallery, videos, achievements, testimonials, FAQ, resources, calendar) now read through their repository; their public API and ordering/filter rules are unchanged, so no component changed. Empty 'unpublished' data moved to `core/data/unpublished.data.ts`.
+- The shared loading / error (retry) / empty pattern (`rxResource` + `<app-async-state>`) was already used by every data-driven page (28 components).
+- `docs/CONTENT-INTEGRATION.md`: table of what the school must supply and where it goes, the proposed API, steps to turn it on, and what is not covered (results, admission and contact submission, SSR/prerender of CMS items).
+
+**Files** — new: `src/app/core/repositories/{content-repository,content-repositories,content-repository.spec}.ts`, `src/app/core/data/unpublished.data.ts`, `docs/CONTENT-INTEGRATION.md`. Modified: the 14 `*.service.ts` files, `features/content-pages.spec.ts` (event tests now provide a repository instead of constructing a service).
+
+**Dependencies:** none
+
+**Commands:** `npm run typecheck`; `npm run lint`; `npx ng test --watch=false`; `npx ng build`; `PORT=4310 ./scripts/ssr-smoke.sh /bn /en/notices /en/teachers /en/nope`; `PW_EXECUTABLE=/opt/pw-browsers/chromium npx playwright test`.
+
+**Verification**
+
+| Check            | Result                                                          |
+| ---------------- | --------------------------------------------------------------- |
+| Type checking    | PASS                                                            |
+| Lint             | PASS                                                            |
+| Unit tests       | PASS — 47 files, 358 tests                                      |
+| Production build | PASS — 114 static routes prerendered                            |
+| SSR smoke        | PASS — /bn 200; /en/notices 200; /en/teachers 200; /en/nope 404 |
+| Browser tests    | PASS — 297 Playwright tests (Chromium 141 via `PW_EXECUTABLE`)  |
+
+**Issues (honest):** The HTTP repositories are a stub: the API contract does not exist, responses are not validated, and nothing was tested against a real backend (only against `HttpTestingController`). Prerendering and the sitemap still use the bundled data. `ResultService`, `ContactService` and `SchoolInfoService` are not behind repositories (documented).
+
+**Acceptance criteria:** PASS — every list-based content service goes through an injectable repository with local and unwired HTTP implementations, the shared state pattern is in place, and the integration document is written.

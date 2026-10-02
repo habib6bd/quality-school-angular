@@ -1,11 +1,13 @@
-import { Injectable } from '@angular/core';
-import { Observable, of } from 'rxjs';
-import { VIDEOS } from '../data/videos.data';
+import { inject, Injectable } from '@angular/core';
+import { Observable } from 'rxjs';
+import { VIDEO_LIST } from '../repositories/content-repositories';
 import { SchoolVideo } from '../models/video.model';
 
 @Injectable({ providedIn: 'root' })
 export class VideoService {
+  private readonly repository = inject(VIDEO_LIST.token);
+
   list(): Observable<readonly SchoolVideo[]> {
-    return of(VIDEOS);
+    return this.repository.list();
   }
 }

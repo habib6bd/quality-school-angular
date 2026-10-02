@@ -1,13 +1,13 @@
-import { Injectable } from '@angular/core';
-import { Observable, of } from 'rxjs';
+import { inject, Injectable } from '@angular/core';
+import { Observable } from 'rxjs';
+import { ACHIEVEMENT_LIST } from '../repositories/content-repositories';
 import { Achievement } from '../models/achievement.model';
-
-/** The school has not published any verified achievements yet, so the list is empty. */
-const ACHIEVEMENTS: readonly Achievement[] = [];
 
 @Injectable({ providedIn: 'root' })
 export class AchievementService {
+  private readonly repository = inject(ACHIEVEMENT_LIST.token);
+
   list(): Observable<readonly Achievement[]> {
-    return of(ACHIEVEMENTS);
+    return this.repository.list();
   }
 }

@@ -1,13 +1,13 @@
-import { Injectable } from '@angular/core';
-import { Observable, of } from 'rxjs';
+import { inject, Injectable } from '@angular/core';
+import { Observable } from 'rxjs';
+import { RESOURCE_LIST } from '../repositories/content-repositories';
 import { ResourceItem } from '../models/resource.model';
-
-/** The school has not supplied any routines, syllabus, study material, forms or policies yet. */
-const RESOURCES: readonly ResourceItem[] = [];
 
 @Injectable({ providedIn: 'root' })
 export class ResourceService {
+  private readonly repository = inject(RESOURCE_LIST.token);
+
   list(): Observable<readonly ResourceItem[]> {
-    return of(RESOURCES);
+    return this.repository.list();
   }
 }

@@ -22,8 +22,8 @@ Work proceeds **one phase at a time**. A phase is finished only when its accepta
 | 12  | Site search & navigation polish        | ✅ Done    |
 | 13  | SEO & SSR                              | ✅ Done    |
 | 14  | Accessibility & performance            | ✅ Done    |
-| 15  | CMS / API integration readiness        | ⏭ **Next** |
-| 16  | Final QA                               | ☐          |
+| 15  | CMS / API integration readiness        | ✅ Done    |
+| 16  | Final QA                               | ⏭ **Next** |
 
 Update this table when a phase is completed.
 

@@ -1,12 +1,16 @@
-import { Injectable } from '@angular/core';
-import { map, Observable, of } from 'rxjs';
-import { GALLERY } from '../data/gallery.data';
+import { inject, Injectable } from '@angular/core';
+import { map, Observable } from 'rxjs';
+import { GALLERY_LIST } from '../repositories/content-repositories';
 import { GalleryCategory, GalleryItem } from '../models/gallery.model';
 
 @Injectable({ providedIn: 'root' })
 export class GalleryService {
+  private readonly repository = inject(GALLERY_LIST.token);
+
   list(category?: GalleryCategory): Observable<readonly GalleryItem[]> {
-    return of(category ? GALLERY.filter((item) => item.category === category) : GALLERY);
+    return this.repository
+      .list()
+      .pipe(map((all) => (category ? all.filter((item) => item.category === category) : all)));
   }
 
   featured(count: number): Observable<readonly GalleryItem[]> {

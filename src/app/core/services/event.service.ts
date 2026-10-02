@@ -1,13 +1,17 @@
-import { Injectable } from '@angular/core';
-import { map, Observable, of } from 'rxjs';
-import { EVENTS } from '../data/events.data';
+import { inject, Injectable } from '@angular/core';
+import { map, Observable } from 'rxjs';
+import { EVENT_LIST } from '../repositories/content-repositories';
 import { SchoolEvent } from '../models/event.model';
 
 @Injectable({ providedIn: 'root' })
 export class EventService {
+  private readonly repository = inject(EVENT_LIST.token);
+
   /** Soonest first. */
   list(): Observable<readonly SchoolEvent[]> {
-    return of([...EVENTS].sort((a, b) => a.startDate.localeCompare(b.startDate)));
+    return this.repository
+      .list()
+      .pipe(map((all) => [...all].sort((a, b) => a.startDate.localeCompare(b.startDate))));
   }
 
   /** Events that have not ended before `today` (ISO date). */

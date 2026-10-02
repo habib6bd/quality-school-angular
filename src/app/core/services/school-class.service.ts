@@ -1,6 +1,6 @@
-import { Injectable } from '@angular/core';
-import { map, Observable, of } from 'rxjs';
-import { CLASSES } from '../data/classes.data';
+import { inject, Injectable } from '@angular/core';
+import { map, Observable } from 'rxjs';
+import { CLASS_LIST } from '../repositories/content-repositories';
 import { SchoolClass } from '../models/school-class.model';
 
 export interface ClassDetail {
@@ -11,9 +11,11 @@ export interface ClassDetail {
 
 @Injectable({ providedIn: 'root' })
 export class SchoolClassService {
+  private readonly repository = inject(CLASS_LIST.token);
+
   /** Classes in the school's published order, Play first. */
   list(): Observable<readonly SchoolClass[]> {
-    return of([...CLASSES].sort((a, b) => a.order - b.order));
+    return this.repository.list().pipe(map((all) => [...all].sort((a, b) => a.order - b.order)));
   }
 
   /** A class with its neighbours in the school's order, or `undefined` for an unknown slug. */

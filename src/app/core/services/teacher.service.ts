@@ -1,6 +1,6 @@
-import { Injectable } from '@angular/core';
-import { map, Observable, of } from 'rxjs';
-import { TEACHERS } from '../data/teachers.data';
+import { inject, Injectable } from '@angular/core';
+import { map, Observable } from 'rxjs';
+import { TEACHER_LIST } from '../repositories/content-repositories';
 import { Designation, Teacher } from '../models/teacher.model';
 
 export const DESIGNATION_ORDER: readonly Designation[] = ['principal', 'teacher', 'staff'];
@@ -16,8 +16,10 @@ export function compareTeachers(a: Teacher, b: Teacher): number {
 
 @Injectable({ providedIn: 'root' })
 export class TeacherService {
+  private readonly repository = inject(TEACHER_LIST.token);
+
   list(): Observable<readonly Teacher[]> {
-    return of([...TEACHERS].sort(compareTeachers));
+    return this.repository.list().pipe(map((all) => [...all].sort(compareTeachers)));
   }
 
   /** A few people for the homepage: the principal first, then ordered teachers. */

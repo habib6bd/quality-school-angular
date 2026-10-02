@@ -1,12 +1,20 @@
-import { Injectable } from '@angular/core';
-import { map, Observable, of } from 'rxjs';
-import { FAQS } from '../data/faqs.data';
+import { inject, Injectable } from '@angular/core';
+import { map, Observable } from 'rxjs';
+import { FAQ_LIST } from '../repositories/content-repositories';
 import { FaqCategory, FaqItem } from '../models/faq.model';
 
 @Injectable({ providedIn: 'root' })
 export class FaqService {
+  private readonly repository = inject(FAQ_LIST.token);
+
   list(...categories: FaqCategory[]): Observable<readonly FaqItem[]> {
-    return of(categories.length ? FAQS.filter((faq) => categories.includes(faq.category)) : FAQS);
+    return this.repository
+      .list()
+      .pipe(
+        map((all) =>
+          categories.length ? all.filter((faq) => categories.includes(faq.category)) : all,
+        ),
+      );
   }
 
   preview(count: number): Observable<readonly FaqItem[]> {
