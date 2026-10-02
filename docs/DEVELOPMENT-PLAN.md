@@ -6,24 +6,24 @@ Work proceeds **one phase at a time**. A phase is finished only when its accepta
 
 ## Status
 
-| #   | Phase                                  | Status     |
-| --- | -------------------------------------- | ---------- |
-| 1   | Project foundation                     | ✅ Done    |
-| 2   | Design system & shared components      | ✅ Done    |
-| 3   | Bilingual architecture                 | ✅ Done    |
-| 4   | Main layout & homepage                 | ✅ Done    |
-| 5   | About & academic pages                 | ✅ Done    |
-| 6   | Teachers & faculty directory           | ✅ Done    |
-| 7   | Admission (info + form prototype)      | ✅ Done    |
-| 8   | Notices, news & events                 | ✅ Done    |
-| 9   | Gallery, videos & achievements         | ✅ Done    |
-| 10  | Results, resources & academic calendar | ✅ Done    |
-| 11  | Guardian reviews, FAQ & contact        | ✅ Done    |
-| 12  | Site search & navigation polish        | ✅ Done    |
-| 13  | SEO & SSR                              | ✅ Done    |
-| 14  | Accessibility & performance            | ✅ Done    |
-| 15  | CMS / API integration readiness        | ✅ Done    |
-| 16  | Final QA                               | ⏭ **Next** |
+| #   | Phase                                  | Status  |
+| --- | -------------------------------------- | ------- |
+| 1   | Project foundation                     | ✅ Done |
+| 2   | Design system & shared components      | ✅ Done |
+| 3   | Bilingual architecture                 | ✅ Done |
+| 4   | Main layout & homepage                 | ✅ Done |
+| 5   | About & academic pages                 | ✅ Done |
+| 6   | Teachers & faculty directory           | ✅ Done |
+| 7   | Admission (info + form prototype)      | ✅ Done |
+| 8   | Notices, news & events                 | ✅ Done |
+| 9   | Gallery, videos & achievements         | ✅ Done |
+| 10  | Results, resources & academic calendar | ✅ Done |
+| 11  | Guardian reviews, FAQ & contact        | ✅ Done |
+| 12  | Site search & navigation polish        | ✅ Done |
+| 13  | SEO & SSR                              | ✅ Done |
+| 14  | Accessibility & performance            | ✅ Done |
+| 15  | CMS / API integration readiness        | ✅ Done |
+| 16  | Final QA                               | ✅ Done |
 
 Update this table when a phase is completed.
 

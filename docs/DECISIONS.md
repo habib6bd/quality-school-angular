@@ -93,3 +93,5 @@ One line per ambiguous choice, made to stay consistent with the plan, the conten
 - Phase 14: Lighthouse is not a repo dependency; `scripts/lighthouse.sh` runs it via `npx` on demand.
 - Phase 15: repositories expose only `list()`; filtering, sorting and slug lookup stay in the services so those rules survive a CMS swap. Single-purpose services (results, contact, school info) are left as they are and documented.
 - Phase 15: `provideHttpContentRepositories()` exists but is not in `app.config.ts`, so the "unwired" requirement holds; enabling it is a documented two-line change.
+- Phase 16: the final sweep allows exactly one console message (the browser's own "404" log) on the intentional 404 route; every other console error or HTTP status >= 400 fails the test.
+- Phase 16: `brokenImages` forces lazy images to load before checking, since off-screen lazy images otherwise never complete.

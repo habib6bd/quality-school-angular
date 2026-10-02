@@ -47,6 +47,11 @@ export async function brokenImages(page: Page): Promise<string[]> {
   await page.evaluate(() =>
     Promise.all(
       Array.from(document.images)
+        .map((img) => {
+          // Off-screen lazy images never start loading on their own; load them so they can be checked.
+          img.loading = 'eager';
+          return img;
+        })
         .filter((img) => !img.complete)
         .map(
           (img) =>
@@ -63,3 +68,35 @@ export async function brokenImages(page: Page): Promise<string[]> {
       .map((img) => img.currentSrc || img.src),
   );
 }
+
+/** Every route a visitor can reach, (language prefix left out); includes detail pages and the 404 page. */
+export const ROUTES = [
+  '',
+  '/about',
+  '/about/history',
+  '/about/mission-vision',
+  '/about/philosophy',
+  '/about/messages',
+  '/about/facilities',
+  '/academics',
+  '/academics/programs',
+  '/academics/programs/nine',
+  '/academics/calendar?month=2026-10',
+  '/results',
+  '/resources',
+  '/admission',
+  '/admission/apply',
+  '/faq',
+  '/teachers',
+  '/teachers/md-abdullah-al-mizan',
+  '/notices',
+  '/notices/admission-2026',
+  '/news',
+  '/events',
+  '/gallery',
+  '/videos',
+  '/achievements',
+  '/contact',
+  '/search?q=admission',
+  '/this-page-does-not-exist',
+];

@@ -1,6 +1,60 @@
 # BQES — Progress report
 
-Phase reports are appended below in order. (A final summary is added at the top when Phase 16 is done.)
+## Final summary (Phases 1–16)
+
+**Status:** all 16 phases are done and verified in this sandbox. This is a complete **frontend** for the Banasree Quality Education School (BQES) site. It is **not deployed and has no backend**, so it is not production-ready for any backend feature.
+
+### What works
+
+- Bilingual (Bangla default, English) Angular 22 site: standalone components, signals, zoneless, SSR with 114 prerendered routes, Tailwind CSS v4. The URL prefix (`/bn`, `/en`) is the source of truth; unknown URLs return a real 404.
+- Pages: homepage (17 sections); about, history, mission/vision, philosophy, messages, facilities; academics overview, programs with class detail pages, calendar; teachers directory with filters and detail pages; admission info and a multi-step application form prototype; notices, news and events (listing, filters, pagination, detail); gallery with lightbox, videos with an accessible modal, achievements; results, resources; FAQ; contact with map and a form prototype; site search; 404.
+- SEO: titles, descriptions, canonical, hreflang (bn, en, x-default), Open Graph and Twitter tags, JSON-LD (School, BreadcrumbList; Article/Event only for real items), `robots.txt`, generated `sitemap.xml` (130 URLs).
+- Accessibility: axe (WCAG 2.2 AA and best practices) finds no violations on 59 audited routes and states; heading order, keyboard focus and reduced-motion tests; skip link, focus management, accessible form errors.
+- Performance: compression, immutable caching of hashed assets, self-hosted fonts, responsive image variants, no layout shift (CLS 0).
+- CMS/API readiness: every list-based content service reads through an injectable repository (local data now; HTTP stub not wired in). See [docs/CONTENT-INTEGRATION.md](CONTENT-INTEGRATION.md).
+
+### Final check results (last full run, Phase 16)
+
+| Check                                             | Result                                                                                                                                                          |
+| ------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `npm run typecheck`                               | PASS                                                                                                                                                            |
+| `npm run lint`                                    | PASS                                                                                                                                                            |
+| `npx ng test --watch=false`                       | PASS — 47 files, 358 tests                                                                                                                                      |
+| `npx ng build`                                    | PASS — 114 static routes prerendered                                                                                                                            |
+| `PORT=4310 ./scripts/ssr-smoke.sh …` (11 URLs)    | PASS — 200 for pages, 404 for `/en/nope` and `/bn/nope`                                                                                                         |
+| `npx playwright test`                             | PASS — 311 tests (incl. 59 axe audits; all routes × 7 widths × bn/en)                                                                                           |
+| Sitemap in sync, `npm audit --omit=dev`           | PASS, 0 vulnerabilities                                                                                                                                         |
+| Lighthouse (mobile, simulated slow 4G, localhost) | accessibility, best practices, SEO 100 on all five pages tried; performance bn home 72, en home 89, en gallery 89, en teachers 93, bn admission apply 90; CLS 0 |
+
+### Placeholders the school must fill
+
+Full table with file locations: [docs/CONTENT-INTEGRATION.md](CONTENT-INTEGRATION.md). In short:
+
+- **Confirm** the address, phones, EIIN and School Code (transcribed by eye from the admission banner); supply email and office hours; confirm the production domain (`https://www.bqesbd.com` is assumed).
+- Mission and vision, history and philosophy text; admission eligibility, steps, documents, dates and fees; per-class information.
+- Staff photos, Bangla names and consent (only English names and initial avatars are shown).
+- News, events, ongoing notices, academic calendar, routines, syllabus, study resources, forms and policies, results source, achievements, guardian testimonials, school-specific FAQ answers.
+- More approved photos and videos; **replace the demo photos** (marked `isDemo`, public domain, not BQES); a 1200×630 share image.
+- A backend (with spam protection and a privacy notice) before the admission and contact forms can submit anything.
+
+### Known issues
+
+- Bangla home page performance is 72 on Lighthouse (LCP about 4.4 s: the hero photo waits for hydration and the Bangla font; TBT about 350 ms). Other pages scored 89–93.
+- `npx prettier --check .` flags three older config files (`.postcssrc.json`, `tsconfig.app.json`, `tsconfig.spec.json`); they were not touched.
+- Prerendered pages and the sitemap use the bundled data. CMS items would need prerender params or server rendering (see the integration guide).
+- The results lookup, admission form and contact form are prototypes: they validate but send and store nothing.
+
+### Not verified
+
+- Browsers other than headless Chromium 141 (no Firefox or Safari), real phones, real networks, and screen readers (axe finds only automatically detectable problems).
+- Real YouTube and Google Maps embeds (stubbed in tests); Open Graph previews and search-engine indexing on the public domain.
+- Lighthouse on a deployed site; load behaviour behind a real CDN or proxy.
+- The HTTP repositories against a real API (only unit-tested with a mocked HTTP backend).
+- Deployment: nothing was deployed.
+
+---
+
+Phase reports are appended below in order.
 
 ---
 
@@ -389,3 +443,35 @@ Phase reports are appended below in order. (A final summary is added at the top 
 **Issues (honest):** The HTTP repositories are a stub: the API contract does not exist, responses are not validated, and nothing was tested against a real backend (only against `HttpTestingController`). Prerendering and the sitemap still use the bundled data. `ResultService`, `ContactService` and `SchoolInfoService` are not behind repositories (documented).
 
 **Acceptance criteria:** PASS — every list-based content service goes through an injectable repository with local and unwired HTTP implementations, the shared state pattern is in place, and the integration document is written.
+
+---
+
+### Phase 16: Final QA
+
+**Implemented**
+
+- `e2e/final-qa.spec.ts`: every route (`ROUTES` in `e2e/support.ts`, 33 pages incl. detail pages, search and the 404 page) in bn and en at 320, 375, 425, 768, 1024, 1280 and 1440 px (14 tests). Each route must have exactly one h1, no horizontal overflow, no broken images (off-screen lazy images are forced to load first), no console errors or uncaught exceptions, and no HTTP response >= 400 other than the intentional 404 page.
+- Form review: the admission, contact and results forms are covered by earlier e2e tests (validation, accessible errors, success states) and by tests asserting no network request is made when submitting; a source search found no `console.*`, `HttpClient`, `fetch`, `sendBeacon` or `localStorage` use outside the unwired repositories (`sessionStorage` is used only to remember a dismissed announcement).
+- Full verification of every check (results below), `npm run check` pieces (sitemap in sync, 130 URLs) and `npm audit --omit=dev` (0 vulnerabilities).
+- `brokenImages` helper now loads lazy images before checking (it previously could wait forever on off-screen lazy images).
+
+**Files** — new: `e2e/final-qa.spec.ts`. Modified: `e2e/support.ts` (shared `ROUTES`, lazy-image fix), `e2e/a11y.spec.ts` (imports `ROUTES`).
+
+**Dependencies:** none
+
+**Commands:** `npm run typecheck`; `npm run lint`; `npx ng test --watch=false`; `npx ng build`; `PORT=4310 ./scripts/ssr-smoke.sh /bn /en /bn/about /en/about/history /en/academics/programs/nine /en/teachers /en/notices/admission-2026 /en/gallery /en/search?q=admission /en/nope /bn/nope`; `PW_EXECUTABLE=/opt/pw-browsers/chromium npx playwright test`.
+
+**Verification**
+
+| Check            | Result                                                                                                                                                                                                                    |
+| ---------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Type checking    | PASS                                                                                                                                                                                                                      |
+| Lint             | PASS                                                                                                                                                                                                                      |
+| Unit tests       | PASS — 47 files, 358 tests                                                                                                                                                                                                |
+| Production build | PASS — 114 static routes prerendered                                                                                                                                                                                      |
+| SSR smoke        | PASS — /bn 200; /en 200; /bn/about 200; /en/about/history 200; /en/academics/programs/nine 200; /en/teachers 200; /en/notices/admission-2026 200; /en/gallery 200; /en/search?q=admission 200; /en/nope 404; /bn/nope 404 |
+| Browser tests    | PASS — 311 Playwright tests (Chromium 141 via `PW_EXECUTABLE`)                                                                                                                                                            |
+
+**Issues (honest):** Tested only in headless Chromium 141 on Linux (no Firefox, Safari, real phones or screen readers). YouTube and Google Maps are stubbed in tests, so the real embeds were not exercised. Lighthouse numbers come from a simulated slow-4G run on localhost (Bangla home page performance 72, the others 89-93). `npx prettier --check .` flags three config files that predate this work (`.postcssrc.json`, `tsconfig.app.json`, `tsconfig.spec.json`) and were left untouched. The site is not deployed and has no backend: forms are prototypes, results lookup is a stub, and the CMS/API repositories are an unwired stub.
+
+**Acceptance criteria:** PASS — all checks green; all routes render without overflow, broken images or console errors at every required width in both languages. Backend features are not production-ready and are not claimed to be.
