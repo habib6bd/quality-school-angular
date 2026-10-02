@@ -196,6 +196,22 @@ describe('SeoService head tags', () => {
     expect(TestBed.inject(Meta).getTag('property="og:url"')).toBeNull();
   });
 
+  it('preloads only the fonts of the page language, without duplicates', () => {
+    const seo = TestBed.inject(SeoService);
+    const preloads = () =>
+      Array.from(head().querySelectorAll('link[rel="preload"][as="font"]')).map((l) => [
+        l.getAttribute('href'),
+        l.getAttribute('crossorigin'),
+      ]);
+    seo.setPage({}, 'bn', '/bn');
+    expect(preloads()).toEqual([
+      ['/fonts/hind-siliguri-bengali-400.woff2', ''],
+      ['/fonts/hind-siliguri-bengali-600.woff2', ''],
+    ]);
+    seo.setPage({}, 'en', '/en');
+    expect(preloads()).toEqual([['/fonts/inter-latin-variable.woff2', '']]);
+  });
+
   it('adds, replaces and resets JSON-LD blocks', () => {
     const seo = TestBed.inject(SeoService);
     seo.resetStructuredData(); // the document is shared between tests

@@ -134,7 +134,7 @@ const SUGGESTIONS = ['admission', 'notices', 'teachers', 'academics/programs', '
                   {{ chip.label | t }}
                   <span
                     class="rounded-full px-2 text-xs"
-                    [class]="active ? 'bg-white/20' : 'bg-stone-100'"
+                    [class]="active ? 'bg-primary-900' : 'bg-stone-100'"
                     >{{ chip.count | localeNumber }}</span
                   >
                 </a>
@@ -147,6 +147,7 @@ const SUGGESTIONS = ['admission', 'notices', 'teachers', 'academics/programs', '
           {{ 'search.resultCount' | t: { count: kindHits().length, query: query().trim() } }}
         </p>
 
+        <h2 class="sr-only">{{ 'search.resultsHeading' | t }}</h2>
         <app-async-state
           class="mt-4 block"
           [status]="index.status()"

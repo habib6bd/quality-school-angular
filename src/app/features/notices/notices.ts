@@ -73,7 +73,7 @@ const CHIPS: readonly Chip[] = [
                 {{ chip.label | t }}
                 <span
                   class="rounded-full px-2 text-xs"
-                  [class]="active ? 'bg-white/20' : 'bg-stone-100'"
+                  [class]="active ? 'bg-primary-900' : 'bg-stone-100'"
                   >{{ count(chip.value) | localeNumber }}</span
                 >
               </a>
@@ -86,6 +86,7 @@ const CHIPS: readonly Chip[] = [
         {{ 'notices.showing' | t: { shown: paged().items.length, total: filtered().length } }}
       </p>
 
+      <h2 class="sr-only">{{ 'notices.listHeading' | t }}</h2>
       <app-async-state
         class="mt-4 block"
         [status]="notices.status()"

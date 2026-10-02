@@ -78,7 +78,7 @@ import { TranslatePipe } from '../../shared/pipes/translate.pipe';
       </nav>
       <div class="mt-6 border-t border-stone-200 pt-6">
         <p class="mb-2 text-sm text-ink-muted">{{ 'common.language' | t }}</p>
-        <app-language-switcher />
+        <app-language-switcher [label]="'common.language' | t" />
       </div>
     </app-modal>
   `,

@@ -20,7 +20,7 @@ export function swapLangInUrl(url: string, lang: Lang): string {
   changeDetection: ChangeDetectionStrategy.OnPush,
   imports: [RouterLink, TranslatePipe],
   template: `
-    <nav [attr.aria-label]="'common.switchLanguage' | t">
+    <nav [attr.aria-label]="label() ?? ('common.switchLanguage' | t)">
       <ul
         class="flex items-center rounded-full p-0.5 text-sm font-semibold"
         [class]="inverse() ? 'bg-white/15' : 'bg-stone-100'"
@@ -53,6 +53,8 @@ export class LanguageSwitcher {
   private readonly language = inject(LanguageService);
 
   readonly inverse = input(false);
+  /** Accessible name; give each switcher on a page its own so the landmarks are distinguishable. */
+  readonly label = input<string>();
 
   private readonly url = toSignal(
     this.router.events.pipe(

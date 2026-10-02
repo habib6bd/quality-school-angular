@@ -212,9 +212,11 @@ const CALENDAR_ROWS = [
             @for (phone of info().phones; track phone) {
               <li class="flex items-center gap-3">
                 <app-icon name="phone" [size]="20" class="text-accent-300" />
-                <a [href]="'tel:' + phone" class="font-semibold hover:underline">{{
-                  phone | localeDigits
-                }}</a>
+                <a
+                  [href]="'tel:' + phone"
+                  class="inline-block py-1.5 font-semibold hover:underline"
+                  >{{ phone | localeDigits }}</a
+                >
               </li>
             }
             @if (info().address; as address) {

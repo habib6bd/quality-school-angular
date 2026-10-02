@@ -186,6 +186,7 @@ const isType = (value: unknown): value is ResourceType =>
         (retry)="items.reload()"
       >
         @if (visible().length) {
+          <h2 class="sr-only">{{ 'resources.listHeading' | t }}</h2>
           <ul class="grid gap-4 md:grid-cols-2">
             @for (item of visible(); track item.id) {
               <li class="card p-5">

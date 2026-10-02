@@ -93,7 +93,7 @@ const CHIPS: readonly FilterChip[] = [
                   {{ chip.label | t }}
                   <span
                     class="rounded-full px-2 text-xs"
-                    [class]="active ? 'bg-white/20' : 'bg-stone-100'"
+                    [class]="active ? 'bg-primary-900' : 'bg-stone-100'"
                     >{{ count(chip.value) | localeNumber }}</span
                   >
                 </a>
@@ -115,6 +115,7 @@ const CHIPS: readonly FilterChip[] = [
         {{ 'teachers.showing' | t: { shown: visible().length, total: teachers.value().length } }}
       </p>
 
+      <h2 class="sr-only">{{ 'teachers.listHeading' | t }}</h2>
       <app-async-state
         class="mt-4 block"
         [status]="teachers.status()"

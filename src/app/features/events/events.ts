@@ -57,6 +57,7 @@ export type EventView = 'upcoming' | 'past';
         </ul>
       </nav>
 
+      <h2 class="sr-only">{{ 'events.listHeading' | t }}</h2>
       <app-async-state
         class="mt-6 block"
         [status]="events.status()"

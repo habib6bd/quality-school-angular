@@ -1,5 +1,6 @@
-import { NgOptimizedImage } from '@angular/common';
+import { IMAGE_LOADER, NgOptimizedImage } from '@angular/common';
 import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
+import { responsiveLoader } from '../../core/images/responsive';
 import { SchoolInfoService } from '../../core/services/school-info.service';
 import { PageScaffold } from '../../shared/components/page-scaffold/page-scaffold';
 import { PendingNote } from '../../shared/components/pending-note/pending-note';
@@ -11,6 +12,7 @@ import { TranslatePipe } from '../../shared/pipes/translate.pipe';
 @Component({
   selector: 'app-about-page',
   changeDetection: ChangeDetectionStrategy.OnPush,
+  providers: [{ provide: IMAGE_LOADER, useValue: responsiveLoader }],
   imports: [
     NgOptimizedImage,
     PageScaffold,
@@ -34,6 +36,8 @@ import { TranslatePipe } from '../../shared/pipes/translate.pipe';
           <figure class="mt-8">
             <img
               ngSrc="images/bqes/gallery/annual-sports-4.webp"
+              ngSrcset="480w, 960w, 1500w"
+              sizes="(min-width: 1024px) 640px, 100vw"
               width="1500"
               height="1125"
               [alt]="'about.storyImageAlt' | t"

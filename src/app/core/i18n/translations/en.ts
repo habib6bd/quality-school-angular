@@ -143,6 +143,7 @@ export const en: PartialDict<TranslationShape> = {
     mapTitle: 'Location of Banasree Quality Education School on Google Maps',
   },
   teachers: {
+    listHeading: 'List of teachers and staff',
     intro: 'The school’s published list of teachers and staff.',
     namesNote: 'Names are shown as published by the school, written in English.',
     filterLabel: 'Filter by designation',
@@ -166,6 +167,7 @@ export const en: PartialDict<TranslationShape> = {
     group: { science: 'Science', business: 'Business Studies' },
   },
   notices: {
+    listHeading: 'List of notices',
     intro: 'Notices and announcements from the school. New notices appear here once published.',
     filterLabel: 'Filter by category',
     all: 'All',
@@ -190,6 +192,7 @@ export const en: PartialDict<TranslationShape> = {
     emptyMessage: 'No notices have been published yet.',
   },
   events: {
+    listHeading: 'List of events',
     intro: 'Events and programs at the school. They appear here once the school announces them.',
     viewLabel: 'Type of events',
     upcoming: 'Upcoming',
@@ -492,6 +495,7 @@ export const en: PartialDict<TranslationShape> = {
     startOver: 'Start over',
   },
   news: {
+    listHeading: 'List of news articles',
     intro: 'News and updates from the school.',
     emptyTitle: 'No news published yet',
     emptyMessage: 'News will appear here once the school publishes it.',
@@ -526,6 +530,7 @@ export const en: PartialDict<TranslationShape> = {
     privacy: 'What you enter is used only for the lookup; it is not stored or logged.',
   },
   resources: {
+    listHeading: 'List of resources',
     intro: 'Class and exam routines, syllabus, study material, forms and policies.',
     typeLabel: 'Browse by type',
     all: 'All',
@@ -553,6 +558,7 @@ export const en: PartialDict<TranslationShape> = {
     clear: 'Clear filters',
   },
   faq: {
+    listHeading: 'Questions and answers',
     intro:
       'Frequently asked questions about the website, admission and academics. Answers are limited to how to use this site and facts the school has published.',
     filterLabel: 'Browse by topic',
@@ -573,6 +579,7 @@ export const en: PartialDict<TranslationShape> = {
     moreText: 'For specific information, please contact the school directly.',
   },
   search: {
+    resultsHeading: 'Search results',
     intro: 'Search pages, teachers, notices, news, events and resources.',
     label: 'Search the website',
     hint: 'Type one or more words — for example “admission”, “Class Nine” or a teacher’s name.',

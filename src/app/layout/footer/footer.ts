@@ -129,7 +129,7 @@ import { TranslatePipe } from '../../shared/pipes/translate.pipe';
               </dt>
               <dd class="text-secondary-200">
                 @for (phone of info().phones; track phone) {
-                  <a [href]="'tel:' + phone" class="block hover:text-white">{{
+                  <a [href]="'tel:' + phone" class="block py-1.5 hover:text-white">{{
                     phone | localeDigits
                   }}</a>
                 } @empty {
@@ -148,7 +148,7 @@ import { TranslatePipe } from '../../shared/pipes/translate.pipe';
               </dt>
               <dd class="text-secondary-200">
                 @for (email of info().emails; track email) {
-                  <a [href]="'mailto:' + email" class="block break-all hover:text-white">{{
+                  <a [href]="'mailto:' + email" class="block break-all py-1.5 hover:text-white">{{
                     email
                   }}</a>
                 } @empty {

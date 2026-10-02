@@ -4,6 +4,7 @@ import {
   isMainModule,
   writeResponseToNodeResponse,
 } from '@angular/ssr/node';
+import compression from 'compression';
 import express from 'express';
 import { join } from 'node:path';
 
@@ -11,6 +12,12 @@ const browserDistFolder = join(import.meta.dirname, '../browser');
 
 const app = express();
 const angularApp = new AngularNodeAppEngine();
+
+/** Build output with a content hash in its name (`main-GXGH7SKZ.js`) can be cached forever. */
+const HASHED_ASSET = /-[A-Za-z0-9_-]{8}\.(?:js|css)$/;
+
+/** Gzip/brotli-compress text responses (HTML, JS, CSS, JSON, XML, SVG). */
+app.use(compression());
 
 /**
  * Example Express Rest API endpoints can be defined here.
@@ -29,9 +36,18 @@ const angularApp = new AngularNodeAppEngine();
  */
 app.use(
   express.static(browserDistFolder, {
-    maxAge: '1y',
     index: false,
     redirect: false,
+    // Hashed bundles never change; everything else (images, fonts, robots.txt, sitemap.xml) may,
+    // so it is revalidated daily instead of being pinned for a year.
+    setHeaders: (res, path) => {
+      const maxAge = HASHED_ASSET.test(path)
+        ? 'public, max-age=31536000, immutable'
+        : path.includes('/fonts/')
+          ? 'public, max-age=2592000'
+          : 'public, max-age=86400';
+      res.setHeader('Cache-Control', maxAge);
+    },
   }),
 );
 

@@ -29,6 +29,7 @@ export const NEWS_PAGE_SIZE = 9;
   ],
   template: `
     <app-page-scaffold page="news" [intro]="'news.intro' | t">
+      <h2 class="sr-only">{{ 'news.listHeading' | t }}</h2>
       <app-async-state
         [status]="articles.status()"
         [empty]="articles.value().length === 0"

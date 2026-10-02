@@ -65,7 +65,7 @@ export function isGalleryCategory(value: unknown): value is GalleryCategory {
                 {{ chip.label | t }}
                 <span
                   class="rounded-full px-2 text-xs"
-                  [class]="active ? 'bg-white/20' : 'bg-stone-100'"
+                  [class]="active ? 'bg-primary-900' : 'bg-stone-100'"
                   >{{ count(chip.value) | localeNumber }}</span
                 >
               </a>

@@ -51,9 +51,11 @@ import { TranslatePipe } from '../../../shared/pipes/translate.pipe';
             </dt>
             <dd>
               @for (phone of info().phones; track phone) {
-                <a [href]="'tel:' + phone" class="block font-medium hover:text-primary-700">{{
-                  phone | localeDigits
-                }}</a>
+                <a
+                  [href]="'tel:' + phone"
+                  class="block py-1.5 font-medium hover:text-primary-700"
+                  >{{ phone | localeDigits }}</a
+                >
               } @empty {
                 {{ 'common.toBeConfirmed' | t }}
               }
@@ -67,9 +69,11 @@ import { TranslatePipe } from '../../../shared/pipes/translate.pipe';
             </dt>
             <dd>
               @for (email of info().emails; track email) {
-                <a [href]="'mailto:' + email" class="block break-all hover:text-primary-700">{{
-                  email
-                }}</a>
+                <a
+                  [href]="'mailto:' + email"
+                  class="block break-all py-1.5 hover:text-primary-700"
+                  >{{ email }}</a
+                >
               } @empty {
                 {{ 'common.toBeConfirmed' | t }}
               }

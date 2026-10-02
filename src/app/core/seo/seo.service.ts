@@ -28,6 +28,12 @@ const OG_LOCALES: Record<Lang, string> = { bn: 'bn_BD', en: 'en_GB' };
 const DEFAULT_IMAGE = 'images/bqes/logo.png';
 const MARK = 'data-seo';
 
+/** The fonts the first paint of each language needs (self-hosted, see public/fonts/README.txt). */
+const FONT_PRELOADS: Record<Lang, readonly string[]> = {
+  bn: ['/fonts/hind-siliguri-bengali-400.woff2', '/fonts/hind-siliguri-bengali-600.woff2'],
+  en: ['/fonts/inter-latin-variable.woff2'],
+};
+
 /**
  * Everything a search engine or link preview reads from `<head>`: title, description, canonical,
  * `hreflang` alternates, Open Graph, Twitter card, robots and JSON-LD. Route-level pages are
@@ -91,6 +97,7 @@ export class SeoService {
       { property: 'og:locale:alternate', content: otherLocale },
       'property="og:locale:alternate"',
     );
+    this.setFontPreloads(lang);
     this.setCanonical(canonical);
     this.setAlternates(page.noindex ? [] : alternatesFor(path));
   }
@@ -129,6 +136,22 @@ export class SeoService {
   ): void {
     if (condition) this.meta.updateTag(tag);
     else this.meta.removeTag(selector);
+  }
+
+  /** Starts downloading the page language's fonts early, so text is not first drawn in a fallback. */
+  private setFontPreloads(lang: Lang): void {
+    const head = this.document.head;
+    head.querySelectorAll(`link[rel="preload"][${MARK}]`).forEach((node) => node.remove());
+    for (const href of FONT_PRELOADS[lang]) {
+      const link = this.document.createElement('link');
+      link.setAttribute('rel', 'preload');
+      link.setAttribute('as', 'font');
+      link.setAttribute('type', 'font/woff2');
+      link.setAttribute('href', href);
+      link.setAttribute('crossorigin', '');
+      link.setAttribute(MARK, '');
+      head.appendChild(link);
+    }
   }
 
   private setCanonical(href: string | null): void {

@@ -96,7 +96,7 @@ export function filterFaqs(
                   {{ chip.label | t }}
                   <span
                     class="rounded-full px-2 text-xs"
-                    [class]="active ? 'bg-white/20' : 'bg-stone-100'"
+                    [class]="active ? 'bg-primary-900' : 'bg-stone-100'"
                     >{{ count(chip.value) | localeNumber }}</span
                   >
                 </a>
@@ -118,6 +118,7 @@ export function filterFaqs(
         {{ 'faq.showing' | t: { shown: visible().length, total: faqs.value().length } }}
       </p>
 
+      <h2 class="sr-only">{{ 'faq.listHeading' | t }}</h2>
       <app-async-state
         class="mt-4 block max-w-3xl"
         [status]="faqs.status()"

@@ -1,6 +1,7 @@
-import { NgOptimizedImage } from '@angular/common';
+import { IMAGE_LOADER, NgOptimizedImage } from '@angular/common';
 import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
 import { RouterLink } from '@angular/router';
+import { responsiveLoader } from '../../../core/images/responsive';
 import { SchoolInfoService } from '../../../core/services/school-info.service';
 import { Icon } from '../../../shared/components/icon/icon';
 import { ButtonDirective } from '../../../shared/directives/button.directive';
@@ -11,6 +12,7 @@ import { TranslatePipe } from '../../../shared/pipes/translate.pipe';
 @Component({
   selector: 'app-home-hero',
   changeDetection: ChangeDetectionStrategy.OnPush,
+  providers: [{ provide: IMAGE_LOADER, useValue: responsiveLoader }],
   imports: [
     NgOptimizedImage,
     RouterLink,
@@ -63,6 +65,8 @@ import { TranslatePipe } from '../../../shared/pipes/translate.pipe';
         <figure class="relative">
           <img
             ngSrc="images/bqes/gallery/annual-sports-4.webp"
+            ngSrcset="480w, 960w, 1500w"
+            sizes="(min-width: 1024px) 590px, 100vw"
             width="1500"
             height="1125"
             priority

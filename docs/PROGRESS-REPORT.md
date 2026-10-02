@@ -325,3 +325,35 @@ Phase reports are appended below in order. (A final summary is added at the top 
 **Issues (honest):** Open Graph/Twitter previews and search-engine indexing could not be tested against real crawlers or the public domain from this sandbox; canonical URLs assume the production site URL `https://www.bqesbd.com` from `environment.ts` (confirm with the school). The preview image is the logo (no dedicated share image exists). No Article/Event JSON-LD is emitted because no news or events are published.
 
 **Acceptance criteria:** PASS — SeoService covers title, description, canonical, Open Graph, Twitter and hreflang (bn, en, x-default); JSON-LD for School and BreadcrumbList (Article/Event only for real data); robots.txt and a generated sitemap (verified in sync and fully resolvable); correct 404 status; SSR HTML verified to contain the real content.
+
+---
+
+### Phase 14: Accessibility & performance
+
+**Implemented**
+
+- `@axe-core/playwright` audit (`e2e/a11y.spec.ts`, WCAG 2.0/2.1/2.2 A+AA and best-practice rules): every route in bn and en (incl. detail pages, 404, search), interactive states (mobile menu, lightbox, video dialog, accordion, desktop dropdown, forms showing errors) and a 320 px viewport. Plus tests for heading hierarchy (one h1, no skipped levels), keyboard focus visibility and `prefers-reduced-motion`.
+- Accessibility fixes found by axe: chip badge contrast, touch-target size of phone/email links, out-of-month calendar day contrast, sr-only list headings (heading order) on list pages, distinct aria-label for the mobile-menu language switcher.
+- Performance: gzip `compression()` middleware in the SSR server (bn home HTML 171 KB → 24 KB); long-lived immutable caching for hashed JS/CSS, 30 days for fonts; self-hosted Hind Siliguri and Inter (woff2, OFL) replacing Google Fonts, language-specific font preloads via `SeoService`; responsive `-480/-960/-1440` webp variants for the real gallery photos (`scripts/generate-image-variants.mjs`) used through `ngSrcset` + `sizes` and a component-level `IMAGE_LOADER`; production build no longer inlines critical CSS (it caused layout shifts), CLS is 0.
+- Lazy routes were already in place (every page is a lazy component). `scripts/lighthouse.sh` lets the owner re-run Lighthouse.
+
+**Files** — new: `e2e/a11y.spec.ts`, `src/app/core/images/{responsive,responsive.spec,image-variants.generated}.ts`, `scripts/{generate-image-variants.mjs,lighthouse.sh}`, `public/fonts/*`, gallery variant images. Modified: `src/server.ts`, `src/styles.css`, `src/index.html`, `angular.json`, `seo.service.ts`, gallery-grid, hero, about, list pages, mobile menu, month calendar, translations.
+
+**Dependencies:** `@axe-core/playwright` (dev), `compression` + `@types/compression`.
+
+**Commands:** `npm run typecheck`; `npm run lint`; `npx ng test --watch=false`; `npx ng build`; `PORT=4310 ./scripts/ssr-smoke.sh /bn /en/about /en/gallery /en/nope`; `PW_EXECUTABLE=/opt/pw-browsers/chromium npx playwright test`.
+
+**Verification**
+
+| Check            | Result                                                         |
+| ---------------- | -------------------------------------------------------------- |
+| Type checking    | PASS                                                           |
+| Lint             | PASS                                                           |
+| Unit tests       | PASS — 46 files, 351 tests                                     |
+| Production build | PASS — 114 static routes prerendered                           |
+| SSR smoke        | PASS — /bn 200; /en/about 200; /en/gallery 200; /en/nope 404   |
+| Browser tests    | PASS — 297 Playwright tests (Chromium 141 via `PW_EXECUTABLE`) |
+
+**Issues (honest):** Lighthouse (v12, mobile, simulated slow 4G, headless Chromium in this sandbox, production server on localhost; scores vary run to run): bn home perf 72, en home 89, en/gallery 89, en/teachers 93, bn/admission/apply 90; accessibility, best-practices and SEO 100 on all; CLS 0. The Bangla home page is the weakest: LCP about 4.4 s (hero photo waits for JS hydration and Bangla font download) and TBT about 350 ms. Not tuned further. Real-device and real-network numbers were not measured; no screen-reader testing was done (axe covers only automatically detectable issues).
+
+**Acceptance criteria:** PASS with a caveat — axe finds no violations on any audited route/state, heading, focus and reduced-motion tests pass, CLS is 0 and lazy routes/sized images are in place; the Bangla home page performance score (72) is below 90.

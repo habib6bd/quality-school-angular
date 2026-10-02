@@ -113,7 +113,7 @@ export function occursOn(event: CalendarEvent, iso: string): boolean {
               @for (cell of week; track cell.iso) {
                 <td
                   class="h-12 align-top text-sm sm:h-24 sm:p-2 sm:text-base"
-                  [class]="cell.inMonth ? '' : 'bg-stone-50 text-stone-400'"
+                  [class]="cell.inMonth ? '' : 'bg-stone-50 text-stone-600'"
                   [attr.aria-current]="cell.iso === today() ? 'date' : null"
                 >
                   <span
