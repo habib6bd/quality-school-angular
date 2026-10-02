@@ -11,6 +11,11 @@ export function youtubeEmbedUrl(youtubeId: string): string | null {
     : null;
 }
 
+/** Public YouTube page for a video id, or `null` when the id is not valid. */
+export function youtubeWatchUrl(youtubeId: string): string | null {
+  return YOUTUBE_ID.test(youtubeId) ? `https://www.youtube.com/watch?v=${youtubeId}` : null;
+}
+
 /**
  * Accessible dialog that plays a YouTube video. The iframe exists only while the dialog is
  * open, so nothing loads (and nothing plays on) until the visitor asks for it.

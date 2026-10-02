@@ -203,15 +203,27 @@ export const en: PartialDict<TranslationShape> = {
     emptyMessage: 'Events will appear here once the school announces them.',
   },
   achievements: {
+    intro:
+      'The school’s achievements in academics, sports and culture. They will be published here only once the school provides verified details.',
     academic: 'Academic achievements',
     sports: 'Sports achievements',
     cultural: 'Cultural achievements',
     placeholderText: 'To be published here once the school provides verified details.',
   },
   gallery: {
+    intro: 'Photos from the school’s events and activities.',
+    filterLabel: 'Filter photos by category',
+    all: 'All photos',
+    category: { annualSports: 'Annual Sports', schoolEvents: 'School events' },
+    emptyTitle: 'No photos in this category',
+    emptyMessage: 'Choose another category or view all photos.',
+    showAll: 'View all photos',
     open: 'View larger image',
   },
   videos: {
+    intro: 'Videos from the school.',
+    watchOnYoutube: 'Watch on YouTube',
+    channel: 'The school’s YouTube channel',
     watch: 'Watch video',
   },
   testimonials: {

@@ -166,3 +166,35 @@ Phase reports are appended below in order. (A final summary is added at the top 
 **Issues (honest):** Only one notice exists, so multi-page notice listings and the category filter on real multi-category data were verified with stub data in unit tests, not in the browser. The notice's own expiry date (2026-02-28) is stored but not used to hide it (see DECISIONS). News and events pages are empty until the school publishes items.
 
 **Acceptance criteria:** PASS — listings, filters, pagination and detail routes work in both languages; attachments are linked safely; unknown items return 404; unit, browser and build checks pass.
+
+---
+
+### Phase 9: Gallery, videos & achievements
+
+**Implemented**
+
+- Photo gallery (`/gallery`): the 7 real school photos in a responsive grid (2/3 columns), category filter with counts (`?category=`), empty state, demo-image badge support, explicit dimensions and lazy loading (first two eager), descriptive alt text in both languages.
+- Lightbox (existing component) wired to the filtered set with captions: keyboard navigation (arrows, wrap-around), Escape, focus restored to the opening photo, inert background.
+- Video gallery (`/videos`): shared `VideoGallery` (tiles, shared accessible dialog, thumbnail fallback), nothing loads from YouTube until a video is opened, nocookie embed with validated ids, links to the YouTube page and the school channel; the homepage section now uses the same component.
+- Achievements (`/achievements`): academic, sports and cultural sections, each a marked placeholder until the school provides verified entries; real entries replace the placeholder per category.
+
+**Files** — new: `src/app/features/{gallery,videos,achievements}/*`, `src/app/shared/components/video/video-gallery.ts`, `src/app/features/media-pages.spec.ts`, `e2e/media.spec.ts`. Modified: `video-modal.ts` (`youtubeWatchUrl`), `gallery-grid.ts` (demo badge), homepage videos section, `pages.ts`, `app.routes.ts`, translations.
+
+**Dependencies:** none added.
+
+**Commands:** `npm run typecheck`; `npm run lint`; `npx ng test --watch=false`; `npx ng build`; `PORT=4310 ./scripts/ssr-smoke.sh /bn/gallery /en/gallery?category=annual-sports /en/videos /bn/achievements`; `PW_EXECUTABLE=/opt/pw-browsers/chromium npx playwright test`.
+
+**Verification**
+
+| Check            | Result                                                                                               |
+| ---------------- | ---------------------------------------------------------------------------------------------------- |
+| Type checking    | PASS                                                                                                 |
+| Lint             | PASS                                                                                                 |
+| Unit tests       | PASS — 38 files, 255 tests                                                                           |
+| Production build | PASS — 122 static routes prerendered                                                                 |
+| SSR smoke        | PASS — /bn/gallery 200; /en/gallery?category=annual-sports 200; /en/videos 200; /bn/achievements 200 |
+| Browser tests    | PASS — 155 Playwright tests (Chromium 141 via `PW_EXECUTABLE`)                                       |
+
+**Issues (honest):** YouTube thumbnails, the YouTube player and the channel page are unreachable from this sandbox, so only the links, the dialog and the thumbnail fallback were verified (against stubs); the real player was not exercised. The gallery has 7 photos and no pagination (not needed at this size). No achievements are published.
+
+**Acceptance criteria:** PASS — lightbox and modals are keyboard accessible (Enter/Space open, arrows, Escape, focus return, inert background); images have fixed dimensions (CLS < 0.1 measured); video links are valid and validated; unit, browser and build checks pass.

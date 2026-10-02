@@ -49,3 +49,10 @@ One line per ambiguous choice, made to stay consistent with the plan, the conten
 - Out-of-range or invalid `page` values are clamped to the valid range (no error page). Page size: notices 6, news/events 9.
 - Attachments are linked only through `safeAttachmentPath`: site-relative paths, no scheme/`//`/`..`/query/fragment, allowed types `webp png jpg jpeg pdf`. Links open in a new tab with `rel="noopener noreferrer"` plus a `download` link; unsafe attachments are not rendered and the page says one was skipped. The `NoticeAttachment` model is now a union of image and pdf attachments.
 - The homepage notice card and the admission page now link to the notice detail page.
+
+## Phase 9
+
+- The gallery filter (`?category=`) uses the school's own grouping: "Annual Sports" (2 photos) and "School events" (the 5 photos the school left ungrouped). The lightbox caption is the photo's description (the school's photos have no captions, only the generic title "BQES").
+- Gallery pages are rendered per request (`queryDriven`) so a filtered URL is correct on the server. The first two photos load eagerly, the rest lazily; every photo has explicit width/height and a fixed aspect-ratio tile (measured CLS < 0.1 in the browser test).
+- The video tile + dialog logic is now one shared `VideoGallery` used by the homepage and `/videos`: nothing from YouTube loads until the visitor opens the player (privacy-enhanced `youtube-nocookie.com` embed, id validated against `[A-Za-z0-9_-]{11}`); each video also links to its YouTube page and the school channel (from the verified social links) with `rel="noopener noreferrer"`.
+- Achievements: the school has published none, so each of the three categories (academic, sports, cultural) is a marked placeholder; real items from `AchievementService` replace the placeholder for their category automatically. The football-tournament photos in the gallery were deliberately not turned into "achievements" because no result or title is published.

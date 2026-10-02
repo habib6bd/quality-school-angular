@@ -1,6 +1,7 @@
 import { NgOptimizedImage } from '@angular/common';
 import { ChangeDetectionStrategy, Component, input, output } from '@angular/core';
 import { GalleryItem } from '../../../core/models/gallery.model';
+import { Badge } from '../badge/badge';
 import { LocalizePipe } from '../../pipes/localize.pipe';
 import { TranslatePipe } from '../../pipes/translate.pipe';
 
@@ -8,7 +9,7 @@ import { TranslatePipe } from '../../pipes/translate.pipe';
 @Component({
   selector: 'app-gallery-grid',
   changeDetection: ChangeDetectionStrategy.OnPush,
-  imports: [NgOptimizedImage, LocalizePipe, TranslatePipe],
+  imports: [NgOptimizedImage, Badge, LocalizePipe, TranslatePipe],
   template: `
     <ul class="grid grid-cols-2 gap-3 sm:gap-4 lg:grid-cols-3">
       @for (item of items(); track item.id; let i = $index) {
@@ -27,6 +28,11 @@ import { TranslatePipe } from '../../pipes/translate.pipe';
               [priority]="priority() && i < 2"
               class="size-full object-cover transition-transform duration-300 group-hover:scale-105"
             />
+            @if (item.image.isDemo) {
+              <app-badge tone="demo" class="absolute start-2 top-2">{{
+                'common.demoImage' | t
+              }}</app-badge>
+            }
           </button>
         </li>
       }

@@ -89,7 +89,7 @@ export const PAGES: readonly PageDef[] = [
   { path: 'notices', titleKey: 'nav.notices', descriptionKey: 'seo.notices', queryDriven: true },
   { path: 'news', titleKey: 'nav.news', descriptionKey: 'seo.news', queryDriven: true },
   { path: 'events', titleKey: 'nav.events', descriptionKey: 'seo.events', queryDriven: true },
-  { path: 'gallery', titleKey: 'nav.gallery', descriptionKey: 'seo.gallery' },
+  { path: 'gallery', titleKey: 'nav.gallery', descriptionKey: 'seo.gallery', queryDriven: true },
   { path: 'videos', titleKey: 'nav.videos', descriptionKey: 'seo.videos' },
   { path: 'achievements', titleKey: 'nav.achievements', descriptionKey: 'seo.achievements' },
 

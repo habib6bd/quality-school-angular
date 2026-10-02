@@ -21,6 +21,10 @@ const PAGE_COMPONENTS: Partial<Record<string, ComponentLoader>> = {
   notices: () => import('./features/notices/notices').then((m) => m.NoticesPage),
   news: () => import('./features/news/news').then((m) => m.NewsPage),
   events: () => import('./features/events/events').then((m) => m.EventsPage),
+  gallery: () => import('./features/gallery/gallery').then((m) => m.GalleryPage),
+  videos: () => import('./features/videos/videos').then((m) => m.VideosPage),
+  achievements: () =>
+    import('./features/achievements/achievements').then((m) => m.AchievementsPage),
   academics: () => import('./features/academics/overview').then((m) => m.AcademicsPage),
   'academics/programs': () => import('./features/academics/programs').then((m) => m.ProgramsPage),
 };
