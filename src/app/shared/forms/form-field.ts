@@ -32,6 +32,7 @@ export function fieldError(errors: ValidationErrors | null): FieldError | null {
     };
   if (errors['email']) return { key: 'forms.error.email' };
   if (errors['phone']) return { key: 'forms.error.phone' };
+  if (errors['contactMethod']) return { key: 'forms.error.contactMethod' };
   if (errors['rollNumber']) return { key: 'forms.error.rollNumber' };
   if (errors['futureDate']) return { key: 'forms.error.futureDate' };
   if (errors['invalidDate']) return { key: 'forms.error.invalidDate' };

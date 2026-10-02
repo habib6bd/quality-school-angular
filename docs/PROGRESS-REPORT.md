@@ -230,3 +230,35 @@ Phase reports are appended below in order. (A final summary is added at the top 
 **Issues (honest):** Everything content-dependent is a placeholder because the school has supplied no results system, routines, syllabus, study material, forms, policies or calendar; filters/lookup states with real data were verified with stub services in unit tests only. A stale-error bug in `FormField` (also affecting the Phase 7 form) was found and fixed in this phase.
 
 **Acceptance criteria:** PASS — filters work (URL-driven, derived options, safe downloads); the calendar is responsive (no overflow 320–1440 px) and accessible; no private data exposed or stored; unit, browser and build checks pass.
+
+---
+
+### Phase 11: Guardian reviews, FAQ & contact
+
+**Implemented**
+
+- FAQ (`/faq`): 11 generic / site-usage questions in 4 categories (bilingual), category chips with counts, search over question and answer in the active language, accordion (keyboard: Enter/Space, arrows, Home/End), empty state, live result count, filters in the URL and rendered on the server.
+- Guardian reviews: `TestimonialCard` component + service; the homepage section shows an honest empty state because no review is verified; cards render automatically once approved reviews exist.
+- Contact (`/contact`): address, phones (tel links, Bangla digits), email and office hours marked to-be-confirmed, School Code/EIIN, Google Maps embed (allow-listed host), and a validated contact form prototype (name, email/phone rule, subject, message) with accessible errors, success and error states and no endpoint (`ContactService` is a local no-op).
+- Consistency: footer, homepage and contact page read the same school info (asserted in unit and e2e tests).
+
+**Files** — new: `src/app/features/{faq,contact}/*`, `src/app/shared/components/testimonial-card/*`, `src/app/core/{models/contact-message.model.ts,services/contact.service.ts}`, `src/app/features/faq-contact.spec.ts`, `e2e/faq-contact.spec.ts`. Modified: `faqs.data.ts` (+6 generic items), `form-field.ts` (contact-method message), homepage testimonials section, `pages.ts`, `app.routes.ts`, translations, admission spec.
+
+**Dependencies:** none added.
+
+**Commands:** `npm run typecheck`; `npm run lint`; `npx ng test --watch=false`; `npx ng build`; `PORT=4310 ./scripts/ssr-smoke.sh /bn/faq /en/faq?category=contact /bn/contact /en/contact`; `PW_EXECUTABLE=/opt/pw-browsers/chromium npx playwright test`.
+
+**Verification**
+
+| Check            | Result                                                                             |
+| ---------------- | ---------------------------------------------------------------------------------- |
+| Type checking    | PASS                                                                               |
+| Lint             | PASS                                                                               |
+| Unit tests       | PASS — 41 files, 299 tests                                                         |
+| Production build | PASS — 116 static routes prerendered                                               |
+| SSR smoke        | PASS — /bn/faq 200; /en/faq?category=contact 200; /bn/contact 200; /en/contact 200 |
+| Browser tests    | PASS — 191 Playwright tests (Chromium 141 via `PW_EXECUTABLE`)                     |
+
+**Issues (honest):** The map embed is built from the school name and could not be loaded or verified from this sandbox (Google Maps is unreachable), so "valid map location" is unverified. The school published no email address or office hours. The contact form cannot deliver messages (prototype). No testimonials exist, so only the empty state could be shown.
+
+**Acceptance criteria:** PASS (with the map caveat above) — forms validate; FAQ works (filters, search, accordion); contact details are consistent across footer, homepage and contact page; no endpoint, nothing stored or logged; unit, browser and build checks pass.

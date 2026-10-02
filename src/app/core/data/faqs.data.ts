@@ -62,4 +62,67 @@ export const FAQS: readonly FaqItem[] = [
       en: 'All notices are published on the Notices page. Important announcements also appear in the bar at the top of the page.',
     },
   },
+  {
+    id: 'pending-info',
+    category: 'website',
+    question: {
+      bn: 'কিছু তথ্যের পাশে “বিদ্যালয় কর্তৃক নিশ্চিত করা হবে” লেখা কেন?',
+      en: 'Why do some items say “To be confirmed by the school”?',
+    },
+    answer: {
+      bn: 'এই লেখা দিয়ে বোঝানো হয়েছে যে বিদ্যালয় ওই তথ্য এখনো সরবরাহ করেনি। যাচাই করা তথ্য পাওয়ার পরই সেটি যোগ করা হবে; অনুমান করে কিছু লেখা হয় না।',
+      en: 'It means the school has not supplied that information yet. It will be added once the school provides verified details; nothing is guessed.',
+    },
+  },
+  {
+    id: 'find-teachers',
+    category: 'website',
+    question: { bn: 'শিক্ষকদের তালিকা কোথায় পাব?', en: 'Where can I find the list of teachers?' },
+    answer: {
+      bn: '“শিক্ষকমণ্ডলী” পৃষ্ঠায় বিদ্যালয়ের প্রকাশিত শিক্ষক ও কর্মচারীদের নাম ও পদবি আছে। পদবি অনুযায়ী ফিল্টার করা এবং নাম দিয়ে খোঁজা যায়।',
+      en: 'The Teachers page lists the names and designations the school has published. You can filter by designation and search by name.',
+    },
+  },
+  {
+    id: 'find-classes',
+    category: 'academics',
+    question: { bn: 'বিদ্যালয়ে কোন কোন শ্রেণি আছে?', en: 'Which classes does the school have?' },
+    answer: {
+      bn: 'প্লে থেকে দশম শ্রেণি পর্যন্ত। নবম ও দশম শ্রেণিতে বিজ্ঞান ও ব্যবসায় শিক্ষা বিভাগ আছে। বিস্তারিত “শ্রেণি ও কার্যক্রম” পৃষ্ঠায় দেখুন।',
+      en: 'From Play to Class Ten, with Science and Business Studies groups in Classes Nine and Ten. See the Classes & Programs page for details.',
+    },
+  },
+  {
+    id: 'medium',
+    category: 'academics',
+    question: {
+      bn: 'বিদ্যালয়ে কোন কোন মাধ্যমে পড়ানো হয়?',
+      en: 'In which medium are classes taught?',
+    },
+    answer: {
+      bn: 'বিদ্যালয়ের ভর্তি ব্যানার অনুযায়ী বাংলা মাধ্যম ও ইংলিশ ভার্সন রয়েছে।',
+      en: 'According to the school’s admission banner, there are both Bangla medium and an English version.',
+    },
+  },
+  {
+    id: 'find-results',
+    category: 'academics',
+    question: { bn: 'ফলাফল কোথায় দেখব?', en: 'Where can I see results?' },
+    answer: {
+      bn: '“ফলাফল” পৃষ্ঠায় অনুসন্ধানের ব্যবস্থা রাখা হয়েছে, তবে অনলাইন ফলাফল এখনো চালু হয়নি। ফলাফলের জন্য বিদ্যালয়ের সঙ্গে সরাসরি যোগাযোগ করুন।',
+      en: 'The Results page has a lookup, but online results are not live yet. For results, please contact the school directly.',
+    },
+  },
+  {
+    id: 'contact-form',
+    category: 'contact',
+    question: {
+      bn: 'যোগাযোগ ফরম থেকে কি বার্তা পাঠানো যায়?',
+      en: 'Can I send a message through the contact form?',
+    },
+    answer: {
+      bn: 'না। ফরমটি এখনো প্রোটোটাইপ; কোনো বার্তা পাঠানো বা সংরক্ষণ করা হয় না। সরাসরি ফোনে যোগাযোগ করুন।',
+      en: 'No. The form is still a prototype; no message is sent or stored. Please contact the school by phone.',
+    },
+  },
 ];

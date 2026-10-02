@@ -85,7 +85,7 @@ export const PAGES: readonly PageDef[] = [
     descriptionKey: 'seo.apply',
     parent: 'admission',
   },
-  { path: 'faq', titleKey: 'nav.faq', descriptionKey: 'seo.faq' },
+  { path: 'faq', titleKey: 'nav.faq', descriptionKey: 'seo.faq', queryDriven: true },
 
   { path: 'teachers', titleKey: 'nav.teachers', descriptionKey: 'seo.teachers', queryDriven: true },
   { path: 'notices', titleKey: 'nav.notices', descriptionKey: 'seo.notices', queryDriven: true },

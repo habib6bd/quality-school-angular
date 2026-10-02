@@ -75,6 +75,7 @@ describe('AdmissionPage', () => {
       'Where can I find information about admission?',
       'Does the online application form submit my application?',
       'How can I contact the school?',
+      'Can I send a message through the contact form?',
     ]);
   });
 });

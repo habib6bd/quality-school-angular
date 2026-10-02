@@ -28,6 +28,8 @@ const PAGE_COMPONENTS: Partial<Record<string, ComponentLoader>> = {
   results: () => import('./features/results/results').then((m) => m.ResultsPage),
   resources: () => import('./features/resources/resources').then((m) => m.ResourcesPage),
   'academics/calendar': () => import('./features/academics/calendar').then((m) => m.CalendarPage),
+  faq: () => import('./features/faq/faq').then((m) => m.FaqPage),
+  contact: () => import('./features/contact/contact').then((m) => m.ContactPage),
   academics: () => import('./features/academics/overview').then((m) => m.AcademicsPage),
   'academics/programs': () => import('./features/academics/programs').then((m) => m.ProgramsPage),
 };
