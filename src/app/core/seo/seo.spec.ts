@@ -204,12 +204,9 @@ describe('SeoService head tags', () => {
         l.getAttribute('crossorigin'),
       ]);
     seo.setPage({}, 'bn', '/bn');
-    expect(preloads()).toEqual([
-      ['/fonts/hind-siliguri-bengali-400.woff2', ''],
-      ['/fonts/hind-siliguri-bengali-600.woff2', ''],
-    ]);
+    expect(preloads()).toEqual([['/fonts/noto-serif-bengali-bengali-variable.woff2', '']]);
     seo.setPage({}, 'en', '/en');
-    expect(preloads()).toEqual([['/fonts/inter-latin-variable.woff2', '']]);
+    expect(preloads()).toEqual([['/fonts/noto-serif-bengali-latin-variable.woff2', '']]);
   });
 
   it('adds, replaces and resets JSON-LD blocks', () => {

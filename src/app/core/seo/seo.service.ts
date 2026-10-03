@@ -30,8 +30,8 @@ const MARK = 'data-seo';
 
 /** The fonts the first paint of each language needs (self-hosted, see public/fonts/README.txt). */
 const FONT_PRELOADS: Record<Lang, readonly string[]> = {
-  bn: ['/fonts/hind-siliguri-bengali-400.woff2', '/fonts/hind-siliguri-bengali-600.woff2'],
-  en: ['/fonts/inter-latin-variable.woff2'],
+  bn: ['/fonts/noto-serif-bengali-bengali-variable.woff2'],
+  en: ['/fonts/noto-serif-bengali-latin-variable.woff2'],
 };
 
 /**

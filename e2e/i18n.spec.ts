@@ -79,7 +79,7 @@ test.describe('bilingual architecture', () => {
     await expect(page).toHaveTitle('শিক্ষকমণ্ডলী | বনশ্রী কোয়ালিটি এডুকেশন স্কুল');
   });
 
-  test('Bangla pages use the Bangla font, taller line height and Bangla digits', async ({
+  test('Both languages use Noto Serif Bengali; Bangla pages get a taller line height and Bangla digits', async ({
     page,
   }) => {
     await page.goto('/bn/about');
@@ -90,13 +90,13 @@ test.describe('bilingual architecture', () => {
         lineHeight: parseFloat(style.lineHeight) / parseFloat(style.fontSize),
       };
     });
-    expect(body.font).toMatch(/^"?Hind Siliguri/);
+    expect(body.font).toMatch(/^"?Noto Serif Bengali/);
     expect(body.lineHeight).toBeGreaterThanOrEqual(1.75);
     await expect(page.locator('footer')).toContainText('© ২০');
 
     await page.goto('/en/about');
     const fontEn = await page.evaluate(() => getComputedStyle(document.body).fontFamily);
-    expect(fontEn).toMatch(/^"?Inter/);
+    expect(fontEn).toMatch(/^"?Noto Serif Bengali/);
   });
 
   test('unknown pages are translated 404s in the requested language', async ({ page }) => {
