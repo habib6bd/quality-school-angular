@@ -2,6 +2,7 @@ import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { TranslationKey } from '../../../core/i18n/translation.service';
 import { Icon, IconName } from '../../../shared/components/icon/icon';
+import { RevealDirective } from '../../../shared/directives/reveal.directive';
 import { PagePathPipe } from '../../../shared/pipes/page-path.pipe';
 import { TranslatePipe } from '../../../shared/pipes/translate.pipe';
 
@@ -25,11 +26,11 @@ const QUICK_LINKS: readonly QuickLink[] = [
 @Component({
   selector: 'app-home-quick-links',
   changeDetection: ChangeDetectionStrategy.OnPush,
-  imports: [RouterLink, Icon, PagePathPipe, TranslatePipe],
+  imports: [RouterLink, RevealDirective, Icon, PagePathPipe, TranslatePipe],
   template: `
     <nav class="bg-white py-8 shadow-sm" [attr.aria-label]="'home.quickLinks' | t">
       <div class="container-page">
-        <ul class="grid grid-cols-2 gap-3 sm:grid-cols-4 lg:grid-cols-8">
+        <ul appReveal class="grid grid-cols-2 gap-3 sm:grid-cols-4 lg:grid-cols-8">
           @for (item of links; track item.path) {
             <li>
               <a

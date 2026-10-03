@@ -1,20 +1,31 @@
-import { IMAGE_LOADER, NgOptimizedImage } from '@angular/common';
-import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
+import { DOCUMENT } from '@angular/common';
+import {
+  afterNextRender,
+  ChangeDetectionStrategy,
+  Component,
+  DestroyRef,
+  ElementRef,
+  inject,
+  viewChild,
+} from '@angular/core';
+import { toSignal } from '@angular/core/rxjs-interop';
 import { RouterLink } from '@angular/router';
-import { responsiveLoader } from '../../../core/images/responsive';
+import { loadGsap, prefersReducedMotion } from '../../../core/animation/gsap';
+import { GalleryItem } from '../../../core/models/gallery.model';
+import { GalleryService } from '../../../core/services/gallery.service';
 import { SchoolInfoService } from '../../../core/services/school-info.service';
 import { Icon } from '../../../shared/components/icon/icon';
 import { ButtonDirective } from '../../../shared/directives/button.directive';
 import { LocalizePipe } from '../../../shared/pipes/localize.pipe';
 import { PagePathPipe } from '../../../shared/pipes/page-path.pipe';
 import { TranslatePipe } from '../../../shared/pipes/translate.pipe';
+import { HeroSlider } from './hero-slider';
 
 @Component({
   selector: 'app-home-hero',
   changeDetection: ChangeDetectionStrategy.OnPush,
-  providers: [{ provide: IMAGE_LOADER, useValue: responsiveLoader }],
   imports: [
-    NgOptimizedImage,
+    HeroSlider,
     RouterLink,
     ButtonDirective,
     Icon,
@@ -32,6 +43,7 @@ import { TranslatePipe } from '../../../shared/pipes/translate.pipe';
         class="absolute inset-0 -z-10 opacity-15 [background-image:radial-gradient(circle_at_1px_1px,white_1px,transparent_0)] [background-size:22px_22px]"
       ></div>
       <div
+        #glow
         aria-hidden="true"
         class="absolute -right-24 -bottom-24 -z-10 size-96 rounded-full bg-accent-500/25 blur-3xl"
       ></div>
@@ -62,18 +74,9 @@ import { TranslatePipe } from '../../../shared/pipes/translate.pipe';
             }
           </ul>
         </div>
-        <figure class="relative">
-          <img
-            ngSrc="images/bqes/gallery/annual-sports-4.webp"
-            ngSrcset="480w, 960w, 1500w"
-            sizes="(min-width: 1024px) 590px, 100vw"
-            width="1500"
-            height="1125"
-            priority
-            [alt]="'home.heroImageAlt' | t"
-            class="w-full rounded-3xl object-cover shadow-2xl ring-4 ring-white/20"
-          />
-        </figure>
+        @if (slides().length) {
+          <app-hero-slider [slides]="slides()" />
+        }
       </div>
     </section>
   `,
@@ -81,4 +84,39 @@ import { TranslatePipe } from '../../../shared/pipes/translate.pipe';
 export class HomeHero {
   protected readonly info = inject(SchoolInfoService).info;
   protected readonly points = ['home.heroPoint1', 'home.heroPoint2', 'home.heroPoint3'] as const;
+  /** The first six gallery photos. The bundled data arrives synchronously, so the server HTML and the first client render both include the slider. */
+  protected readonly slides = toSignal(inject(GalleryService).featured(6), {
+    initialValue: [] as readonly GalleryItem[],
+  });
+
+  private readonly glow = viewChild.required<ElementRef<HTMLElement>>('glow');
+
+  constructor() {
+    const document = inject(DOCUMENT);
+    let destroyed = false;
+    let stop: (() => void) | undefined;
+
+    // A slow drift of the decorative glow. The text is already painted by the server, so it is not animated in.
+    afterNextRender(() => {
+      if (prefersReducedMotion(document.defaultView)) return;
+      void loadGsap().then((gsap) => {
+        if (destroyed) return;
+        const tween = gsap.to(this.glow().nativeElement, {
+          x: -60,
+          y: -40,
+          scale: 1.15,
+          duration: 14,
+          ease: 'sine.inOut',
+          yoyo: true,
+          repeat: -1,
+        });
+        stop = () => tween.kill();
+      });
+    });
+
+    inject(DestroyRef).onDestroy(() => {
+      destroyed = true;
+      stop?.();
+    });
+  }
 }

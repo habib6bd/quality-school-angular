@@ -174,4 +174,50 @@ test.describe('homepage', () => {
     await page.getByRole('link', { name: 'ভর্তির তথ্য দেখুন' }).click();
     await expect(page).toHaveURL(/\/bn\/admission$/);
   });
+
+  test.describe('hero slideshow', () => {
+    const shownSlide = (page: import('@playwright/test').Page) =>
+      page.locator('[aria-roledescription="slide"]:not([aria-hidden])');
+
+    test('starts on the first photo and moves with the arrows and dots', async ({ page }) => {
+      await page.goto('/en');
+      const slider = page.getByRole('region', { name: 'School photos' });
+      await expect(slider.locator('[aria-roledescription="slide"]')).toHaveCount(6);
+      await expect(shownSlide(page)).toHaveAttribute('aria-label', 'Image 1 of 6');
+
+      await slider.getByRole('button', { name: 'Pause' }).click();
+      await slider.getByRole('button', { name: 'Next' }).click();
+      await expect(shownSlide(page)).toHaveAttribute('aria-label', 'Image 2 of 6');
+      await slider.getByRole('button', { name: 'Show image 5' }).click();
+      await expect(shownSlide(page)).toHaveAttribute('aria-label', 'Image 5 of 6');
+      await expect(shownSlide(page).locator('img')).toHaveJSProperty('complete', true);
+      await expect(shownSlide(page)).toHaveCSS('opacity', '1');
+      await slider.getByRole('button', { name: 'Previous' }).click();
+      await expect(shownSlide(page)).toHaveAttribute('aria-label', 'Image 4 of 6');
+    });
+
+    test('autoplays, and the pause button stops it', async ({ page }) => {
+      await page.goto('/en');
+      await page.mouse.move(0, 0);
+      await expect(shownSlide(page)).toHaveAttribute('aria-label', 'Image 2 of 6', {
+        timeout: 10_000,
+      });
+      await page
+        .getByRole('region', { name: 'School photos' })
+        .getByRole('button', { name: 'Pause' })
+        .click();
+      await page.mouse.move(0, 0);
+      await page.waitForTimeout(7_000);
+      await expect(shownSlide(page)).toHaveAttribute('aria-label', 'Image 2 of 6');
+    });
+
+    test('does not autoplay with reduced motion', async ({ page }) => {
+      await page.emulateMedia({ reducedMotion: 'reduce' });
+      await page.goto('/en');
+      const slider = page.getByRole('region', { name: 'School photos' });
+      await expect(slider.getByRole('button', { name: 'Play', exact: true })).toBeVisible();
+      await page.waitForTimeout(7_000);
+      await expect(shownSlide(page)).toHaveAttribute('aria-label', 'Image 1 of 6');
+    });
+  });
 });

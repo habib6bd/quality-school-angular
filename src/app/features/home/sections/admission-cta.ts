@@ -2,13 +2,14 @@ import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { Icon } from '../../../shared/components/icon/icon';
 import { ButtonDirective } from '../../../shared/directives/button.directive';
+import { RevealDirective } from '../../../shared/directives/reveal.directive';
 import { PagePathPipe } from '../../../shared/pipes/page-path.pipe';
 import { TranslatePipe } from '../../../shared/pipes/translate.pipe';
 
 @Component({
   selector: 'app-home-admission-cta',
   changeDetection: ChangeDetectionStrategy.OnPush,
-  imports: [RouterLink, ButtonDirective, Icon, PagePathPipe, TranslatePipe],
+  imports: [RouterLink, ButtonDirective, RevealDirective, Icon, PagePathPipe, TranslatePipe],
   template: `
     <section
       class="relative isolate overflow-hidden bg-gradient-to-r from-primary-800 to-secondary-800 py-14 text-white sm:py-16"
@@ -19,6 +20,7 @@ import { TranslatePipe } from '../../../shared/pipes/translate.pipe';
         class="absolute -top-20 -left-20 -z-10 size-72 rounded-full bg-accent-500/25 blur-3xl"
       ></div>
       <div
+        appReveal
         class="container-page flex flex-col items-start gap-6 md:flex-row md:items-center md:justify-between"
       >
         <div class="max-w-2xl">

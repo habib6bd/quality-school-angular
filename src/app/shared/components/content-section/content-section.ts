@@ -1,6 +1,7 @@
 import { ChangeDetectionStrategy, Component, input } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { ButtonDirective } from '../../directives/button.directive';
+import { RevealDirective } from '../../directives/reveal.directive';
 import { TranslatePipe } from '../../pipes/translate.pipe';
 import { Icon } from '../icon/icon';
 import { SectionHeading } from '../section-heading/section-heading';
@@ -15,14 +16,14 @@ let nextId = 0;
   selector: 'app-content-section',
   changeDetection: ChangeDetectionStrategy.OnPush,
   host: { class: 'block' },
-  imports: [SectionHeading, RouterLink, ButtonDirective, Icon, TranslatePipe],
+  imports: [SectionHeading, RouterLink, ButtonDirective, RevealDirective, Icon, TranslatePipe],
   template: `
     <section
       [class]="tone() === 'white' ? 'section bg-white' : 'section'"
       [attr.aria-labelledby]="id"
     >
       <div class="container-page">
-        <div class="flex flex-wrap items-end justify-between gap-x-6 gap-y-4">
+        <div appReveal class="flex flex-wrap items-end justify-between gap-x-6 gap-y-4">
           <app-section-heading
             [headingId]="id"
             [title]="title()"
@@ -36,7 +37,7 @@ let nextId = 0;
             </a>
           }
         </div>
-        <div class="mt-8 sm:mt-10"><ng-content /></div>
+        <div appReveal class="mt-8 sm:mt-10"><ng-content /></div>
       </div>
     </section>
   `,

@@ -5,6 +5,7 @@ import { FOOTER_QUICK_LINKS, navCommands } from '../../core/config/navigation';
 import { LanguageService } from '../../core/i18n/language.service';
 import { SchoolInfoService } from '../../core/services/school-info.service';
 import { Icon } from '../../shared/components/icon/icon';
+import { RevealDirective } from '../../shared/directives/reveal.directive';
 import { LocaleDigitsPipe, LocaleNumberPipe } from '../../shared/pipes/locale-format.pipes';
 import { LocalizePipe } from '../../shared/pipes/localize.pipe';
 import { TranslatePipe } from '../../shared/pipes/translate.pipe';
@@ -13,6 +14,7 @@ import { TranslatePipe } from '../../shared/pipes/translate.pipe';
   selector: 'app-footer',
   changeDetection: ChangeDetectionStrategy.OnPush,
   imports: [
+    RevealDirective,
     RouterLink,
     NgOptimizedImage,
     Icon,
@@ -28,6 +30,7 @@ import { TranslatePipe } from '../../shared/pipes/translate.pipe';
         class="h-1 bg-gradient-to-r from-primary-600 via-accent-500 to-secondary-600"
       ></div>
       <div
+        appReveal
         class="container-page grid gap-10 py-14 sm:grid-cols-2 lg:grid-cols-[1.4fr_1fr_1fr_1.2fr]"
       >
         <section>

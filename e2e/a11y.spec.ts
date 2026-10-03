@@ -6,6 +6,17 @@ import { ROUTES, stubExternalHosts } from './support';
 const TAGS = ['wcag2a', 'wcag2aa', 'wcag21a', 'wcag21aa', 'wcag22aa', 'best-practice'];
 
 async function audit(page: Page, label: string) {
+  // Let scroll reveals that are under way finish: axe would measure contrast mid-fade.
+  await expect
+    .poll(() =>
+      page.evaluate(
+        () =>
+          Array.from(
+            document.querySelectorAll<HTMLElement>('[data-reveal], [data-reveal] *'),
+          ).filter((el) => el.style.opacity !== '' && el.style.opacity !== '0').length,
+      ),
+    )
+    .toBe(0);
   const results = await new AxeBuilder({ page }).withTags(TAGS).analyze();
   const summary = results.violations.map(
     (v) =>
@@ -154,4 +165,37 @@ test.describe('accessibility audit (axe, WCAG 2.2 AA + best practice)', () => {
     );
     expect(offenders).toEqual([]);
   });
+
+  /** Elements a scroll reveal left hidden or shifted (inline styles only; GSAP sets those). */
+  const hiddenByReveal = (page: Page) =>
+    page.evaluate(() =>
+      Array.from(document.querySelectorAll<HTMLElement>('[data-reveal], [data-reveal] *'))
+        .filter((el) => el.style.opacity !== '' || el.style.transform !== '')
+        .map((el) => el.tagName + '.' + String(el.className).slice(0, 40))
+        .slice(0, 5),
+    );
+
+  test('reduced motion never hides content for a scroll reveal', async ({ page }) => {
+    await stubExternalHosts(page);
+    await page.emulateMedia({ reducedMotion: 'reduce' });
+    await page.goto('/en');
+    await page.evaluate(() => window.scrollTo(0, document.body.scrollHeight));
+    await page.waitForTimeout(500);
+    expect(await hiddenByReveal(page)).toEqual([]);
+  });
+
+  for (const path of ['/en', '/bn/teachers', '/en/about']) {
+    test(`scroll reveals leave nothing hidden after scrolling through ${path}`, async ({
+      page,
+    }) => {
+      await stubExternalHosts(page);
+      await page.goto(path);
+      const height = await page.evaluate(() => document.body.scrollHeight);
+      for (let y = 0; y <= height; y += 400) {
+        await page.evaluate((top) => window.scrollTo(0, top), y);
+        await page.waitForTimeout(60);
+      }
+      await expect.poll(() => hiddenByReveal(page), { timeout: 5000 }).toEqual([]);
+    });
+  }
 });

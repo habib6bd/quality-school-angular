@@ -3,6 +3,7 @@ import { findPage } from '../../../core/config/pages';
 import { TranslationService } from '../../../core/i18n/translation.service';
 import { SeoService } from '../../../core/seo/seo.service';
 import { BreadcrumbService } from '../../../core/services/breadcrumb.service';
+import { RevealDirective } from '../../directives/reveal.directive';
 import { PageHeader } from '../page-header/page-header';
 
 /**
@@ -13,10 +14,10 @@ import { PageHeader } from '../page-header/page-header';
 @Component({
   selector: 'app-page-scaffold',
   changeDetection: ChangeDetectionStrategy.OnPush,
-  imports: [PageHeader],
+  imports: [PageHeader, RevealDirective],
   template: `
     <app-page-header [title]="heading()" [intro]="intro()" [breadcrumbs]="breadcrumbs()" />
-    <div class="container-page section"><ng-content /></div>
+    <div appReveal class="container-page section"><ng-content /></div>
   `,
 })
 export class PageScaffold {
