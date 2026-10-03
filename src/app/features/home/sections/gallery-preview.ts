@@ -16,18 +16,22 @@ import { TranslatePipe } from '../../../shared/pipes/translate.pipe';
   changeDetection: ChangeDetectionStrategy.OnPush,
   imports: [AsyncState, ContentSection, GalleryGrid, Lightbox, PagePathPipe, TranslatePipe],
   template: `
-    <app-content-section
-      tone="white"
-      [eyebrow]="'nav.campusLife' | t"
-      [title]="'nav.gallery' | t"
-      [link]="'gallery' | pagePath"
-    >
+    <app-content-section tone="white" [eyebrow]="'nav.campusLife' | t" [title]="'nav.gallery' | t">
       <app-async-state
         [status]="items.status()"
         [empty]="items.value().length === 0"
         (retry)="items.reload()"
       >
-        <app-gallery-grid [items]="items.value()" (choose)="selected.set($event)" />
+        <app-gallery-grid
+          [items]="items.value()"
+          [feature]="{
+            eyebrow: 'gallery.explore' | t,
+            title: 'nav.gallery' | t,
+            linkLabel: 'gallery.showAll' | t,
+            link: 'gallery' | pagePath,
+          }"
+          (choose)="selected.set($event)"
+        />
         <app-lightbox [images]="images()" [(index)]="selected" />
       </app-async-state>
     </app-content-section>
@@ -39,7 +43,7 @@ export class HomeGallery {
 
   protected readonly selected = signal<number | null>(null);
   protected readonly items = rxResource({
-    stream: () => this.service.featured(6),
+    stream: () => this.service.featured(7),
     defaultValue: [] as readonly GalleryItem[],
   });
   protected readonly images = computed<LightboxImage[]>(() =>

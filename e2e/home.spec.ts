@@ -113,9 +113,9 @@ test.describe('homepage', () => {
     await first.click();
     const dialog = page.getByRole('dialog');
     await expect(dialog).toBeVisible();
-    await expect(dialog.getByText('Image 1 of 6')).toBeVisible();
+    await expect(dialog.getByText('Image 1 of 7')).toBeVisible();
     await page.keyboard.press('ArrowRight');
-    await expect(dialog.getByText('Image 2 of 6')).toBeVisible();
+    await expect(dialog.getByText('Image 2 of 7')).toBeVisible();
     await page.keyboard.press('Escape');
     await expect(dialog).toBeHidden();
     await expect(first).toBeFocused();

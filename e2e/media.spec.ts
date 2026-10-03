@@ -65,6 +65,31 @@ test.describe('photo gallery', () => {
     expect(cls).toBeLessThan(0.1);
   });
 
+  test('mosaic leads with a feature card that follows the category and links to videos', async ({
+    page,
+  }) => {
+    await page.goto('/en/gallery?category=annual-sports');
+    const card = page.locator('app-gallery-grid li[data-feature]');
+    await expect(card).toContainText('Annual Sports');
+    await card.getByRole('link', { name: 'Watch our videos' }).click();
+    await expect(page).toHaveURL(/\/en\/videos$/);
+  });
+
+  test('mosaic tiles fill whole rows on desktop', async ({ page }) => {
+    // Without the scroll reveal, tiles below the fold sit where the grid puts them.
+    await page.emulateMedia({ reducedMotion: 'reduce' });
+    await page.setViewportSize({ width: 1280, height: 900 });
+    await page.goto('/en/gallery');
+    const { boxes, grid } = await page.locator('app-gallery-grid ul').evaluate((ul) => ({
+      grid: ul.getBoundingClientRect().toJSON() as DOMRect,
+      boxes: Array.from(ul.children, (li) => li.getBoundingClientRect().toJSON() as DOMRect),
+    }));
+    const area = boxes.reduce((sum, b) => sum + b.width * b.height, 0);
+    // Tiles plus gaps cover the grid: no empty cells (gaps are under 15% of the area).
+    expect(area / (grid.width * grid.height)).toBeGreaterThan(0.85);
+    expect(Math.max(...boxes.map((b) => b.bottom))).toBeCloseTo(grid.bottom, 0);
+  });
+
   test('lightbox: opens from a photo, moves with the keyboard, wraps, closes with Escape', async ({
     page,
   }) => {

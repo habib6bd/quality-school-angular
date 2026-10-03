@@ -55,13 +55,13 @@ describe('GalleryPage', () => {
 
   it('filters by category from the URL', async () => {
     const { el } = await render(GalleryPage, 'en', { category: 'annual-sports' });
-    expect(el.querySelectorAll('app-gallery-grid li')).toHaveLength(2);
+    expect(el.querySelectorAll('app-gallery-grid button')).toHaveLength(2);
     expect(el.querySelector('a[aria-current="true"]')?.textContent).toContain('Annual Sports');
   });
 
   it('ignores an unknown category', async () => {
     const { el } = await render(GalleryPage, 'bn', { category: 'whatever' });
-    expect(el.querySelectorAll('app-gallery-grid li')).toHaveLength(7);
+    expect(el.querySelectorAll('app-gallery-grid button')).toHaveLength(7);
   });
 
   it('opens the lightbox on the chosen photo of the filtered set, with its description', async () => {

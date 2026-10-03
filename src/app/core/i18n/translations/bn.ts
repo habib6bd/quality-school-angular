@@ -220,6 +220,8 @@ export const bn = {
   },
   gallery: {
     intro: 'বিদ্যালয়ের অনুষ্ঠান ও কার্যক্রমের ছবি।',
+    explore: 'ঘুরে দেখুন',
+    watchVideos: 'আমাদের ভিডিও দেখুন',
     filterLabel: 'বিভাগ অনুযায়ী ছবি দেখুন',
     all: 'সব ছবি',
     category: { annualSports: 'বার্ষিক ক্রীড়া', schoolEvents: 'বিদ্যালয়ের অনুষ্ঠান' },

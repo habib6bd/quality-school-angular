@@ -84,7 +84,17 @@ export function isGalleryCategory(value: unknown): value is GalleryCategory {
         [skeletonCount]="6"
         (retry)="photos.reload()"
       >
-        <app-gallery-grid [items]="visible()" [priority]="true" (choose)="selected.set($event)" />
+        <app-gallery-grid
+          [items]="visible()"
+          [priority]="true"
+          [feature]="{
+            eyebrow: 'gallery.explore' | t,
+            title: activeLabel() | t,
+            linkLabel: 'gallery.watchVideos' | t,
+            link: 'videos' | pagePath,
+          }"
+          (choose)="selected.set($event)"
+        />
         <a empty appButton variant="outline" [routerLink]="'gallery' | pagePath">{{
           'gallery.showAll' | t
         }}</a>
@@ -120,6 +130,10 @@ export class GalleryPage {
     return category === 'all'
       ? this.photos.value()
       : this.photos.value().filter((item) => item.category === category);
+  });
+  protected readonly activeLabel = computed<TranslationKey>(() => {
+    const category = this.activeCategory();
+    return category === 'all' ? 'gallery.all' : GALLERY_CATEGORY_LABELS[category];
   });
   /** The same photos for the lightbox, described by their alt text. */
   protected readonly images = computed<LightboxImage[]>(() =>

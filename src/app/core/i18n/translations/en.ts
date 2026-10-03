@@ -220,6 +220,8 @@ export const en: PartialDict<TranslationShape> = {
   },
   gallery: {
     intro: 'Photos from the school’s events and activities.',
+    explore: 'Explore',
+    watchVideos: 'Watch our videos',
     filterLabel: 'Filter photos by category',
     all: 'All photos',
     category: { annualSports: 'Annual Sports', schoolEvents: 'School events' },
